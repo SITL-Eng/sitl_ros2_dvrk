@@ -1,6 +1,6 @@
 M- osaThread::CreateInternal: create thread named: Unnamed
 M- osaThread::CreateInternal: create thread named: Unnamed
-M- Class mtsIntuitiveResearchKitConsole: Configure: console using file "/home/hossein/ros2_ws/src/sitl_dvrk_interface/uic-configs/console-PSM1.json"
+M- Class mtsIntuitiveResearchKitConsole: Configure: console using file "/home/hossein/ros2_ws/src/sitl_dvrk_interface/uic_configs_logs/uic_configs/console-PSM1.json"
 ----> content of configuration file: 
 {
 	// see https://github.com/jhu-dvrk/sawIntuitiveResearchKit/wiki/Configuration-File-Formats
@@ -43,8 +43,8 @@ BasePort::ScanNodes: building node map for 13 nodes:
 BasePort::ScanNodes: found 13 boards
 BasePort::SetDefaultProtocol: all nodes broadcast capable and support shorter wait
 BasePort::SetProtocol: system running with broadcast write
-M- Class mtsIntuitiveResearchKitConsole: Configure: configuring IO using "/home/hossein/ros2_ws/src/sitl_dvrk_interface/uic-configs/sawRobotIO1394-PSM1-25976.xml"
-M- Class mtsRobotIO1394: Configure: configuring from /home/hossein/ros2_ws/src/sitl_dvrk_interface/uic-configs/sawRobotIO1394-PSM1-25976.xml
+M- Class mtsIntuitiveResearchKitConsole: Configure: configuring IO using "/home/hossein/ros2_ws/src/sitl_dvrk_interface/uic_configs_logs/uic_configs/sawRobotIO1394-PSM1-25976.xml"
+M- Class mtsRobotIO1394: Configure: configuring from /home/hossein/ros2_ws/src/sitl_dvrk_interface/uic_configs_logs/uic_configs/sawRobotIO1394-PSM1-25976.xml
 W- Configure: potentiometer to encoder latency (0.01) and/or distance (0) set to zero, safety check is DISABLED for Axis 3 for robot 1 (PSM1)
 W- Configure: potentiometer to encoder latency (0.01) and/or distance (0) set to zero, safety check is DISABLED for Axis 4 for robot 1 (PSM1)
 W- Configure: potentiometer to encoder latency (0.01) and/or distance (0) set to zero, safety check is DISABLED for Axis 5 for robot 1 (PSM1)
@@ -67,7 +67,7 @@ D- Class mtsIntuitiveResearchKitPSM: AddStateTable: added state table "State" an
 D- Class mtsIntuitiveResearchKitPSM: AddStateTable: added state table "Configuration" and corresponding interface "StateTableConfiguration" to task "PSM1"
 -M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #1: PSM1: desired state DISABLED
 -M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #2: PSM1: current state DISABLED
-M- Class mtsIntuitiveResearchKitPSM: Configure: PSM1 using file "/home/hossein/ros2_ws/src/sitl_dvrk_interface/uic-configs/PSM1-25976.json"
+M- Class mtsIntuitiveResearchKitPSM: Configure: PSM1 using file "/home/hossein/ros2_ws/src/sitl_dvrk_interface/uic_configs_logs/uic_configs/PSM1-25976.json"
 ----> content of configuration file: 
 {
 	"generation" : "Classic",
@@ -742,29 +742,26 @@ M- osaThread::CreateInternal: create thread named: Unnamed
 M- Class mtsRobot1394QtWidget: Create: default create method for component "PSM1 IO"
 M- Class mtsIntuitiveResearchKitPSMQtWidget: Create: default create method for component "PSM1-GUI"
 M- Class mtsPID: Create: getting thread from component io
-M-M- Class mtsPIDQtWidget: Create: default create method for component "PSM1-PID-GUI"
+M- Class mtsPIDQtWidget: Create: default create method for component "PSM1-PID-GUI"
 -M Class mtsIntuitiveResearchKitConsole: RemoveInterfaceRequired: removed required interface "ExecIn"
 M- Class mtsIntuitiveResearchKitConsole: Create: creating thread for task console
 M- osaThread::CreateInternal: create thread named: Unnamed
- Class mtsIntuitiveResearchKitPSM: Starting StartupInternal (periodic) for PSM1
- Class mtsIntuitiveResearchKitPSM: Starting StartupInternal (periodic) for PSM1
+M- Class mtsIntuitiveResearchKitPSM: StartupInternal: started for task "PSM1"
 M- Class mtsIntuitiveResearchKitConsoleQtWidget: Create: default create method for component "consoleGUI"
-M- Class mtsIntuitiveResearchKitPSM: StartupInternal: started for task "PSM1"
-M- Class mtsIntuitiveResearchKitPSM: StartupInternal: started for task "PSM1"
-M- osaThread::CreateInternal: create thread named: Unnamed
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm:  Class mtsIntuitiveResearchKitConsole: RunInternal: begin task console
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm:  Class mtsIntuitiveResearchKitConsole: RunInternal: begin task console
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: M-M-eosaThread::CreateInternal: create thread named: Unnamed
 1.7284e+09s, #3: PSM1: desired state DISABLED
+ Class mtsIntuitiveResearchKitConsole: RunInternal: begin task console
 M- Class mtsIntuitiveResearchKitConsole: StartupInternal: started for task "console"
--M Class mtsIntuitiveResearchKitConsole: console:Main: M- osaThread::CreateInternal: create thread named: Unnamed
-1.7284e+09s, #1: console started, dVRK 2.3.0 / cisst 1.3.0
+M- Class mtsIntuitiveResearchKitConsole: StartupInternal: started for task "console"
 M- osaThread::CreateInternal: create thread named: Unnamed
+1.7284e+09s, #1: console started, dVRK 2.3.0 / cisst 1.3.0
 -M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #4: PSM1: current state DISABLED
-M- osaThread::CreateInternal: create thread named: M- Clas
- #4: PSmtsIntuitiveResearchKitConsoleM- osaThread::CreateInternal: create thread named: M- Clas
- #4: PSmtsIntuitiveResearchKitConsole: StartupInternal: ended for task "console"
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- Class mtsIntuitiveResearchKitConsole: StartupInternal: ended for task "console"
 M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
 M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
+M- osaThread::CreateInternal: create thread named: Unnamed
 M- osaThread::CreateInternal: create thread named: Unnamed
 M- Class mtsIntuitiveResearchKitPSM: StartupInternal: ended for task "PSM1"
 M- osaThread::CreateInternal: create thread named: Unnamed
@@ -775,10 +772,10 @@ M- osaThread::CreateInternal: create thread named: Unnamed
 M- Class mtsRobotIO1394QtWidgetFactory: Create: default create method for component "robotWidgetFactory"
 M- osaThread::CreateInternal: create thread named: Unnamed
 M- Class mtsRobotIO1394: Starting StartupInternal (periodic) for io
-M- Class mtsRobotIO1394: Starting StartupInternal (periodic) for io
-M- Class mtsRobot1394QtWidget: WaitForState: called for component "PSM1 IO" for state "mtsComponentState
+M- Class mtsRobotIO1394: StartupInternal: started for task "io"
+M- Class mtsRobotIO1394: StartupInternal: started for task "io"
+mtsComponentState
   State:ready" has no effect for mtsComponent
-M- Class mtsIntuitiveResearchKitPSMQtWidgettarted for task "io"
 M- Class mtsIntuitiveResearchKitPSMQtWidget: WaitForState: called for component "PSM1-GUI" for state "mtsComponentState
   State:ready" has no effect for mtsComponent
 M- Class mtsPIDQtWidget: WaitForState: called for component "PSM1-PID-GUI" for state "mtsComponentState
@@ -789,15 +786,19 @@ M- Class mtsRobotIO1394: WaitForState: waiting for task "io" to enter state "mts
   State:ready"
 M- Class mtsRobotIO1394: StartupInternal: ended for task "io"
 M- Class mtsRobotIO1394: StartupInternal: ended for task "io"
-M- Class mtsRobotIO1394: WaitForState: waited for 7.98702e-05 seconds.
+M- Class mtsRobotIO1394: WaitForState: waited for 6.48499e-05 seconds.
+M- Class mtsRobotIO1394QtWidgetFactory: WaitForState: called for component "robotWidgetFactory" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
 M- Class mtsRobotIO1394QtWidgetFactory: WaitForState: called for component "robotWidgetFactory" for state "mtsComponentState
   State:ready" has no effect for mtsComponent
 -M Class mtsPID: RunEventHandler: initializing thread for PSM1-PID
--M Class mtsPID: RunEventHandler: initializing thread for PSM1-PID
-M- Class mtsIntuitiveResearchKitPSM: Start: starting task PSM1
 M- Class mtsPID: Starting StartupInternal (periodic) for PSM1-PID
+M- Class mtsPID: StartupInternal: started for task "PSM1-PID"
+PID
+M- Class mtsIntuitiveResearchKitPSM: Start: starting task PSM1
+M- Class mtsPID: StartupInternal: started for task "PSM1-PID"
 M- Class mtsIntuitiveResearchKitPSM: Start: started task PSM1
-M- Class mtsRobot1394QtWidget: Start: default start method forM- Class mtsRobot1394QtWidget: Start: default start method for component "PSM1 IO"
+M- Class mtsRobot1394QtWidget: Start: default start method for component "PSM1 IO"
 M- Class mtsRobot1394QtWidget: Startup
 M- Class mtsPID: Startup: configuration_js:
 M- Class mtsIntuitiveResearchKitPSMQtWidget: Start: default start method for component "PSM1-GUI"
@@ -805,10 +806,8 @@ prmConfigurationJoint
 Timestamp (auto): 0.00000 (invalid)
   Name:[yaw, pitch, insertion, roll, wrist_pitch, wrist_yaw, jaw]  Type:[REVOLUTE, REVOLUTE, PRISMATIC, REVOLUTE, REVOLUTE, REVOLUTE, REVOLUTE]  PositionMin:[-1.58825, -0.925025, 0, -3.03687, -3.03687, -3.03687, -3.03687]  PositionMax:[1.58825, 0.925025, 0.24, 3.03687, 3.03687, 3.03687, 3.03687]  VelocityMin:[]  VelocityMax:[]  AccelerationMin:[]  AccelerationMax:[]  EffortMin:[-3.3161, -3.3161, -9.87793, -0.343642, -0.343642, -0.343642, -0.343642]  EffortMax:[3.3161, 3.3161, 9.87793, 0.343642, 0.343642, 0.343642, 0.343642]
 M- Class mtsPID: StartupInternal: ended for task "PSM1-PID"
-M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
-M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
 -M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #5: PSM1: current state DISABLED
-M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
+ Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
 M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
 M- Class mtsPID: Start: starting task PSM1-PID
 M- Class mtsPID: Start: started task PSM1-PID
@@ -835,16 +834,17 @@ M- Class mtsIntuitiveResearchKitConsoleQtWidget: WaitForState: called for compon
 M- Class mtsRobotIO1394QtWidgetFactory: WaitForState: called for component "robotWidgetFactory" for state "mtsComponentState
   State:active" has no effect for mtsComponent
 -M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #6: PSM1: adapter detected
--M-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #7: PSM1: tool detected
--M-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #7: PSM1: tool detected
-1.7284e+09s, #5: PSM1: adapter detected
+-M Class mtsIntuitiveResearchKitConsole: console:Main: -M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #5: PSM1: adapter detecteds, #
+: PSM1: tool detected
+-M Class mtsIntuitiveResearchKitConsole: console:Main: -M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #5: PSM1: adapter detecteds, #
+: PSM1: tool detected
 -M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #6: PSM1: tool detected
 -M Class mtsRobotIO1394: io:PSM1-Dallas: 1.7284e+09s, #1: PSM1-Dallas: requested tool read
 -M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #7: PSM1-Dallas: requested tool read
 -M Class mtsRobotIO1394: io:PSM1-Dallas: 1.7284e+09s, #2: PSM1-Dallas: found tool type "LARGE_NEEDLE_DRIVER:420006[8]"
 -M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #8: PSM1-Dallas: found tool type "LARGE_NEEDLE_DRIVER:420006[8]"
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #8: PSM1-Dallas: found tool type "LARGE_NEEDLE_DRIVER:420006[8]"
 -M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #8: PSM1: setting up for tool type "LARGE_NEEDLE_DRIVER:420006[8]"
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #9: PSM1: setting up for tool type "LARGE_NEEDLE_DRIVER:420006[8]"
 -M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #9: PSM1: setting up for tool type "LARGE_NEEDLE_DRIVER:420006[8]"
 -M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #9: PSM1: using tool file "LARGE_NEEDLE_DRIVER_420006.json" for: Large Needle Driver for da Vinci S (420006[..11])
 -M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #10: PSM1: using tool file "LARGE_NEEDLE_DRIVER_420006.json" for: Large Needle Driver for da Vinci S (420006[..11])
@@ -1012,63 +1012,55 @@ M- Class mtsIntuitiveResearchKitPSM: ConfigureTool PSM1: loaded kinematics
 -M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #13: PSM1: current state POWERING
 -M Class mtsRobotIO1394: io:PSM1: 1.7284e+09s, #1: IO: PSM1 watchdog ok
 -M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #14: IO: PSM1 watchdog ok
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #13: PSM1: power on
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #15: PSM1: power on
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #15: PSM1: power on
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #14: PSM1: current state ENABLED
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #16: PSM1: current state ENABLED
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #15: PSM1: desired state HOMED
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #17: PSM1: desired state HOMED
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #16: PSM1: current state CALIBRATING_ENCODERS_FROM_POTS
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #18: PSM1: current state CALIBRATING_ENCODERS_FROM_POTS
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #17: PSM1: encoders seem to be already biased
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm-M1. Class mtsIntuitiveResearchKitConsole: 1.7284e+09s, #18: PSM1: current state ENCODERS_BIASED
-console:Main: -M Class mtsIntuitiveResearchKitPSM: PSM1:Arm-M1. Class mtsIntuitiveResearchKitConsole: 1.7284e+09s, #18: PSM1: current state ENCODERS_BIASED
-console:Main: 1.7284e+09s, #19: PSM1: encoders seem to be already biased
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #20: PSM1: current state ENCODERS_BIASED
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #19: PSM1: control JOINT_SPACE/TRAJECTORY_MODE
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #21: PSM1: control JOINT_SPACE/TRAJECTORY_MODE
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #20: PSM1: current state HOMING
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #22: PSM1: current state HOMING
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #21: PSM1: control UNDEFINED_SPACE/UNDEFINED_MODE
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #23: PSM1: control UNDEFINED_SPACE/UNDEFINED_MODE
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #22: PSM1: current state HOMED
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #24: PSM1: current state HOMED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #13: PSM1: desired state ENABLED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #14: PSM1: power on
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #15: PSM1: current state ENABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #15: PSM1: desired state ENABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #16: PSM1: power on
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #17: PSM1: current state ENABLED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #16: PSM1: desired state HOMED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #18: PSM1: desired state HOMED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #17: PSM1: current state CALIBRATING_ENCODERS_FROM_POTS
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #19: PSM1: current state CALIBRATING_ENCODERS_FROM_POTS
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #18: PSM1: encoders seem to be already biased
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #20: PSM1: encoders seem to be already biased
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #19: PSM1: current state ENCODERS_BIASED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #21: PSM1: current state ENCODERS_BIASED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #20: PSM1: control JOINT_SPACE/TRAJECTORY_MODE
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #22: PSM1: control JOINT_SPACE/TRAJECTORY_MODE
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #21: PSM1: current state HOMING
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #23: PSM1: current state HOMING
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #22: PSM1: control UNDEFINED_SPACE/UNDEFINED_MODE
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #24: PSM1: control UNDEFINED_SPACE/UNDEFINED_MODE
 -M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #23: PSM1: current state HOMED
 -M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #25: PSM1: current state HOMED
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #25: PSM1: current state ENGAGING_TOOL
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #24: PSM1: current state HOMED
 -M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #26: PSM1: current state HOMED
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #27: PSM1: current state ENGAGING_TOOL
-0.175403, depth threshold is 0.025
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #26: PSM1: tool tip is outside the cannula, assuming it doesn't need to "engage".  If the tool is not engaged properly, move the sterile adapter all the way up and re-insert the tool.
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #28: PSM1: tool tip is outside the cannula, assuming it doesn't need to "engage".  If the tool is not engaged properly, move the sterile adapter all the way up and re-insert the tool.
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #27: PSM1: current state TOOL_ENGAGED
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #28: PSM1: tool tip is outside the cannula, assuming it doesn't need to "engage".  If the tool is not engaged properly, move the sterile adapter all the way up and re-insert the tool.
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #27: PSM1: current state TOOL_ENGAGED
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #29: PSM1: current state TOOL_ENGAGED
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #28: PSM1: control JOINT_SPACE/TRAJECTORY_MODE
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #30: PSM1: control JOINT_SPACE/TRAJECTORY_MODE
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #29: PSM1: control UNDEFINED_SPACE/UNDEFINED_MODE
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #31: PSM1: control UNDEFINED_SPACE/UNDEFINED_MODE
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #30: PSM1: current state HOMED
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #32: PSM1: current state HOMED
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #31: PSM1: desired state DISABLED
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #33: PSM1: desired state DISABLED
--M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #32: PSM1: current state DISABLED
--M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #34: PSM1: current state DISABLED
-W- cmnQtQApplicationExitsOnCtrlC_SignalHandler: exiting Qt Core Application
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #25: PSM1: current state HOMED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #27: PSM1: current state HOMED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #26: PSM1: current state ENGAGING_TOOL
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #28: PSM1: current state ENGAGING_TOOL
+M- Class mtsIntuitiveResearchKitPSM: RunEngagingTool: distance to RCM is 0.175402, depth threshold is 0.025
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #27: PSM1: tool tip is outside the cannula, assuming it doesn't need to "engage".  If the tool is not engaged properly, move the sterile adapter all the way up and re-insert the tool.
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #29: PSM1: tool tip is outside the cannula, assuming it doesn't need to "engage".  If the tool is not engaged properly, move the sterile adapter all the way up and re-insert the tool.
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #28: PSM1: current state TOOL_ENGAGED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #30: PSM1: current state TOOL_ENGAGED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #29: PSM1: control JOINT_SPACE/TRAJECTORY_MODE
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #31: PSM1: control JOINT_SPACE/TRAJECTORY_MODE
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #30: PSM1: control UNDEFINED_SPACE/UNDEFINED_MODE
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #32: PSM1: control UNDEFINED_SPACE/UNDEFINED_MODE
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #31: PSM1: current state HOMED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #33: PSM1: current state HOMED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #32: PSM1: desired state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #34: PSM1: desired state DISABLED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.7284e+09s, #33: PSM1: current state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.7284e+09s, #35: PSM1: current state DISABLED
 M- Class mtsIntuitiveResearchKitPSM: Kill: task "PSM1", current state "mtsComponentState
   State:active"
 M- Class mtsRobot1394QtWidget: Kill: default kill method for component "PSM1 IO"
--M Class mtsIntuitiveResearchKitPSM: RunInternal: End of task PSM1
--M Class mtsIntuitiveResearchKitPSM: RunInternal: End of task PSM1
 M- Class mtsIntuitiveResearchKitPSMQtWidget: Kill: default kill method for component "PSM1-GUI"
-M- Class mtsPID: Kill: task "PSM1-PID", current state "M- Class mtsIntuitiveResearchKitPSM: PSM1: Cleanup
-M- Class mtsPID: Kill: task "PSM1-PID", current state "M- Class mtsIntuitiveResearchKitPSM: PSM1: Cleanup
-mtsComponentState
+M- Class mtsPID: Kill: task "PSM1-PID", current state "mtsComponentState
   State:active"
-M- Class mtsIntuitiveResearchKitPSM: CleanupInternal: ended for task "PSM1"
-M- Class mtsIntuitiveResearchKitPSM: CleanupInternal: ended for task "PSM1"
 M- Class mtsPIDQtWidget: Kill: default kill method for component "PSM1-PID-GUI"
 M- Class mtsPIDQtWidget: mtsPIDQtWidget::Cleanup
 M- Class mtsIntuitiveResearchKitConsole: Kill: task "console", current state "mtsComponentState
@@ -1076,36 +1068,34 @@ M- Class mtsIntuitiveResearchKitConsole: Kill: task "console", current state "mt
 M- Class mtsIntuitiveResearchKitConsole: Kill: task "console", current state "mtsComponentState
   State:active"
 M- Class mtsIntuitiveResearchKitConsoleQtWidget: Kill: default kill method for component "consoleGUI"
-M- Class mtsIntuitiveResearchKitConsole: RunInternal: end of task "console: mtsIntuitiveResearchKitConsoleQtWidget::Cleanup
-
-M- Class mtsIntuitiveResearchKitConsole: RunInternal: end of task "console: mtsIntuitiveResearchKitConsoleQtWidget::Cleanup
-
+M- Class mtsIntuitiveResearchKitConsoleQtWidget: mtsIntuitiveResearchKitConsoleQtWidget::Cleanup
+M- Class mtsIntuitiveResearchKitConsole: RunInternal: end of task "console"
+"
+"
 M- Class mtsIntuitiveResearchKitConsole: Cleanup
-M- Class mtsRobotIO1394: Kill: task "io", current state "mtsComponentState
-  State:active"
-M- Class mtsRobotIO1394: Kill: task "io", current state "mtsComponentState
-  State:active"
-M- Class mtsIntuitiveResearchKitConsole: CleanupInternal: ended for task "console"
 -M Class mtsPID: ChangeStateEventHandler: calling Kill for PSM1-PID
 M- Class mtsPID: Kill: task "PSM1-PID", current state "mtsComponentState
   State:finishing"
+M- Class mtsIntuitiveResearchKitConsole: CleanupInternal: ended for task "console"
+M- Class mtsIntuitiveResearchKitConsole: CleanupInternal: ended for task "console"
 M- Class mtsRobotIO1394QtWidgetFactory: Kill: default kill method for component "robotWidgetFactory"
-M- Class mtsRobot1394QtWidget: WaitForState: called for component "PSM1 IO" for state "mtsComponentState
+M- Class mtsIntuitiveResearchKitPSM: WaitForState: waiting for task "PSM1" to enter state "mtsComponentState
+  State:finished"
+-M Class mtsIntuitiveResearchKitPSM: RunInternal: End of task PSM1
+M- Class mtsIntuitiveResearchKitPSM: PSM1: Cleanup
+M- Class mtsIntuitiveResearchKitPSM: CleanupInternal: ended for task "PSM1"
+PSM1 IO" for state "eR Class mtsRobotIO1394: RunInternal: End of task io
+mtsComponentState
+  State:finishedPSM1 IO" for state "eR Class mtsRobotIO1394: RunInternal: End of task io
+mtsComponentState
   State:finished" has no effect for mtsComponent
 M- Class mtsIntuitiveResearchKitPSMQtWidget: WaitForState: called for component "PSM1-GUI" for state "mtsComponentState
   State:finished" has no effect for mtsComponent
--MM- Class mtsPIDQtWidget: WaitForState: called for component "mtsRobotIO1394PSM1-PID-GUI: " for state "RunInternal: End of task io
-mtsComponentState
+M- Class mtsPIDQtWidget: WaitForState: called for component "PSM1-PID-GUI" for state "mtsComponentState
   State:finished" has no effect for mtsComponent
--MM- Class mtsPIDQtWidget: WaitForState: called for component "mtsRobotIO1394PSM1-PID-GUI: " for state "RunInternal: End of task io
-mtsComponentState
-  State:finishedM- Class mtsIntuitiveResearchKitConsoleQtWidget: WaitForState: called for component "consoleGUI" for state "mtsComponentState
+M- Class mtsIntuitiveResearchKitConsoleQtWidget: WaitForState: called for component "consoleGUI" for state "mtsComponentState
   State:finished" has no effect for mtsComponent
 -M Class mtsPID: ChangeStateEventHandler: calling Kill for PSM1-PID
 M- Class mtsPID: Kill: task "PSM1-PID", current state "mtsComponentState
   State:finishing"
 M- Class mtsRobotIO1394: CleanupInternal: ended for task "io"
-M- Class mtsRobotIO1394QtWidgetFactory: WaitForState: called for component "robotWidgetFactory" for state "mtsComponentState
-  State:finished" has no effect for mtsComponent
-M- Class cmnClassRegister: SetLogMaskClassAll: log mask has been set to "  " for the following classes: cmnBool, cmnChar, cmnCommandLineOptions, cmnDeSerializer, cmnDouble, cmnInt, cmnJointTypeProxy, cmnLoggerQtWidget, cmnLong, cmnLongLong, cmnPath, cmnSerializer, cmnShort, cmnUChar, cmnUInt, cmnULong, cmnULongLong, cmnUShort, cmnXMLPath, dvrk_console, mtsBool, mtsBool1, mtsBool2, mtsBool3, mtsBool4, mtsBool5, mtsBool6, mtsBoolMat, mtsBoolVec, mtsChar, mtsChar1, mtsChar2, mtsChar3, mtsChar4, mtsChar5, mtsChar6, mtsCharMat, mtsCharVec, mtsCollectorEvent, mtsCollectorFactory, mtsCollectorQtComponent, mtsCollectorQtFactory, mtsCollectorState, mtsComponent, mtsComponentAddLatency, mtsComponentConstructorArg, mtsComponentConstructorArgProxy, mtsComponentConstructorNameAndDouble, mtsComponentConstructorNameAndInt, mtsComponentConstructorNameAndLong, mtsComponentConstructorNameAndString, mtsComponentConstructorNameAndUInt, mtsComponentConstructorNameAndULong, mtsComponentStateChangeProxy, mtsComponentStateProxy, mtsComponentStatusControlProxy, mtsComponentViewer, mtsConnection, mtsDaVinciEndoscopeFocus, mtsDaVinciEndoscopeFocusQtWidget, mtsDaVinciHeadSensor, mtsDescriptionComponentClassProxy, mtsDescriptionComponentClassVecProxy, mtsDescriptionComponentProxy, mtsDescriptionConnectionProxy, mtsDescriptionConnectionVecProxy, mtsDescriptionInterfaceFullNameProxy, mtsDescriptionInterfaceFullNameVecProxy, mtsDescriptionInterfaceProxy, mtsDescriptionLoadLibraryProxy, mtsDouble, mtsDouble1, mtsDouble2, mtsDouble3, mtsDouble4, mtsDouble5, mtsDouble6, mtsDoubleAnRot2, mtsDoubleAxAnRot3, mtsDoubleFrm4x4, mtsDoubleMat, mtsDoubleMatFrm3, mtsDoubleMatRot2, mtsDoubleMatRot3, mtsDoubleQuat, mtsDoubleQuatFrm3, mtsDoubleQuatRot3, mtsDoubleRodRot3, mtsDoubleVec, mtsEndUserInterfaceArgProxy, mtsEventHandlerList, mtsExecutionResultProxy, mtsFloat, mtsFloat1, mtsFloat2, mtsFloat3, mtsFloat4, mtsFloat5, mtsFloat6, mtsFloatAnRot2, mtsFloatAxAnRot3, mtsFloatFrm4x4, mtsFloatMat, mtsFloatMatFrm3, mtsFloatMatRot2, mtsFloatMatRot3, mtsFloatQuat, mtsFloatQuatFrm3, mtsFloatQuatRot3, mtsFloatRodRot3, mtsFloatVec, mtsHIDHeadSensor, mtsHIDHeadSensorConfigurationProxy, mtsInt, mtsInt1, mtsInt2, mtsInt3, mtsInt4, mtsInt5, mtsInt6, mtsIntMat, mtsIntVec, mtsInterfaceProvided, mtsInterfaceProvidedDescriptionProxy, mtsInterfaceRequired, mtsInterfaceRequiredDescriptionProxy, mtsIntervalStatistics, mtsIntervalStatisticsQtWidgetComponent, mtsIntuitiveResearchKitArm, mtsIntuitiveResearchKitArmQtWidget, mtsIntuitiveResearchKitArmTypesProxy, mtsIntuitiveResearchKitConsole, mtsIntuitiveResearchKitConsoleQt, mtsIntuitiveResearchKitConsoleQtWidget, mtsIntuitiveResearchKitECM, mtsIntuitiveResearchKitECMQtWidget, mtsIntuitiveResearchKitEndoscopeTypesProxy, mtsIntuitiveResearchKitMTM, mtsIntuitiveResearchKitMTMQtWidget, mtsIntuitiveResearchKitPSM, mtsIntuitiveResearchKitPSMQtWidget, mtsIntuitiveResearchKitSUJ, mtsIntuitiveResearchKitSUJFixed, mtsIntuitiveResearchKitSUJQtWidget, mtsIntuitiveResearchKitSUJSi, mtsIntuitiveResearchKitToolDescriptionProxy, mtsIntuitiveResearchKitToolTypesProxy, mtsIntuitiveResearchKitUDPStreamer, mtsLogMessage, mtsLong, mtsLongLong, mtsLongMat, mtsLongVec, mtsManagerComponentBase, mtsManagerComponentClient, mtsManagerComponentServer, mtsManagerComponentServices, mtsManagerGlobal, mtsManagerGlobalInterface, mtsManagerLocal, mtsManagerLocalInterface, mtsMessageProxy, mtsMessageQtWidgetComponent, mtsPID, mtsPIDAxisConfigurationProxy, mtsPIDConfigurationProxy, mtsPIDQtWidget, mtsPSMCompensation, mtsQtApplication, mtsQtApplicationConstructorArg, mtsQtWidgetBoolRead, mtsQtWidgetBoolVecRead, mtsQtWidgetBoolVecWrite, mtsQtWidgetBoolWrite, mtsQtWidgetComponent, mtsQtWidgetDoubleRead, mtsQtWidgetDoubleVecRead, mtsQtWidgetDoubleVecWrite, mtsQtWidgetDoubleWrite, mtsQtWidgetEvent, mtsQtWidgetFunction, mtsQtWidgetIntRead, mtsQtWidgetIntWrite, mtsQtWidgetInterfaceRequired, mtsQtWidgetStateIndexRead, mtsQtWidgetStateIndexWrite, mtsQtWidgetStdStringRead, mtsQtWidgetStdStringWrite, mtsROSBridge, mtsRobot1394QtWidget, mtsRobotIO1394, mtsRobotIO1394QtWidgetFactory, mtsShort, mtsShortMat, mtsShortVec, mtsSocketBaseQtWidget, mtsSocketClientPSM, mtsSocketProxyClient, mtsSocketProxyClientConstructorArg, mtsSocketProxyInitData, mtsSocketProxyServer, mtsSocketProxyServerConstructorArg, mtsSocketServerPSM, mtsStateIndex, mtsStateTable, mtsStateTableIndexRange, mtsStdCharVecProxy, mtsStdDoubleVecProxy, mtsStdString, mtsStdStringListProxy, mtsStdStringVec, mtsStdStringVecProxy, mtsStdVct3VecProxy, mtsSystemQtWidgetComponent, mtsTask, mtsTaskConstructorArg, mtsTaskConstructorArgProxy, mtsTaskContinuous, mtsTaskContinuousConstructorArg, mtsTaskContinuousConstructorArgProxy, mtsTaskFromCallback, mtsTaskFromCallbackAdapter, mtsTaskFromSignal, mtsTaskMain, mtsTaskPeriodic, mtsTaskPeriodicConstructorArg, mtsTaskPeriodicConstructorArgProxy, mtsTeleOperationECM, mtsTeleOperationECMQtWidget, mtsTeleOperationPSM, mtsTeleOperationPSMQtWidget, mtsTextToSpeech, mtsUChar, mtsUChar1, mtsUChar2, mtsUChar3, mtsUChar4, mtsUChar5, mtsUChar6, mtsUCharMat, mtsUCharVec, mtsUInt, mtsUInt1, mtsUInt2, mtsUInt3, mtsUInt4, mtsUInt5, mtsUInt6, mtsUIntMat, mtsUIntVec, mtsULong, mtsULongMat, mtsULongVec, mtsUShort, mtsUShortMat, mtsUShortVec, mtsVct1, mtsVct2, mtsVct2x2, mtsVct3, mtsVct3x3, mtsVct4, mtsVct4x4, mtsVct5, mtsVct6, mtsVct7, mtsVct8, mtsVct9, mtsVctBool1, mtsVctBool2, mtsVctBool3, mtsVctBool4, mtsVctBool5, mtsVctBool6, mtsVctBool7, mtsVctBool8, mtsVctBool9, mtsVctBoolVec, mtsVctChar1, mtsVctChar2, mtsVctChar3, mtsVctChar4, mtsVctChar5, mtsVctChar6, mtsVctChar7, mtsVctChar8, mtsVctChar9, mtsVctCharVec, mtsVctDoubleMat, mtsVctDoubleVec, mtsVctFloat1, mtsVctFloat2, mtsVctFloat3, mtsVctFloat4, mtsVctFloat5, mtsVctFloat6, mtsVctFloat7, mtsVctFloat8, mtsVctFloat9, mtsVctFloatMat, mtsVctFloatVec, mtsVctFrm3, mtsVctFrm4x4, mtsVctInt1, mtsVctInt2, mtsVctInt3, mtsVctInt4, mtsVctInt5, mtsVctInt6, mtsVctInt7, mtsVctInt8, mtsVctInt9, mtsVctIntMat, mtsVctIntVec, mtsVctLong1, mtsVctLong2, mtsVctLong3, mtsVctLong4, mtsVctLong5, mtsVctLong6, mtsVctLong7, mtsVctLong8, mtsVctLong9, mtsVctLongVec, mtsVctMatRot3, mtsVctShort1, mtsVctShort2, mtsVctShort3, mtsVctShort4, mtsVctShort5, mtsVctShort6, mtsVctShort7, mtsVctShort8, mtsVctShort9, mtsVctShortVec, mtsVctUChar1, mtsVctUChar2, mtsVctUChar3, mtsVctUChar4, mtsVctUChar5, mtsVctUChar6, mtsVctUChar7, mtsVctUChar8, mtsVctUChar9, mtsVctUCharVec, mtsVctUInt1, mtsVctUInt2, mtsVctUInt3, mtsVctUInt4, mtsVctUInt5, mtsVctUInt6, mtsVctUInt7, mtsVctUInt8, mtsVctUInt9, mtsVctUIntVec, mtsVctULong1, mtsVctULong2, mtsVctULong3, mtsVctULong4, mtsVctULong5, mtsVctULong6, mtsVctULong7, mtsVctULong8, mtsVctULong9, mtsVctULongVec, mtsVctUShort1, mtsVctUShort2, mtsVctUShort3, mtsVctUShort4, mtsVctUShort5, mtsVctUShort6, mtsVctUShort7, mtsVctUShort8, mtsVctUShort9, mtsVctUShortVec, mtsWatchdogClient, mtsWatchdogServer, mts_ros_crtk_bridge_provided, mts_ros_crtk_bridge_required, osa1394Proxy, osaSerialPort, osaSocket, osaSocketServer, osaTimeServer, prmActuatorJointCouplingProxy, prmActuatorParameters, prmActuatorState, prmCameraInfo, prmCameraInfoProxy, prmCartesianImpedance, prmCartesianImpedanceHalfPlaneGainsProxy, prmCartesianImpedanceProxy, prmConfigurationJoint, prmConfigurationJointProxy, prmDepthMap, prmDepthMapProxy, prmEventButton, prmEventButtonQtWidgetComponent, prmForceCartesianGet, prmForceCartesianGetQtWidgetComponent, prmForceCartesianSet, prmForceTorqueJointSet, prmForceTorqueJointSetProxy, prmForwardKinematicsRequest, prmForwardKinematicsRequestProxy, prmForwardKinematicsResponse, prmForwardKinematicsResponseProxy, prmGainParameters, prmIMUSensors, prmIMUSensorsProxy, prmImageFrame, prmImageFrameProxy, prmInputData, prmInputDataProxy, prmInputDataQtWidgetComponent, prmInverseKinematicsRequest, prmInverseKinematicsRequestProxy, prmInverseKinematicsResponse, prmInverseKinematicsResponseProxy, prmKeyValueProxy, prmMaskedBoolVec, prmMaskedCharVec, prmMaskedDoubleVec, prmMaskedFloatVec, prmMaskedIntVec, prmMaskedLongVec, prmMaskedShortVec, prmMaskedUCharVec, prmMaskedUIntVec, prmMaskedULongVec, prmMaskedUShortVec, prmOperatingState, prmOperatingStateProxy, prmPositionCartesianArrayGet, prmPositionCartesianArrayGetProxy, prmPositionCartesianArrayGetQtWidget, prmPositionCartesianGet, prmPositionCartesianGetProxy, prmPositionCartesianSet, prmPositionCartesianSetProxy, prmPositionJointGet, prmPositionJointGetProxy, prmPositionJointSet, prmPositionJointSetProxy, prmRobotState, prmStateJoint, prmStateJointProxy, prmStateRobotQtWidgetComponent, prmVelocityCartesianGet, prmVelocityCartesianGetProxy, prmVelocityCartesianSet, prmVelocityJointGet, prmVelocityJointSet, sawRobotIO1394_osaActuator1394ConfigurationProxy, sawRobotIO1394_osaActuatorMappingProxy, sawRobotIO1394_osaAnalogBrake1394ConfigurationProxy, sawRobotIO1394_osaBrakeMappingProxy, sawRobotIO1394_osaDallasChip1394ConfigurationProxy, sawRobotIO1394_osaDigitalInput1394ConfigurationProxy, sawRobotIO1394_osaDigitalOutput1394ConfigurationProxy, sawRobotIO1394_osaDrive1394ConfigurationProxy, sawRobotIO1394_osaEncoder1394ConfigurationProxy, sawRobotIO1394_osaLimitsProxy, sawRobotIO1394_osaLinearFunctionProxy, sawRobotIO1394_osaPort1394ConfigurationProxy, sawRobotIO1394_osaPot1394ConfigurationProxy, sawRobotIO1394_osaPotTolerance1394ConfigurationProxy, sawRobotIO1394_osaRobot1394ConfigurationProxy, socketCommandPSMProxy, socketHeaderProxy, socketMessagesProxy, socketStatePSMProxy, 
-M- Class cmnLogger: SetMaskFunction: function mask set to "  "
