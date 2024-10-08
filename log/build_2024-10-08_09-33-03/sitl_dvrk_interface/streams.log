@@ -1,0 +1,91 @@
+[0.417s] Invoking command in '/home/hossein/ros2_ws/src/sitl_dvrk_interface': PYTHONPATH=/home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base build/sitl_dvrk_interface build --build-base /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build install --record /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/install.log --single-version-externally-managed install_data
+[0.569s] running egg_info
+[0.569s] creating build/sitl_dvrk_interface/sitl_dvrk_interface.egg-info
+[0.569s] writing build/sitl_dvrk_interface/sitl_dvrk_interface.egg-info/PKG-INFO
+[0.569s] writing dependency_links to build/sitl_dvrk_interface/sitl_dvrk_interface.egg-info/dependency_links.txt
+[0.569s] writing entry points to build/sitl_dvrk_interface/sitl_dvrk_interface.egg-info/entry_points.txt
+[0.569s] writing requirements to build/sitl_dvrk_interface/sitl_dvrk_interface.egg-info/requires.txt
+[0.569s] writing top-level names to build/sitl_dvrk_interface/sitl_dvrk_interface.egg-info/top_level.txt
+[0.570s] writing manifest file 'build/sitl_dvrk_interface/sitl_dvrk_interface.egg-info/SOURCES.txt'
+[0.571s] reading manifest file 'build/sitl_dvrk_interface/sitl_dvrk_interface.egg-info/SOURCES.txt'
+[0.571s] writing manifest file 'build/sitl_dvrk_interface/sitl_dvrk_interface.egg-info/SOURCES.txt'
+[0.571s] running build
+[0.571s] running build_py
+[0.571s] creating /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build
+[0.571s] creating /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib
+[0.571s] creating /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface
+[0.571s] copying sitl_dvrk_interface/__init__.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface
+[0.572s] copying sitl_dvrk_interface/pub_cp.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface
+[0.572s] copying sitl_dvrk_interface/pub_tf.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface
+[0.572s] creating /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils
+[0.572s] copying sitl_dvrk_interface/utils/__init__.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils
+[0.572s] copying sitl_dvrk_interface/utils/pcl_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils
+[0.572s] copying sitl_dvrk_interface/utils/dt2_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils
+[0.572s] copying sitl_dvrk_interface/utils/ma_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils
+[0.572s] copying sitl_dvrk_interface/utils/tapnet_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils
+[0.572s] copying sitl_dvrk_interface/utils/misc_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils
+[0.572s] copying sitl_dvrk_interface/utils/dvrk_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils
+[0.572s] copying sitl_dvrk_interface/utils/mdino_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils
+[0.572s] copying sitl_dvrk_interface/utils/dvrk_devel_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils
+[0.572s] copying sitl_dvrk_interface/utils/ecm_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils
+[0.573s] copying sitl_dvrk_interface/utils/ik_devel_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils
+[0.573s] copying sitl_dvrk_interface/utils/cv_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils
+[0.573s] copying sitl_dvrk_interface/utils/ik_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils
+[0.573s] copying sitl_dvrk_interface/utils/cv_cuda_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils
+[0.573s] copying sitl_dvrk_interface/utils/aruco_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils
+[0.573s] copying sitl_dvrk_interface/utils/tf_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils
+[0.573s] running install
+[0.573s] running install_lib
+[0.574s] creating /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface
+[0.574s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/__init__.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface
+[0.574s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/pub_cp.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface
+[0.574s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/pub_tf.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface
+[0.574s] creating /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils
+[0.574s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils/__init__.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils
+[0.574s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils/pcl_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils
+[0.574s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils/dt2_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils
+[0.574s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils/ma_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils
+[0.575s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils/tapnet_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils
+[0.575s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils/misc_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils
+[0.575s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils/dvrk_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils
+[0.575s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils/mdino_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils
+[0.575s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils/dvrk_devel_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils
+[0.575s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils/ecm_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils
+[0.575s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils/ik_devel_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils
+[0.575s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils/cv_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils
+[0.575s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils/ik_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils
+[0.575s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils/cv_cuda_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils
+[0.575s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils/aruco_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils
+[0.575s] copying /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build/lib/sitl_dvrk_interface/utils/tf_utils.py -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils
+[0.576s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/__init__.py to __init__.cpython-310.pyc
+[0.576s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/pub_cp.py to pub_cp.cpython-310.pyc
+[0.577s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/pub_tf.py to pub_tf.cpython-310.pyc
+[0.577s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils/__init__.py to __init__.cpython-310.pyc
+[0.577s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils/pcl_utils.py to pcl_utils.cpython-310.pyc
+[0.578s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils/dt2_utils.py to dt2_utils.cpython-310.pyc
+[0.580s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils/ma_utils.py to ma_utils.cpython-310.pyc
+[0.581s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils/tapnet_utils.py to tapnet_utils.cpython-310.pyc
+[0.581s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils/misc_utils.py to misc_utils.cpython-310.pyc
+[0.582s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils/dvrk_utils.py to dvrk_utils.cpython-310.pyc
+[0.583s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils/mdino_utils.py to mdino_utils.cpython-310.pyc
+[0.583s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils/dvrk_devel_utils.py to dvrk_devel_utils.cpython-310.pyc
+[0.584s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils/ecm_utils.py to ecm_utils.cpython-310.pyc
+[0.584s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils/ik_devel_utils.py to ik_devel_utils.cpython-310.pyc
+[0.585s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils/cv_utils.py to cv_utils.cpython-310.pyc
+[0.586s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils/ik_utils.py to ik_utils.cpython-310.pyc
+[0.587s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils/cv_cuda_utils.py to cv_cuda_utils.cpython-310.pyc
+[0.587s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils/aruco_utils.py to aruco_utils.cpython-310.pyc
+[0.588s] byte-compiling /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface/utils/tf_utils.py to tf_utils.cpython-310.pyc
+[0.589s] running install_data
+[0.589s] creating /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/share/ament_index
+[0.589s] creating /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/share/ament_index/resource_index
+[0.589s] creating /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/share/ament_index/resource_index/packages
+[0.589s] copying resource/sitl_dvrk_interface -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/share/ament_index/resource_index/packages
+[0.589s] copying package.xml -> /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/share/sitl_dvrk_interface
+[0.589s] running install_egg_info
+[0.590s] Copying build/sitl_dvrk_interface/sitl_dvrk_interface.egg-info to /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages/sitl_dvrk_interface-0.0.0-py3.10.egg-info
+[0.590s] running install_scripts
+[0.602s] Installing pub_cp script to /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/sitl_dvrk_interface
+[0.602s] Installing pub_tf script to /home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/sitl_dvrk_interface
+[0.603s] writing list of installed files to '/home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/install.log'
+[0.615s] Invoked command in '/home/hossein/ros2_ws/src/sitl_dvrk_interface' returned '0': PYTHONPATH=/home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/hossein/ros2_ws/src/sitl_dvrk_interface/install/sitl_dvrk_interface/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base build/sitl_dvrk_interface build --build-base /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/build install --record /home/hossein/ros2_ws/src/sitl_dvrk_interface/build/sitl_dvrk_interface/install.log --single-version-externally-managed install_data

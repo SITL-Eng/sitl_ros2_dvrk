@@ -1,0 +1,12 @@
+Metadata-Version: 2.1
+Name: sitl-dvrk-interface
+Version: 0.0.0
+Summary: This package provides an interface for connecting to the dVRK console over ROS2, specifically modified for UIC SITL's da Vinci Robot.
+Home-page: UNKNOWN
+Maintainer: hossein
+Maintainer-email: haeri.hsn@gmail.com
+License: MIT
+Platform: UNKNOWN
+
+UNKNOWN
+

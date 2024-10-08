@@ -1,0 +1,4 @@
+[console_scripts]
+pub_cp = sitl_dvrk_interface.pub_cp:main
+pub_tf = sitl_dvrk_interface.pub_tf:main
+

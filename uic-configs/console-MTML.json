@@ -1,0 +1,11 @@
+{
+    // see https://github.com/jhu-dvrk/sawIntuitiveResearchKit/wiki/Configuration-File-Formats
+    "arms":
+    [
+        {
+            "name": "MTML",
+            "type": "MTM",
+            "serial": "55716"
+        }
+    ]
+}

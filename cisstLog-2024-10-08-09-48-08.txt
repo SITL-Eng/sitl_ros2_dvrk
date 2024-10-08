@@ -1,0 +1,3 @@
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+-W Class cmnPath: Couldn't find file "/home/hossein/ros2_ws/src/sitl_dvrk_interface/uic-config/console-PSM1.json" in path /home/hossein/ros2_ws/src/sitl_dvrk_interface;/home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share;/usr/share/sawIntuitiveResearchKit/share
