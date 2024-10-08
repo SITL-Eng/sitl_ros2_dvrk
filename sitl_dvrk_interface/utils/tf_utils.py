@@ -62,10 +62,10 @@ def g2tf(g):
 def vecs2tf(rvec,tvec):
     out = Transform()
     quat = rvec2quat(rvec)
-    out.rotation.x = quat[0]
-    out.rotation.y = quat[1]
-    out.rotation.z = quat[2]
-    out.rotation.w = quat[3]
+    out.rotation.x = quat[0][0]
+    out.rotation.y = quat[1][0]
+    out.rotation.z = quat[2][0]
+    out.rotation.w = quat[3][0]
     out.translation.x = tvec[0]
     out.translation.y = tvec[1]
     out.translation.z = tvec[2]
@@ -74,10 +74,10 @@ def vecs2tf(rvec,tvec):
 def vecs2pose(rvec,tvec):
     out = Pose()
     quat = rvec2quat(rvec)
-    out.orientation.x = quat[0]
-    out.orientation.y = quat[1]
-    out.orientation.z = quat[2]
-    out.orientation.w = quat[3]
+    out.orientation.x = quat[0][0]
+    out.orientation.y = quat[1][0]
+    out.orientation.z = quat[2][0]
+    out.orientation.w = quat[3][0]
     out.position.x = tvec[0]
     out.position.y = tvec[1]
     out.position.z = tvec[2]

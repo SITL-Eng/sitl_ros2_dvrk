@@ -6,12 +6,13 @@ from rclpy.node import Node
 from tf2_ros import TransformBroadcaster
 from geometry_msgs.msg import TransformStamped
 from sensor_msgs.msg import JointState
-from utils import tf_utils, aruco_utils, ik_utils
+from sitl_dvrk_interface.utils import tf_utils, aruco_utils, ik_utils
 
 class PUB_CUSTOM_DVRK_TF(Node):
-    def __init__(self):
-        super().__init__('pub_custom_dvrk_tf')
-        self.declare_parameters()
+    def __init__(self, params):
+        super().__init__('pub_tf')
+        self.params = params
+        # self.declare_parameters()
         self.load_tfs()
         self.load_params()
         self.br = TransformBroadcaster(self)
@@ -24,11 +25,11 @@ class PUB_CUSTOM_DVRK_TF(Node):
     def __del__(self):
         self.get_logger().info("Shutting down...")
 
-    def declare_parameters(self):
-        self.declare_parameter('cam_type', '30')
-        self.declare_parameter('psm1_calib_fn', '')
-        self.declare_parameter('psm2_calib_fn', '')
-        self.declare_parameter('ecm_calib_fn', '')
+    # def declare_parameters(self):
+    #     self.declare_parameter('cam_type', '30')
+    #     self.declare_parameter('psm1_calib_fn', '')
+    #     self.declare_parameter('psm2_calib_fn', '')
+    #     self.declare_parameter('ecm_calib_fn', '')
 
     def load_tfs(self):
         tf_path = "/home/" + os.getlogin() + "/aruco_data/base_tfs.yaml"
@@ -42,10 +43,10 @@ class PUB_CUSTOM_DVRK_TF(Node):
         g_psm1tip_psm1jaw = tf_utils.cv2vecs2g(np.array([0.0,0.0,0.0]),np.array([-0.005,-0.0025,0.0147]))
         g_psm2tip_psm2jaw = tf_utils.cv2vecs2g(np.array([0.0,0.0,0.0]),np.array([-0.004, 0.0, 0.019]))
         
-        cam_type = self.get_parameter('cam_type').value
-        if cam_type == "30":
+        # cam_type = self.get_parameter('cam_type').value
+        if self.params['cam_type'] == "30":
             self.g_ecm_dvrk  = tf_utils.cv2vecs2g(np.array([1,0,0])*math.radians(30),np.array([0,0,0]))
-        elif cam_type == "0":
+        elif self.params['cam_type'] == "0":
             self.g_ecm_dvrk  = tf_utils.cv2vecs2g(np.array([0.0,0.0,0.0]),np.array([0,0,0]))
         
         self.g_ecmdvrk_ecmopencv = np.array(tf_data["g_ecmdvrk_ecmopencv"])
@@ -59,9 +60,9 @@ class PUB_CUSTOM_DVRK_TF(Node):
         self.psm2tip_psm2jaw_tf  = tf_utils.g2tf(g_psm2tip_psm2jaw)
 
     def load_params(self):
-        self.psm1_params = ik_utils.get_arm_calib_data(self.get_parameter('psm1_calib_fn').value)
-        self.psm2_params = ik_utils.get_arm_calib_data(self.get_parameter('psm2_calib_fn').value)
-        self.ecm_params  = ik_utils.get_arm_calib_data(self.get_parameter('ecm_calib_fn').value)
+        self.psm1_params = ik_utils.get_arm_calib_data(self.params['psm1_calib_fn'])
+        self.psm2_params = ik_utils.get_arm_calib_data(self.params['psm2_calib_fn'])
+        self.ecm_params  = ik_utils.get_arm_calib_data(self.params['ecm_calib_fn'])
 
     def psm1_callback(self, psm1_js):
         t = self.get_clock().now().to_msg()
@@ -111,7 +112,15 @@ class PUB_CUSTOM_DVRK_TF(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = PUB_CUSTOM_DVRK_TF()
+
+    params = {
+        "cam_type" : "30",
+        "psm1_calib_fn" : "/home/" + os.getlogin() + "/aruco_data/psm1_calib_results_final_new_v2.mat",
+        "psm2_calib_fn" : "/home/" + os.getlogin() + "/aruco_data/psm2_calib_results_final_new_v2.mat",
+        "ecm_calib_fn"  : "/home/" + os.getlogin() + "/aruco_data/ecm_calib_results_final_new_v2.mat"
+    }
+
+    node = PUB_CUSTOM_DVRK_TF(params)
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:

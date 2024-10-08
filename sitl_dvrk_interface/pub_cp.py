@@ -3,6 +3,7 @@
 import os
 import numpy as np
 import math
+import cv2
 
 import rclpy
 from rclpy.node import Node
@@ -15,11 +16,11 @@ from sitl_dvrk_interface.utils import tf_utils, aruco_utils, ik_devel_utils
 
 
 class PUB_CUSTOM_DVRK_CP(Node):
-    def __init__(self):
-        super().__init__('pub_custom_dvrk_cp')
+    def __init__(self, params):
+        super().__init__('pub_cp')
+        self.params = params
         self.load_tfs()
         self.load_params()
-
         if self.params["cam_type"] == "30":
             self.g_ecm_dvrk  = tf_utils.cv2vecs2g(np.array([1,0,0])*math.radians(30),np.array([0,0,0]))
         elif self.params["cam_type"] == "0":
@@ -28,7 +29,6 @@ class PUB_CUSTOM_DVRK_CP(Node):
         # Initialize publishers
         self.custom_psm1_cp = self.create_publisher(PoseStamped, "/PSM1/custom/setpoint_cp", 10)
         self.custom_psm2_cp = self.create_publisher(PoseStamped, "/PSM2/custom/setpoint_cp", 10)
-        # ... (initialize other publishers similarly)
         self.custom_psm1_jaw_cp = self.create_publisher(PoseStamped, "/PSM1/custom/jaw/setpoint_cp", 10)
         self.custom_psm2_jaw_cp = self.create_publisher(PoseStamped, "/PSM2/custom/jaw/setpoint_cp", 10)
         self.custom_ecm_cp = self.create_publisher(PoseStamped, "/ECM/custom/setpoint_cp", 10)
@@ -87,6 +87,10 @@ class PUB_CUSTOM_DVRK_CP(Node):
 
         t = self.get_clock().now().to_msg()
 
+        rvec = cv2.Rodrigues(g_odom_ecmtip[:3,:3])[0]
+        quat = tf_utils.rvec2quat(rvec)
+        # self.get_logger().info(f"{quat[0]}")
+
         custom_ecm_cp_msg = tf_utils.g2posestamped(g_odom_ecmtip,t,"Cart")
         self.custom_ecm_cp.publish(custom_ecm_cp_msg)
 
@@ -120,7 +124,13 @@ class PUB_CUSTOM_DVRK_CP(Node):
         
 def main(args=None):
     rclpy.init(args=args)
-    node = PUB_CUSTOM_DVRK_CP()
+    params = {
+        "cam_type" : "30",
+        "psm1_calib_fn" : "/home/" + os.getlogin() + "/aruco_data/psm1_calib_results_final_new_v2.mat",
+        "psm2_calib_fn" : "/home/" + os.getlogin() + "/aruco_data/psm2_calib_results_final_new_v2.mat",
+        "ecm_calib_fn"  : "/home/" + os.getlogin() + "/aruco_data/ecm_calib_results_final_new_v2.mat"
+    }
+    node = PUB_CUSTOM_DVRK_CP(params)
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
