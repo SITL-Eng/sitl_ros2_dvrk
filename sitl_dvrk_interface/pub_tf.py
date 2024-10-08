@@ -12,7 +12,6 @@ class PUB_CUSTOM_DVRK_TF(Node):
     def __init__(self, params):
         super().__init__('pub_tf')
         self.params = params
-        # self.declare_parameters()
         self.load_tfs()
         self.load_params()
         self.br = TransformBroadcaster(self)
@@ -25,11 +24,6 @@ class PUB_CUSTOM_DVRK_TF(Node):
     def __del__(self):
         self.get_logger().info("Shutting down...")
 
-    # def declare_parameters(self):
-    #     self.declare_parameter('cam_type', '30')
-    #     self.declare_parameter('psm1_calib_fn', '')
-    #     self.declare_parameter('psm2_calib_fn', '')
-    #     self.declare_parameter('ecm_calib_fn', '')
 
     def load_tfs(self):
         tf_path = "/home/" + os.getlogin() + "/aruco_data/base_tfs.yaml"
