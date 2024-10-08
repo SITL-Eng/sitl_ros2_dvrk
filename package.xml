@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>sitl_dvrk_interface</name>
+  <version>0.0.0</version>
+  <description>This package provides an interface for connecting to the dVRK console over ROS2, specifically modified for UIC SITL's da Vinci Robot.</description>
+  <maintainer email="haeri.hsn@gmail.com">hossein</maintainer>
+  <license>MIT</license>
+
+  <!-- Build dependencies -->
+  <build_depend>rclpy</build_depend>
+  <build_depend>cisst_msgs</build_depend>
+  <build_depend>cisst_ros_bridge</build_depend>
+  <build_depend>cisst_ros_crtk</build_depend>
+  <build_depend>crtk_msgs</build_depend>
+  <build_depend>crtk_python_client</build_depend>
+  <build_depend>dvrk_arms_from_ros</build_depend>
+  <build_depend>dvrk_camera_registration</build_depend>
+  <build_depend>dvrk_config</build_depend>
+  <build_depend>dvrk_hrsv_widget</build_depend>
+  <build_depend>dvrk_model</build_depend>
+  <build_depend>dvrk_python</build_depend>
+  <build_depend>dvrk_robot</build_depend>
+  <build_depend>dvrk_video</build_depend>
+
+  <!-- Runtime dependencies -->
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>cisst_msgs</exec_depend>
+  <exec_depend>cisst_ros_bridge</exec_depend>
+  <exec_depend>cisst_ros_crtk</exec_depend>
+  <exec_depend>crtk_msgs</exec_depend>
+  <exec_depend>crtk_python_client</exec_depend>
+  <exec_depend>dvrk_arms_from_ros</exec_depend>
+  <exec_depend>dvrk_camera_registration</exec_depend>
+  <exec_depend>dvrk_config</exec_depend>
+  <exec_depend>dvrk_hrsv_widget</exec_depend>
+  <exec_depend>dvrk_model</exec_depend>
+  <exec_depend>dvrk_python</exec_depend>
+  <exec_depend>dvrk_robot</exec_depend>
+  <exec_depend>dvrk_video</exec_depend>
+
+  <!-- Test dependencies -->
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
+
