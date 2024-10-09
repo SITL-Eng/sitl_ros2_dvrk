@@ -9,7 +9,7 @@
 
   <!-- dependencies -->
   <depend>rclpy</depend>
-  <depend>sitl_dvrk_ros2_interfaces</depend>
+  <!--<depend>sitl_dvrk_ros2_interfaces</depend> -->
   <depend>cisst_msgs</depend>
   <depend>cisst_ros_bridge</depend>
   <depend>cisst_ros_crtk</depend>
@@ -24,12 +24,6 @@
   <depend>dvrk_robot</depend>
   <depend>dvrk_video</depend>
 
- 
-  <!-- Test dependencies -->
-  <test_depend>ament_copyright</test_depend>
-  <test_depend>ament_flake8</test_depend>
-  <test_depend>ament_pep257</test_depend>
-  <test_depend>python3-pytest</test_depend>
 
   <export>
     <build_type>ament_python</build_type>

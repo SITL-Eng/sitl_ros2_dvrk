@@ -36,8 +36,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "pub_cp = sitl_dvrk_interface.pub_cp:main",
-            "pub_tf = sitl_dvrk_interface.pub_tf:main"
+            "pub_cp = sitl_dvrk_ros2.pub_cp:main",
+            "pub_tf = sitl_dvrk_ros2.pub_tf:main"
         ],
     },
 )
