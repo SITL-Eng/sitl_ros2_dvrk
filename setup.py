@@ -14,6 +14,7 @@ setup(
     install_requires=[
         'setuptools',
         'rclpy',
+        'sitl_dvrk_ros2_interfaces'
         'cisst_msgs',
         'cisst_ros_bridge',
         'cisst_ros_crtk',

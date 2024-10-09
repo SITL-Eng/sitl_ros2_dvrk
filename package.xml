@@ -9,7 +9,7 @@
 
   <!-- dependencies -->
   <depend>rclpy</depend>
-  <!--<depend>sitl_dvrk_ros2_interfaces</depend> -->
+  <depend>sitl_dvrk_ros2_interfaces</depend>
   <depend>cisst_msgs</depend>
   <depend>cisst_ros_bridge</depend>
   <depend>cisst_ros_crtk</depend>
