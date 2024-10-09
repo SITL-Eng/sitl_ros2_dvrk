@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'sitl_dvrk_interface'
+package_name = 'sitl_dvrk_ros2'
 
 setup(
     name=package_name,
