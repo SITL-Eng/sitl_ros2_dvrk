@@ -15,7 +15,7 @@ Clone and install (Ubuntu 22.04 version) the required dVRK ROS 2 packages (cisst
 
 ### 3. Ensure `​sitl_dvrk_ros2_interfaces` Package is Installed
 
-Make sure the  package [sitl_dvrk_ros2_interfaces](https://github.com/hossein-haeri/sitl_dvrk_ros2_interfaces) is installed in your ROS 2 workspace. If not, clone and build it within your workspace. This package is required for custom ros2 messages.
+Make sure the  package [sitl_dvrk_ros2_interfaces](https://github.com/hossein-haeri/sitl_dvrk_ros2_interfaces) is installed in your ROS2 workspace src directory. If not, clone and build it within your workspace. This package is required for custom ros2 messages.
 
 ### 4. Install `​pyquaternion`
 
