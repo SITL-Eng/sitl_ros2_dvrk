@@ -6,7 +6,7 @@ from rclpy.node import Node
 from tf2_ros import TransformBroadcaster
 from geometry_msgs.msg import TransformStamped
 from sensor_msgs.msg import JointState
-from sitl_dvrk_interface.utils import tf_utils, aruco_utils, ik_utils
+from sitl_dvrk_ros2.utils import tf_utils, aruco_utils, ik_utils
 
 class PUB_CUSTOM_DVRK_TF(Node):
     def __init__(self, params):
