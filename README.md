@@ -9,7 +9,7 @@ Follow the official instructions for installing ROS 2 Humble:
 
 ### 2. Install dVRK Packages for ROS 2
 
-Clone and install the required dVRK ROS 2 packages (for ubuntu 22.04) from their official repositories or sources and make sure the 1394 FireWire connection to the da Vinci dVRK works properly:
+Clone and install (Ubuntu 22.04 version) the required dVRK ROS 2 packages (cisst-saw, crtk, dvrk) from their official repositories or sources and make sure the 1394 FireWire connection to the da Vinci dVRK works properly:
 
 [dVRK ROS2 Installation Guide](https://dvrk.readthedocs.io/en/latest/pages/software/compilation/ros2.html)
 
