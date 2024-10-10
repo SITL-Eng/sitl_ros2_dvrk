@@ -21,17 +21,13 @@ Make sure the  package [sitl_dvrk_ros2_interfaces](https://github.com/hossein-ha
 
 You will need `​pyquaternion` for quaternion operations. Install it using `​pip`:
 
-\`\`\`​bash
-pip install pyquaternion
-\`\`\`​
+'pip install pyquaternion'
 
 ### 5. Set Up Calibration Data
 
 Ensure your calibration data is available in the `​~/aruco_data` directory. If this directory does not exist, create it:
 
-\`\`\`​bash
-mkdir -p ~/aruco_data
-\`\`\`​
+'mkdir -p ~/aruco_data'
 
 Populate this directory with your calibration data files.
 
