@@ -11,7 +11,7 @@ from geometry_msgs.msg import PoseStamped
 from sensor_msgs.msg import JointState
 from message_filters import ApproximateTimeSynchronizer, Subscriber
 
-from sitl_dvrk_interface.utils import tf_utils, aruco_utils, ik_devel_utils
+from sitl_dvrk_ros2.utils import tf_utils, aruco_utils, ik_devel_utils
 
 
 
