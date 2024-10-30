@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'sitl_dvrk_ros2'
+package_name = 'sitl_ros2_dvrk'
 
 setup(
     name=package_name,
@@ -14,7 +14,7 @@ setup(
     install_requires=[
         'setuptools',
         'rclpy',
-        'sitl_dvrk_ros2_interfaces'
+        'sitl_ros2_interfaces'
         'cisst_msgs',
         'cisst_ros_bridge',
         'cisst_ros_crtk',
@@ -37,8 +37,10 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "pub_cp = sitl_dvrk_ros2.pub_cp:main",
-            "pub_tf = sitl_dvrk_ros2.pub_tf:main"
+            "pub_cp = sitl_ros2_dvrk.pub_cp:main",
+            "pub_tf = sitl_ros2_dvrk.pub_tf:main",
+            "custom_control_test = sitl_ros2_dvrk.custom_control:main"
+            
         ],
     },
 )

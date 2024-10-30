@@ -13,9 +13,9 @@ Clone and install the required dVRK ROS 2 packages (cisst-saw, crtk, dvrk) from 
 
 [dVRK ROS2 Installation Guide](https://dvrk.readthedocs.io/en/latest/pages/software/compilation/ros2.html)
 
-### 3. Ensure `​sitl_dvrk_ros2_interfaces` Package is Installed
+### 3. Ensure `​sitl_ros2_interfaces` Package is Installed
 
-Make sure the  package [sitl_dvrk_ros2_interfaces](https://github.com/hossein-haeri/sitl_dvrk_ros2_interfaces) is installed in your ROS2 workspace src directory. If not, clone and build it within your workspace. This package is required for custom ros2 messages.
+Make sure the  package [sitl_ros2_interfaces](https://github.com/hossein-haeri/sitl_ros2_interfaces) is installed in your ROS2 workspace src directory. If not, clone and build it within your workspace. This package is required for custom ros2 messages.
 
 ### 4. Install `​pyquaternion`
 

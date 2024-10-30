@@ -5,7 +5,7 @@ import numpy as np
 import pickle
 from scipy import io
 from sensor_msgs.msg import CameraInfo
-from sitl_dvrk_ros2.utils import cv_cuda_utils
+from sitl_ros2_dvrk.utils import cv_cuda_utils
 
 class Resolution():
     def __init__(self, res_type):

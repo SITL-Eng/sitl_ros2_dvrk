@@ -10,7 +10,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 plt.rcParams["figure.figsize"] = (20,10)
 
-from sitl_dvrk_ros2.utils import misc_utils, cv_utils
+from sitl_ros2_dvrk.utils import misc_utils, cv_utils
 
 from detectron2 import model_zoo
 from detectron2.engine import DefaultPredictor

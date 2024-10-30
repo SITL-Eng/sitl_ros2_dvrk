@@ -7,7 +7,7 @@ import math
 import scipy.io as sio
 from scipy.optimize import least_squares, newton, minimize
 from scipy.spatial.transform import Rotation
-from sitl_dvrk_ros2.utils import tf_utils, dvrk_utils
+from sitl_ros2_dvrk.utils import tf_utils, dvrk_utils
 import time
 from pyquaternion import Quaternion
 

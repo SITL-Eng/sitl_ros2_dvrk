@@ -7,7 +7,7 @@ np.seterr(all="ignore")
 import yaml
 from scipy.spatial.transform import Rotation as R
 
-from sitl_dvrk_ros2.utils import tf_utils
+from sitl_ros2_dvrk.utils import tf_utils
 
 def load_aruco_detector():
     # check https://docs.opencv.org/4.x/d5/dae/tutorial_aruco_detection.html

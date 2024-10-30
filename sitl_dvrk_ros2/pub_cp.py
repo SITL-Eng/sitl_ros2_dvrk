@@ -11,7 +11,7 @@ from geometry_msgs.msg import PoseStamped
 from sensor_msgs.msg import JointState
 from message_filters import ApproximateTimeSynchronizer, Subscriber
 
-from sitl_dvrk_ros2.utils import tf_utils, aruco_utils, ik_devel_utils
+from sitl_ros2_dvrk.utils import tf_utils, aruco_utils, ik_devel_utils
 
 
 
@@ -87,8 +87,8 @@ class PUB_CUSTOM_DVRK_CP(Node):
 
         t = self.get_clock().now().to_msg()
 
-        rvec = cv2.Rodrigues(g_odom_ecmtip[:3,:3])[0]
-        quat = tf_utils.rvec2quat(rvec)
+        # rvec = cv2.Rodrigues(g_odom_ecmtip[:3,:3])[0]
+        # quat = tf_utils.rvec2quat(rvec)
         # self.get_logger().info(f"{quat[0]}")
 
         custom_ecm_cp_msg = tf_utils.g2posestamped(g_odom_ecmtip,t,"Cart")

@@ -9,7 +9,7 @@ from maskdino import add_maskdino_config
 from detectron2.engine.defaults import DefaultPredictor
 from detectron2.structures import Instances
 
-from sitl_dvrk_ros2.utils import dt2_utils, misc_utils
+from sitl_ros2_dvrk.utils import dt2_utils, misc_utils
 
 def load_seg_predictor(config_file, model_weights):
     cfg = get_cfg()

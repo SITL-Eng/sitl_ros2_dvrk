@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 from scipy.spatial.distance import cdist
 from ros_numpy import point_cloud2
-from sitl_dvrk_ros2.utils import misc_utils
+from sitl_ros2_dvrk.utils import misc_utils
 
 BIT_MOVE_16 = 2**16
 BIT_MOVE_8  = 2**8

@@ -9,7 +9,7 @@ from sklearn.cluster import DBSCAN
 from skimage.morphology import medial_axis, convex_hull_image
 from scipy.ndimage import binary_fill_holes
 
-from sitl_dvrk_ros2.utils import misc_utils
+from sitl_ros2_dvrk.utils import misc_utils
 
 def scatter(img, pts, radius, color):
     out = copy.deepcopy(img)

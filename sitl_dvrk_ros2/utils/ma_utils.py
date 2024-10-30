@@ -2,7 +2,7 @@
 
 import numpy as np
 from std_msgs.msg import MultiArrayLayout, MultiArrayDimension
-from sitl_dvrk_ros2_interfaces.msg import UInt8MultiArrayStamped, UInt16MultiArrayStamped, Dt2KptState
+from sitl_ros2_interfaces.msg import UInt8MultiArrayStamped, UInt16MultiArrayStamped, Dt2KptState
 
 def get_ma_layout(arr):
     ma_layout = MultiArrayLayout()

@@ -1,0 +1,3241 @@
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- Class mtsIntuitiveResearchKitConsole: Configure: console using file "/home/hossein/ros2_ws/src/sitl_ros2_dvrk/sitl_ros2_dvrk/sitl_daVinci_configs/console-SUJ-ECM-PSM1-PSM2.json"
+----> content of configuration file: 
+/* -*- Mode: Javascript; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+{
+	"arms" : 
+	[
+		{
+			"io" : "sawRobotIO1394-SUJ.xml",
+			"kinematic" : "suj-ECM-1-2-3.json",
+			"name" : "SUJ",
+			"type" : "SUJ_Classic"
+		},
+		{
+			"base-frame" : 
+			{
+				"component" : "SUJ",
+				"interface" : "PSM1"
+			},
+			"name" : "PSM1",
+			"serial" : "25976",
+			"type" : "PSM"
+		},
+		{
+			"base-frame" : 
+			{
+				"component" : "SUJ",
+				"interface" : "PSM2"
+			},
+			"name" : "PSM2",
+			"serial" : "23388",
+			"type" : "PSM"
+		},
+		{
+			"base-frame" : 
+			{
+				"component" : "SUJ",
+				"interface" : "ECM"
+			},
+			"name" : "ECM",
+			"serial" : "27313",
+			"type" : "ECM"
+		}
+	],
+	"endoscope-focus" : 
+	{
+		"io" : "io/sawRobotIO1394-MTML-dv-endoscope-focus.xml"
+	},
+	"io" : 
+	{
+		"footpedals" : "io/sawRobotIO1394-MTMR-foot-pedals.xml",
+		"watchdog-timeout" : 0.050000000000000003 // in seconds
+	},
+	// , "period": 0.0007 //  since we can't use full broadcast
+	// , "port": "udp"
+	// , "firewire-protocol": "broadcast-read-write"
+	"operator-present" : 
+	{
+		"io" : "io/sawRobotIO1394-MTMR-dv-head-sensor.xml"
+	}
+}
+<----
+M- Class mtsIntuitiveResearchKitConsole: Configure:
+     - Period IO is 0.000606667
+     - Port is fw:0
+     - Protocol is sequential-read-broadcast-write
+     - Watchdog timeout is 0.05
+FirewirePort::Init: number of ports = 1
+  Port 0: /dev/fw0, 14 nodes
+FirewirePort::Init: successfully initialized port 0
+Using libraw1394 version 2.1.2
+FirewirePort::Init: successfully disabled cycle start packet
+FirewirePort::InitNodes: base node id = ffc0
+BasePort::ScanNodes: building node map for 13 nodes:
+  Node 0, BoardId = 12, FPGA_V2, Hardware = QLA1, Firmware Version = 8
+  Node 1, BoardId = 11, FPGA_V2, Hardware = QLA1, Firmware Version = 8
+  Node 2, BoardId = 10, FPGA_V2, Hardware = QLA1, Firmware Version = 8
+  Node 3, BoardId = 9, FPGA_V2, Hardware = QLA1, Firmware Version = 8
+  Node 4, BoardId = 8, FPGA_V2, Hardware = QLA1, Firmware Version = 8
+  Node 5, BoardId = 7, FPGA_V2, Hardware = QLA1, Firmware Version = 8
+  Node 6, BoardId = 6, FPGA_V2, Hardware = QLA1, Firmware Version = 8
+  Node 7, BoardId = 5, FPGA_V2, Hardware = QLA1, Firmware Version = 8
+  Node 8, BoardId = 4, FPGA_V2, Hardware = QLA1, Firmware Version = 8
+  Node 9, BoardId = 3, FPGA_V2, Hardware = QLA1, Firmware Version = 8
+  Node 10, BoardId = 2, FPGA_V2, Hardware = QLA1, Firmware Version = 8
+  Node 11, BoardId = 1, FPGA_V2, Hardware = QLA1, Firmware Version = 8
+  Node 12, BoardId = 0, FPGA_V2, Hardware = QLA1, Firmware Version = 8
+BasePort::ScanNodes: found 13 boards
+BasePort::SetDefaultProtocol: all nodes broadcast capable and support shorter wait
+BasePort::SetProtocol: system running with broadcast write
+M- Class mtsIntuitiveResearchKitConsole: Configure: configuring IO using "/home/hossein/ros2_ws/src/sitl_ros2_dvrk/sitl_ros2_dvrk/sitl_daVinci_configs/sawRobotIO1394-ECM-27313.xml"
+M- Class mtsRobotIO1394: Configure: configuring from /home/hossein/ros2_ws/src/sitl_ros2_dvrk/sitl_ros2_dvrk/sitl_daVinci_configs/sawRobotIO1394-ECM-27313.xml
+D- Class mtsRobotIO1394: AddStateTable: added state table "ECMRead" and corresponding interface "StateTableECMRead" to task "io"
+D- Class mtsRobotIO1394: AddStateTable: added state table "ECMWrite" and corresponding interface "StateTableECMWrite" to task "io"
+W- Class mtsRobotIO1394: SetBoards: ECM, board: 0, Id: 4, firmware: 8, FPGA serial: 6547-01, QLA serial: 6557-01
+W- Class mtsRobotIO1394: SetBoards: ECM, board: 1, Id: 5, firmware: 8, FPGA serial: 6547-44, QLA serial: 6557-44
+M- Class mtsRobotIO1394: Configure: added robot "ECM"
+W- Class mtsRobotIO1394: mtsRobot1394::SetBoards
+----------------------------------------------------
+ Suggestion:
+   Please upgrade all boards firmware to version 9.
+   Lowest version found is 8.
+----------------------------------------------------
+ To upgrade (or downgrade) the FPGA firmware, please follow instructions from:
+  https://github.com/jhu-cisst/mechatronics-firmware/wiki/FPGA-Program
+----------------------------------------------------
+M- Class mtsIntuitiveResearchKitConsole: Configure: configuring IO using "/home/hossein/ros2_ws/src/sitl_ros2_dvrk/sitl_ros2_dvrk/sitl_daVinci_configs/sawRobotIO1394-PSM1-25976.xml"
+M- Class mtsRobotIO1394: Configure: configuring from /home/hossein/ros2_ws/src/sitl_ros2_dvrk/sitl_ros2_dvrk/sitl_daVinci_configs/sawRobotIO1394-PSM1-25976.xml
+W- Configure: potentiometer to encoder latency (0.01) and/or distance (0) set to zero, safety check is DISABLED for Axis 3 for robot 1 (PSM1)
+W- Configure: potentiometer to encoder latency (0.01) and/or distance (0) set to zero, safety check is DISABLED for Axis 4 for robot 1 (PSM1)
+W- Configure: potentiometer to encoder latency (0.01) and/or distance (0) set to zero, safety check is DISABLED for Axis 5 for robot 1 (PSM1)
+W- Configure: potentiometer to encoder latency (0.01) and/or distance (0) set to zero, safety check is DISABLED for Axis 6 for robot 1 (PSM1)
+D- Class mtsRobotIO1394: AddStateTable: added state table "PSM1Read" and corresponding interface "StateTablePSM1Read" to task "io"
+D- Class mtsRobotIO1394: AddStateTable: added state table "PSM1Write" and corresponding interface "StateTablePSM1Write" to task "io"
+W- Class mtsRobotIO1394: SetBoards: PSM1, board: 0, Id: 6, firmware: 8, FPGA serial: 6547-05, QLA serial: 6557-70
+W- Class mtsRobotIO1394: SetBoards: PSM1, board: 1, Id: 7, firmware: 8, FPGA serial: 6547-61, QLA serial: 6557-61
+M- Class mtsRobotIO1394: Configure: added robot "PSM1"
+W- Class mtsRobotIO1394: mtsRobot1394::SetBoards
+----------------------------------------------------
+ Suggestion:
+   Please upgrade all boards firmware to version 9.
+   Lowest version found is 8.
+----------------------------------------------------
+ To upgrade (or downgrade) the FPGA firmware, please follow instructions from:
+  https://github.com/jhu-cisst/mechatronics-firmware/wiki/FPGA-Program
+----------------------------------------------------
+M- Class mtsIntuitiveResearchKitConsole: Configure: configuring IO using "/home/hossein/ros2_ws/src/sitl_ros2_dvrk/sitl_ros2_dvrk/sitl_daVinci_configs/sawRobotIO1394-PSM2-23388.xml"
+M- Class mtsRobotIO1394: Configure: configuring from /home/hossein/ros2_ws/src/sitl_ros2_dvrk/sitl_ros2_dvrk/sitl_daVinci_configs/sawRobotIO1394-PSM2-23388.xml
+D- Class mtsRobotIO1394: AddStateTable: added state table "PSM2Read" and corresponding interface "StateTablePSM2Read" to task "io"
+D- Class mtsRobotIO1394: AddStateTable: added state table "PSM2Write" and corresponding interface "StateTablePSM2Write" to task "io"
+W- Class mtsRobotIO1394: SetBoards: PSM2, board: 0, Id: 8, firmware: 8, FPGA serial: 6547-26, QLA serial: 6557-26
+W- Class mtsRobotIO1394: SetBoards: PSM2, board: 1, Id: 9, firmware: 8, FPGA serial: 6547-21, QLA serial: 6557-21
+M- Class mtsRobotIO1394: Configure: added robot "PSM2"
+W- Class mtsRobotIO1394: mtsRobot1394::SetBoards
+----------------------------------------------------
+ Suggestion:
+   Please upgrade all boards firmware to version 9.
+   Lowest version found is 8.
+----------------------------------------------------
+ To upgrade (or downgrade) the FPGA firmware, please follow instructions from:
+  https://github.com/jhu-cisst/mechatronics-firmware/wiki/FPGA-Program
+----------------------------------------------------
+M- Class mtsIntuitiveResearchKitConsole: Configure: configuring IO using "/home/hossein/ros2_ws/src/sitl_ros2_dvrk/sitl_ros2_dvrk/sitl_daVinci_configs/sawRobotIO1394-SUJ.xml"
+M- Class mtsRobotIO1394: Configure: configuring from /home/hossein/ros2_ws/src/sitl_ros2_dvrk/sitl_ros2_dvrk/sitl_daVinci_configs/sawRobotIO1394-SUJ.xml
+W- Configure: no actuator type specified 0 for actuator 0 set to Revolute by default
+W- Configure: no actuator type specified 1 for actuator 1 set to Revolute by default
+W- Configure: no actuator type specified 2 for actuator 2 set to Revolute by default
+W- Configure: no actuator type specified 3 for actuator 3 set to Revolute by default
+W- Configure: potentiometer to encoder latency (0) and/or distance (0) set to zero, safety check is DISABLED for Axis -12345 for robot 1 (SUJ)
+W- Configure: potentiometer to encoder latency (0) and/or distance (0) set to zero, safety check is DISABLED for Axis -12345 for robot 1 (SUJ)
+W- Configure: potentiometer to encoder latency (0) and/or distance (0) set to zero, safety check is DISABLED for Axis -12345 for robot 1 (SUJ)
+W- Configure: potentiometer to encoder latency (0) and/or distance (0) set to zero, safety check is DISABLED for Axis -12345 for robot 1 (SUJ)
+D- Class mtsRobotIO1394: AddStateTable: added state table "SUJRead" and corresponding interface "StateTableSUJRead" to task "io"
+D- Class mtsRobotIO1394: AddStateTable: added state table "SUJWrite" and corresponding interface "StateTableSUJWrite" to task "io"
+W- Class mtsRobotIO1394: SetBoards: SUJ, board: 0, Id: 12, firmware: 8, FPGA serial: 6547-40, QLA serial: 6557-40
+M- Class mtsRobotIO1394: Configure: added robot "SUJ"
+W- Class mtsRobotIO1394: mtsRobot1394::SetBoards
+----------------------------------------------------
+ Suggestion:
+   Please upgrade all boards firmware to version 9.
+   Lowest version found is 8.
+----------------------------------------------------
+ To upgrade (or downgrade) the FPGA firmware, please follow instructions from:
+  https://github.com/jhu-cisst/mechatronics-firmware/wiki/FPGA-Program
+----------------------------------------------------
+M- Class mtsIntuitiveResearchKitConsole: Configure: configuring IO foot pedals using "/home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/io/sawRobotIO1394-MTMR-foot-pedals.xml"
+M- Class mtsRobotIO1394: Configure: configuring from /home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/io/sawRobotIO1394-MTMR-foot-pedals.xml
+W- Class mtsRobotIO1394: mtsRobot1394::SetBoards
+----------------------------------------------------
+ Suggestion:
+   Please upgrade all boards firmware to version 9.
+   Lowest version found is 8.
+----------------------------------------------------
+ To upgrade (or downgrade) the FPGA firmware, please follow instructions from:
+  https://github.com/jhu-cisst/mechatronics-firmware/wiki/FPGA-Program
+----------------------------------------------------
+M- Class mtsIntuitiveResearchKitConsole: Configure: configuring operator present using "/home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/io/sawRobotIO1394-MTMR-dv-head-sensor.xml"
+M- Class mtsRobotIO1394: Configure: configuring from /home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/io/sawRobotIO1394-MTMR-dv-head-sensor.xml
+W- Class mtsRobotIO1394: mtsRobot1394::SetBoards
+----------------------------------------------------
+ Suggestion:
+   Please upgrade all boards firmware to version 9.
+   Lowest version found is 8.
+----------------------------------------------------
+ To upgrade (or downgrade) the FPGA firmware, please follow instructions from:
+  https://github.com/jhu-cisst/mechatronics-firmware/wiki/FPGA-Program
+----------------------------------------------------
+M- Class mtsIntuitiveResearchKitConsole: Configure: configuring endoscope focus using "/home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/io/sawRobotIO1394-MTML-dv-endoscope-focus.xml"
+M- Class mtsRobotIO1394: Configure: configuring from /home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/io/sawRobotIO1394-MTML-dv-endoscope-focus.xml
+W- Class mtsRobotIO1394: mtsRobot1394::SetBoards
+----------------------------------------------------
+ Suggestion:
+   Please upgrade all boards firmware to version 9.
+   Lowest version found is 8.
+----------------------------------------------------
+ To upgrade (or downgrade) the FPGA firmware, please follow instructions from:
+  https://github.com/jhu-cisst/mechatronics-firmware/wiki/FPGA-Program
+----------------------------------------------------
+D- Class mtsIntuitiveResearchKitECM: AddStateTable: added state table "State" and corresponding interface "StateTableState" to task "ECM"
+D- Class mtsIntuitiveResearchKitECM: AddStateTable: added state table "Configuration" and corresponding interface "StateTableConfiguration" to task "ECM"
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #1: ECM: desired state DISABLED
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #2: ECM: current state DISABLED
+M- Class mtsIntuitiveResearchKitECM: Configure: ECM using file "/home/hossein/ros2_ws/src/sitl_ros2_dvrk/sitl_ros2_dvrk/sitl_daVinci_configs/ECM-27313.json"
+----> content of configuration file: 
+/* -*- Mode: Javascript; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+{
+	"endoscope" : "Classic_HD_STRAIGHT",
+	"generation" : "Classic",
+	"kinematic" : "kinematic/ecm.json",
+	// , "endoscope": "SD_STRAIGHT"
+	// , "endoscope": "SD_UP"
+	// , "endoscope": "SD_DOWN"
+	"mounting-pitch" : -0.78539800000000004 // -45.0 degrees
+}
+<----
+M- Class mtsIntuitiveResearchKitECM: ConfigureDH: ECM using file "/home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/kinematic/ecm.json"
+----> content of kinematic (GC) configuration file: 
+/* -*- Mode: Javascript; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+{
+	// see dVRK user guide
+	"DH" : 
+	{
+		"convention" : "modified",
+		"links" : 
+		[
+			{
+				"A" : 0.0,
+				"D" : 0.0,
+				// 1
+				"alpha" : 1.5708,
+				"ftmax" : 26.932079999999999,
+				"mode" : "active",
+				"offset" : 1.5708,
+				"qmax" : 1.5708, //  90
+				"qmin" : -1.5708, // -90
+				"theta" : 0.0,
+				"type" : "revolute"
+			},
+			{
+				"A" : 0.0,
+				"D" : 0.0,
+				// 2
+				"alpha" : -1.5708,
+				"ftmax" : 26.932079999999999,
+				"mode" : "active",
+				"offset" : -1.5708,
+				"qmax" : 1.1344000000000001, //   65
+				"qmin" : -0.76793999999999996, // -44
+				"theta" : 0.0,
+				"type" : "revolute"
+			},
+			{
+				"A" : 0.0,
+				"D" : 0.0,
+				"Ixx" : 0.0001,
+				"Iyy" : 0.0001,
+				"Izz" : 0.0001,
+				// 3
+				"alpha" : 1.5708,
+				"cx" : 0.0,
+				"cy" : 0.0,
+				"cz" : -0.01, // approximative position of endoscope center of gravity
+				"ftmax" : 80.658948300000006,
+				"mass" : 0.0, // mass is set in code, depending on endoscope type
+				"mode" : "active",
+				"offset" : -0.38219999999999998,
+				"qmax" : 0.255, // meters
+				"qmin" : 0.0,
+				"theta" : 0.0,
+				"type" : "prismatic",
+				"x1" : 1.0,
+				"x2" : 0.0,
+				"x3" : 0.0,
+				"y1" : 0.0,
+				"y2" : 1.0,
+				"y3" : 0.0,
+				"z1" : 0.0,
+				"z2" : 0.0,
+				"z3" : 1.0
+			},
+			{
+				"A" : 0.0,
+				"D" : 0.38290000000000002,
+				// 4
+				"alpha" : 0.0,
+				"ftmax" : 0.87658807999999999,
+				"mode" : "active",
+				"offset" : 0.0,
+				"qmax" : 1.552, //  88
+				"qmin" : -1.552, // -88
+				"theta" : 0.0,
+				"type" : "revolute"
+			}
+		]
+	}
+}
+<----
+M- Class mtsIntuitiveResearchKitECM: ConfigureDH ECM: loaded kinematics
+    MODIFIED DH    1.5708         0         0         0         hinge active        1.5708      -1.5708       1.5708      26.9321
+    MODIFIED DH   -1.5708         0         0         0         hinge active       -1.5708     -0.76794       1.1344      26.9321
+    MODIFIED DH    1.5708         0         0         0        slider active       -0.3822            0        0.255      80.6589
+    MODIFIED DH         0         0         0    0.3829         hinge active             0       -1.552        1.552     0.876588
+
+M- Class mtsIntuitiveResearchKitECM: ConfigureDH ECM: saved base configuration file name: /home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/kinematic/ecm.json
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #3: ECM: setting up for endoscope type "Classic_HD_STRAIGHT"
+M- ConfigurePID: can't find "pid" setting for arm "ECM", using default: "pid/sawControllersPID-ECM.json"
+D- Class mtsPID: AddStateTable: added state table "Configuration" and corresponding interface "StateTableConfiguration" to task "ECM-PID"
+M- Class mtsPID: ECM-PID Configure: using /home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/pid/sawControllersPID-ECM.json
+M- Class mtsPID: Configure: ECM-PID using file "/home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/pid/sawControllersPID-ECM.json"
+----> content of configuration file: 
+{
+	"pid" : 
+	[
+		{
+			"d_gain" : 30.0,
+			"i_gain" : 0.0,
+			"index" : 0,
+			"name" : "yaw",
+			"p_gain" : 400.0,
+			"type" : "REVOLUTE"
+		},
+		{
+			"d_gain" : 80.0,
+			"i_gain" : 0.0,
+			"index" : 1,
+			"name" : "pitch",
+			"p_gain" : 1000.0,
+			"type" : "REVOLUTE"
+		},
+		{
+			"d_gain" : 1200.0,
+			"i_gain" : 0.0,
+			"index" : 2,
+			"name" : "insertion",
+			"p_gain" : 10000.0,
+			"type" : "PRISMATIC"
+		},
+		{
+			"d_gain" : 0.5,
+			"i_gain" : 0.0,
+			"index" : 3,
+			"name" : "roll",
+			"p_gain" : 20.0,
+			"type" : "REVOLUTE"
+		}
+	]
+}
+<----
+-M Class mtsPID: ECM-PID Reset Controller
+D- Class mtsIntuitiveResearchKitPSM: AddStateTable: added state table "State" and corresponding interface "StateTableState" to task "PSM1"
+D- Class mtsIntuitiveResearchKitPSM: AddStateTable: added state table "Configuration" and corresponding interface "StateTableConfiguration" to task "PSM1"
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #1: PSM1: desired state DISABLED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #2: PSM1: current state DISABLED
+M- Class mtsIntuitiveResearchKitPSM: Configure: PSM1 using file "/home/hossein/ros2_ws/src/sitl_ros2_dvrk/sitl_ros2_dvrk/sitl_daVinci_configs/PSM1-25976.json"
+----> content of configuration file: 
+{
+	"generation" : "Classic",
+	// see https://github.com/jhu-dvrk/sawIntuitiveResearchKit/wiki/Configuration-File-Formats
+	"kinematic" : "kinematic/psm.json",
+	// , "tool-detection": "MANUAL"
+	// , "tool-detection": "FIXED"
+	"tool-detection" : "AUTOMATIC"
+}
+<----
+M- Class mtsIntuitiveResearchKitPSM: ConfigureDH: PSM1 using file "/home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/kinematic/psm.json"
+----> content of kinematic (GC) configuration file: 
+/* -*- Mode: Javascript; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+{
+	// see dVRK user guide
+	"DH" : 
+	{
+		"convention" : "modified",
+		"joints" : 
+		[
+			{
+				"A" : 0.0,
+				"D" : 0.0,
+				"alpha" : 1.5708,
+				"ftmax" : 3.3161010000000002,
+				"mode" : "active",
+				"name" : "yaw",
+				"offset" : 1.5708, // "D" + 90
+				"qmax" : 1.5880000000000001, //  91
+				"qmin" : -1.5880000000000001, // -91
+				"theta" : 0.0,
+				"type" : "revolute"
+			},
+			{
+				"A" : 0.0,
+				"D" : 0.0,
+				"alpha" : -1.5708,
+				"ftmax" : 3.3161010000000002,
+				"mode" : "active",
+				"name" : "pitch",
+				"offset" : -1.5708,
+				"qmax" : 0.92502499999999999, //  53
+				"qmin" : -0.92502499999999999, // -53
+				"theta" : 0.0,
+				"type" : "revolute"
+			},
+			{
+				"A" : 0.0,
+				"D" : 0.0,
+				"alpha" : 1.5708,
+				"ftmax" : 9.8779260000000004,
+				"mode" : "active",
+				"name" : "insertion",
+				"offset" : -0.43180000000000002,
+				"qmax" : 0.23999999999999999, // 240 mm
+				"qmin" : 0.0,
+				"theta" : 0.0,
+				"type" : "prismatic"
+			}
+		]
+	}
+}
+<----
+M- Class mtsIntuitiveResearchKitPSM: ConfigureDH PSM1: loaded kinematics
+    MODIFIED DH    1.5708         0         0         0         hinge active        1.5708       -1.588        1.588       3.3161
+    MODIFIED DH   -1.5708         0         0         0         hinge active       -1.5708    -0.925025     0.925025       3.3161
+    MODIFIED DH    1.5708         0         0         0        slider active       -0.4318            0         0.24      9.87793
+
+M- Class mtsIntuitiveResearchKitPSM: ConfigureDH PSM1: saved base configuration file name: /home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/kinematic/psm.json
+M- Class mtsIntuitiveResearchKitPSM: ToolList::Load: using file "/home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/tool/index.json"
+----> content of configuration file: 
+/* -*- Mode: Javascript; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+{
+	//
+	// WARNING:
+	// Most users shouldn't edit this file.
+	// Make sure you know what you're doing before editing!
+	//
+	// sorted by generation and model number
+	"instruments" : 
+	[
+		// Classic instruments
+		{
+			"description" : "Potts Scissors",
+			"file" : "POTTS_SCISSORS_400001.json",
+			"generation" : "Classic",
+			"model" : "400001",
+			"names" : 
+			[
+				"POTTS_SCISSORS"
+			]
+		},
+		{
+			"description" : "Small Clip Applier",
+			"file" : "SMALL_CLIP_APPLIER_400003.json",
+			"generation" : "Classic",
+			"model" : "400003",
+			"names" : 
+			[
+				"SMALL_CLIP_APPLIER"
+			]
+		},
+		{
+			"description" : "Large Needle Driver",
+			"file" : "LARGE_NEEDLE_DRIVER_400006.json",
+			"generation" : "Classic",
+			"model" : "400006",
+			"names" : 
+			[
+				"LARGE_NEEDLE_DRIVER"
+			]
+		},
+		{
+			"description" : "Round Tip Scissors",
+			"file" : "ROUND_TIP_SCISSORS_400007.json",
+			"generation" : "Classic",
+			"model" : "400007",
+			"names" : 
+			[
+				"ROUND_TIP_SCISSORS"
+			]
+		},
+		{
+			"description" : "Black Diamond Micro Forceps",
+			"file" : "MICRO_FORCEPS_400033.json",
+			"generation" : "Classic",
+			"model" : "400033",
+			"names" : 
+			[
+				"MICRO_FORCEPS",
+				"BLACK_DIAMOND_MICRO_FORCEPS"
+			]
+		},
+		{
+			"description" : "Round Tooth Forceps",
+			"file" : "ROUND_TOOTH_FORCEPS_400035.json",
+			"generation" : "Classic",
+			"model" : "400035",
+			"names" : 
+			[
+				"ROUND_TOOTH_FORCEPS"
+			]
+		},
+		{
+			"description" : "DeBakey Forceps",
+			"file" : "DEBAKEY_FORCEPS_400036.json",
+			"generation" : "Classic",
+			"model" : "400036",
+			"names" : 
+			[
+				"DEBAKEY_FORCEPS"
+			]
+		},
+		{
+			"description" : "Long Tip Forceps",
+			"file" : "LONG_TIP_FORCEPS_400048.json",
+			"generation" : "Classic",
+			"model" : "400048",
+			"names" : 
+			[
+				"LONG_TIP_FORCEPS"
+			]
+		},
+		{
+			"description" : "Cadiere Forceps",
+			"file" : "CADIERE_FORCEPS_400049.json",
+			"generation" : "Classic",
+			"model" : "400049",
+			"names" : 
+			[
+				"CADIERE_FORCEPS"
+			]
+		},
+		{
+			"description" : "Prograsp Forceps",
+			"file" : "PROGRASP_FORCEPS_400093.json",
+			"generation" : "Classic",
+			"model" : "400093",
+			"names" : 
+			[
+				"PROGRASP_FORCEPS"
+			]
+		},
+		{
+			"description" : "5mm Needle Driver",
+			"file" : "NEEDLE_DRIVER_400117.json",
+			"generation" : "Classic",
+			"model" : "400117",
+			"names" : 
+			[
+				"NEEDLE_DRIVER",
+				"5MM_NEEDLE_DRIVER"
+			]
+		},
+		{
+			"description" : "Bowel Grasper",
+			"file" : "BOWEL_GRASPER_400127.json",
+			"generation" : "Classic",
+			"model" : "400127",
+			"names" : 
+			[
+				"BOWEL_GRASPER"
+			]
+		},
+		{
+			"description" : "5mm Maryland Dissector",
+			"file" : "MARYLAND_DISSECTOR_400143.json",
+			"generation" : "Classic",
+			"model" : "400143",
+			"names" : 
+			[
+				"MARYLAND_DISSECTOR",
+				"5MM_MARYLAND_DISSECTOR"
+			]
+		},
+		{
+			"description" : "Maryland Bipolar Forceps",
+			"file" : "MARYLAND_BIPOLAR_FORCEPS_400172.json",
+			"generation" : "Classic",
+			"model" : "400172",
+			"names" : 
+			[
+				"MARYLAND_BIPOLAR_FORCEPS",
+				"BIPOLAR_MARYLAND_FORCEPS"
+			]
+		},
+		{
+			"description" : "Curved Scissors",
+			"file" : "CURVED_SCISSORS_400178.json",
+			"generation" : "Classic",
+			"model" : "400178",
+			"names" : 
+			[
+				"CURVED_SCISSORS"
+			]
+		},
+		{
+			"description" : "Monopolar Curved Scissors",
+			"file" : "MONOPOLAR_CURVED_SCISSORS_400179.json",
+			"generation" : "Classic",
+			"model" : "400179",
+			"names" : 
+			[
+				"MONOPOLAR_CURVED_SCISSORS",
+				"MONOPOLAR_CURVED_SCISSOR"
+			]
+		},
+		{
+			"description" : "Resano Forceps",
+			"file" : "RESANO_FORCEPS_400181.json",
+			"generation" : "Classic",
+			"model" : "400181",
+			"names" : 
+			[
+				"RESANO_FORCEPS"
+			]
+		},
+		{
+			"description" : "Permanent Cautery Hook",
+			"file" : "PERMANENT_CAUTERY_HOOK_400183.json",
+			"generation" : "Classic",
+			"model" : "400183",
+			"names" : 
+			[
+				"PERMANENT_CAUTERY_HOOK"
+			]
+		},
+		{
+			"description" : "Permanent Cautery Spatula",
+			"file" : "PERMANENT_CAUTERY_SPATULA_400184.json",
+			"generation" : "Classic",
+			"model" : "400184",
+			"names" : 
+			[
+				"PERMANENT_CAUTERY_SPATULA"
+			]
+		},
+		{
+			"description" : "Double Fenestrated Grasper",
+			"file" : "DOUBLE_FENESTRATED_GRASPER_400189.json",
+			"generation" : "Classic",
+			"model" : "400189",
+			"names" : 
+			[
+				"DOUBLE_FENESTRATED_GRASPER"
+			]
+		},
+		{
+			"description" : "Mega Needle Driver",
+			"file" : "MEGA_NEEDLE_DRIVER_400194.json",
+			"generation" : "Classic",
+			"model" : "400194",
+			"names" : 
+			[
+				"MEGA_NEEDLE_DRIVER"
+			]
+		},
+		{
+			"description" : "Fenestrated Bipolar Forceps",
+			"file" : "FENESTRATED_BIPOLAR_FORCEPS_400205.json",
+			"generation" : "Classic",
+			"model" : "400205",
+			"names" : 
+			[
+				"FENESTRATED_BIPOLAR_FORCEPS"
+			]
+		},
+		{
+			"description" : "Tenaculum Forceps",
+			"file" : "TENACULUM_FORCEPS_400207.json",
+			"generation" : "Classic",
+			"model" : "400207",
+			"names" : 
+			[
+				"TENACULUM_FORCEPS"
+			]
+		},
+		{
+			"description" : "Thoracic Grasper",
+			"file" : "THORACIC_GRASPER_400208.json",
+			"generation" : "Classic",
+			"model" : "400208",
+			"names" : 
+			[
+				"THORACIC_GRASPER"
+			]
+		},
+		{
+			"description" : "Large Clip Applier",
+			"file" : "LARGE_CLIP_APPLIER_400230.json",
+			"generation" : "Classic",
+			"model" : "400230",
+			"names" : 
+			[
+				"LARGE_CLIP_APPLIER"
+			]
+		},
+		{
+			"description" : "Large Suturecut Needle Driver",
+			"file" : "LRG_SUTURECUT_NEEDLE_DRIVER_400296.json",
+			"generation" : "Classic",
+			"model" : "400296",
+			"names" : 
+			[
+				"LRG_SUTURECUT_NEEDLE_DRIVER"
+			]
+		},
+		{
+			"description" : "Mega Suturecut Needle Driver",
+			"file" : "MEGA_SUTURECUT_NEEDLE_DRIVER_400309.json",
+			"generation" : "Classic",
+			"model" : "400309",
+			"names" : 
+			[
+				"MEGA_SUTURECUT_NEEDLE_DRIVER"
+			]
+		},
+		// S/Si
+		{
+			"description" : "Stapler 45",
+			"file" : "STAPLER_45_410298.json",
+			"generation" : "Si",
+			"model" : "410298",
+			"names" : 
+			[
+				"STAPLER_45"
+			]
+		},
+		{
+			"description" : "Potts Scissors",
+			"file" : "POTTS_SCISSORS_420001.json",
+			"generation" : "S",
+			"model" : "420001",
+			"names" : 
+			[
+				"POTTS_SCISSORS"
+			]
+		},
+		{
+			"description" : "Large Needle Driver",
+			"file" : "LARGE_NEEDLE_DRIVER_420006.json",
+			"generation" : "S",
+			"model" : "420006",
+			"names" : 
+			[
+				"LARGE_NEEDLE_DRIVER"
+			],
+			"version_max" : 11
+		},
+		{
+			"description" : "Large Needle Driver (Geared)",
+			"file" : "LARGE_NEEDLE_DRIVER_420006_GEARED.json",
+			"generation" : "S",
+			"model" : "420006",
+			"names" : 
+			[
+				"LARGE_NEEDLE_DRIVER"
+			],
+			"version_min" : 12
+		},
+		{
+			"description" : "Round Tip Scissors",
+			"file" : "ROUND_TIP_SCISSORS_420007.json",
+			"generation" : "S",
+			"model" : "420007",
+			"names" : 
+			[
+				"ROUND_TIP_SCISSORS"
+			]
+		},
+		{
+			"description" : "Black Diamond Micro Forceps",
+			"file" : "MICRO_FORCEPS_420033.json",
+			"generation" : "S",
+			"model" : "420033",
+			"names" : 
+			[
+				"MICRO_FORCEPS",
+				"BLACK_DIAMOND_MICRO_FORCEPS"
+			]
+		},
+		{
+			"description" : "DeBakey Forceps",
+			"file" : "DEBAKEY_FORCEPS_420036.json",
+			"generation" : "S",
+			"model" : "420036",
+			"names" : 
+			[
+				"DEBAKEY_FORCEPS"
+			]
+		},
+		{
+			"description" : "Long Tip Forceps",
+			"file" : "LONG_TIP_FORCEPS_420048.json",
+			"generation" : "S",
+			"model" : "420048",
+			"names" : 
+			[
+				"LONG_TIP_FORCEPS"
+			]
+		},
+		{
+			"description" : "Cadiere Forceps",
+			"file" : "CADIERE_FORCEPS_420049.json",
+			"generation" : "S",
+			"model" : "420049",
+			"names" : 
+			[
+				"CADIERE_FORCEPS"
+			]
+		},
+		{
+			"description" : "Prograsp Forceps",
+			"file" : "PROGRASP_FORCEPS_420093.json",
+			"generation" : "S",
+			"model" : "420093",
+			"names" : 
+			[
+				"PROGRASP_FORCEPS"
+			]
+		},
+		{
+			"description" : "5mm Needle Driver",
+			"file" : "NEEDLE_DRIVER_420117.json",
+			"generation" : "S",
+			"model" : "420117",
+			"names" : 
+			[
+				"NEEDLE_DRIVER"
+			]
+		},
+		{
+			"description" : "Maryland Bipolar Forceps",
+			"file" : "MARYLAND_BIPOLAR_FORCEPS_420172.json",
+			"generation" : "S",
+			"model" : "420172",
+			"names" : 
+			[
+				"MARYLAND_BIPOLAR_FORCEPS"
+			]
+		},
+		{
+			"description" : "Curved Scissors",
+			"file" : "CURVED_SCISSORS_420178.json",
+			"generation" : "S",
+			"model" : "420178",
+			"names" : 
+			[
+				"CURVED_SCISSORS"
+			]
+		},
+		{
+			"description" : "Monopolar Curved Scissors",
+			"file" : "MONOPOLAR_CURVED_SCISSORS_420179.json",
+			"generation" : "S",
+			"model" : "420179",
+			"names" : 
+			[
+				"MONOPOLAR_CURVED_SCISSORS"
+			]
+		},
+		{
+			"description" : "Resano Forceps",
+			"file" : "RESANO_FORCEPS_420181.json",
+			"generation" : "S",
+			"model" : "420181",
+			"names" : 
+			[
+				"RESANO_FORCEPS"
+			]
+		},
+		{
+			"description" : "Permanent Cautery Hook",
+			"file" : "PERMANENT_CAUTERY_HOOK_420183.json",
+			"generation" : "S",
+			"model" : "420183",
+			"names" : 
+			[
+				"PERMANENT_CAUTERY_HOOK"
+			]
+		},
+		{
+			"description" : "Permanent Cautery Spatula",
+			"file" : "PERMANENT_CAUTERY_SPATULA_420184.json",
+			"generation" : "S",
+			"model" : "420184",
+			"names" : 
+			[
+				"PERMANENT_CAUTERY_SPATULA"
+			]
+		},
+		{
+			"description" : "Mega Needle Driver",
+			"file" : "MEGA_NEEDLE_DRIVER_420194.json",
+			"generation" : "S",
+			"model" : "420194",
+			"names" : 
+			[
+				"MEGA_NEEDLE_DRIVER"
+			]
+		},
+		{
+			"description" : "Fenestrated Bipolar Forceps",
+			"file" : "FENESTRATED_BIPOLAR_FORCEPS_420205.json",
+			"generation" : "S",
+			"model" : "420205",
+			"names" : 
+			[
+				"FENESTRATED_BIPOLAR_FORCEPS"
+			]
+		},
+		{
+			"description" : "Large Clip Applier",
+			"file" : "LARGE_CLIP_APPLIER_420230.json",
+			"generation" : "S",
+			"model" : "420230",
+			"names" : 
+			[
+				"LARGE_CLIP_APPLIER"
+			]
+		},
+		{
+			"description" : "Large Suturecut Needle Driver",
+			"file" : "LARGE_SUTURECUT_NEEDLEDRIVER_420296.json",
+			"generation" : "S",
+			"model" : "420296",
+			"names" : 
+			[
+				"LARGE_SUTURECUT_NEEDLEDRIVER"
+			]
+		},
+		{
+			"description" : "Mega Suturecut Needle Driver",
+			"file" : "MEGA_SUTURECUT_NEEDLE_DRIVER_420309.json",
+			"generation" : "S",
+			"model" : "420309",
+			"names" : 
+			[
+				"MEGA_SUTURECUT_NEEDLE_DRIVER"
+			]
+		},
+		{
+			"description" : "Medium-large Clip Applier",
+			"file" : "MEDIUM-LARGE_CLIP_APPLIER_420327.json",
+			"generation" : "S",
+			"model" : "420327",
+			"names" : 
+			[
+				"MEDIUM-LARGE_CLIP_APPLIER"
+			]
+		}
+	]
+}
+<----
+M- ConfigurePID: can't find "pid" setting for arm "PSM1", using default: "pid/sawControllersPID-PSM.json"
+D- Class mtsPID: AddStateTable: added state table "Configuration" and corresponding interface "StateTableConfiguration" to task "PSM1-PID"
+M- Class mtsPID: PSM1-PID Configure: using /home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/pid/sawControllersPID-PSM.json
+M- Class mtsPID: Configure: PSM1-PID using file "/home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/pid/sawControllersPID-PSM.json"
+----> content of configuration file: 
+{
+	"pid" : 
+	[
+		{
+			"d_gain" : 6.0,
+			"i_gain" : 0.0,
+			"index" : 0,
+			"name" : "yaw",
+			"p_gain" : 120.0,
+			"type" : "REVOLUTE"
+		},
+		{
+			"d_gain" : 5.0,
+			"i_gain" : 0.0,
+			"index" : 1,
+			"name" : "pitch",
+			"p_gain" : 120.0,
+			"type" : "REVOLUTE"
+		},
+		{
+			"d_gain" : 200.0,
+			"i_gain" : 0.0,
+			"index" : 2,
+			"name" : "insertion",
+			"p_gain" : 6000.0,
+			"type" : "PRISMATIC"
+		},
+		{
+			"d_gain" : 0.089999999999999997,
+			"i_gain" : 0.0,
+			"index" : 3,
+			"name" : "roll",
+			"p_gain" : 6.0,
+			"type" : "REVOLUTE"
+		},
+		{
+			"d_gain" : 0.089999999999999997,
+			"i_gain" : 0.0,
+			"index" : 4,
+			"name" : "wrist_pitch",
+			"p_gain" : 6.0,
+			"type" : "REVOLUTE"
+		},
+		{
+			"d_gain" : 0.089999999999999997,
+			"i_gain" : 0.0,
+			"index" : 5,
+			"name" : "wrist_yaw",
+			"p_gain" : 6.0,
+			"type" : "REVOLUTE"
+		},
+		{
+			"d_gain" : 0.089999999999999997,
+			"i_gain" : 0.0,
+			"index" : 6,
+			"name" : "jaw",
+			"p_gain" : 6.0,
+			"type" : "REVOLUTE"
+		}
+	]
+}
+<----
+-M Class mtsPID: PSM1-PID Reset Controller
+D- Class mtsIntuitiveResearchKitPSM: AddStateTable: added state table "State" and corresponding interface "StateTableState" to task "PSM2"
+D- Class mtsIntuitiveResearchKitPSM: AddStateTable: added state table "Configuration" and corresponding interface "StateTableConfiguration" to task "PSM2"
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #1: PSM2: desired state DISABLED
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #2: PSM2: current state DISABLED
+M- Class mtsIntuitiveResearchKitPSM: Configure: PSM2 using file "/home/hossein/ros2_ws/src/sitl_ros2_dvrk/sitl_ros2_dvrk/sitl_daVinci_configs/PSM2-23388.json"
+----> content of configuration file: 
+/* -*- Mode: Javascript; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+{
+	"generation" : "Classic",
+	"kinematic" : "kinematic/psm.json",
+	// , "tool-detection": "MANUAL"
+	// , "tool-detection": "FIXED"
+	"tool-detection" : "AUTOMATIC"
+}
+<----
+M- Class mtsIntuitiveResearchKitPSM: ConfigureDH: PSM2 using file "/home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/kinematic/psm.json"
+----> content of kinematic (GC) configuration file: 
+/* -*- Mode: Javascript; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+{
+	// see dVRK user guide
+	"DH" : 
+	{
+		"convention" : "modified",
+		"joints" : 
+		[
+			{
+				"A" : 0.0,
+				"D" : 0.0,
+				"alpha" : 1.5708,
+				"ftmax" : 3.3161010000000002,
+				"mode" : "active",
+				"name" : "yaw",
+				"offset" : 1.5708, // "D" + 90
+				"qmax" : 1.5880000000000001, //  91
+				"qmin" : -1.5880000000000001, // -91
+				"theta" : 0.0,
+				"type" : "revolute"
+			},
+			{
+				"A" : 0.0,
+				"D" : 0.0,
+				"alpha" : -1.5708,
+				"ftmax" : 3.3161010000000002,
+				"mode" : "active",
+				"name" : "pitch",
+				"offset" : -1.5708,
+				"qmax" : 0.92502499999999999, //  53
+				"qmin" : -0.92502499999999999, // -53
+				"theta" : 0.0,
+				"type" : "revolute"
+			},
+			{
+				"A" : 0.0,
+				"D" : 0.0,
+				"alpha" : 1.5708,
+				"ftmax" : 9.8779260000000004,
+				"mode" : "active",
+				"name" : "insertion",
+				"offset" : -0.43180000000000002,
+				"qmax" : 0.23999999999999999, // 240 mm
+				"qmin" : 0.0,
+				"theta" : 0.0,
+				"type" : "prismatic"
+			}
+		]
+	}
+}
+<----
+M- Class mtsIntuitiveResearchKitPSM: ConfigureDH PSM2: loaded kinematics
+    MODIFIED DH    1.5708         0         0         0         hinge active        1.5708       -1.588        1.588       3.3161
+    MODIFIED DH   -1.5708         0         0         0         hinge active       -1.5708    -0.925025     0.925025       3.3161
+    MODIFIED DH    1.5708         0         0         0        slider active       -0.4318            0         0.24      9.87793
+
+M- Class mtsIntuitiveResearchKitPSM: ConfigureDH PSM2: saved base configuration file name: /home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/kinematic/psm.json
+M- Class mtsIntuitiveResearchKitPSM: ToolList::Load: using file "/home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/tool/index.json"
+----> content of configuration file: 
+/* -*- Mode: Javascript; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+{
+	//
+	// WARNING:
+	// Most users shouldn't edit this file.
+	// Make sure you know what you're doing before editing!
+	//
+	// sorted by generation and model number
+	"instruments" : 
+	[
+		// Classic instruments
+		{
+			"description" : "Potts Scissors",
+			"file" : "POTTS_SCISSORS_400001.json",
+			"generation" : "Classic",
+			"model" : "400001",
+			"names" : 
+			[
+				"POTTS_SCISSORS"
+			]
+		},
+		{
+			"description" : "Small Clip Applier",
+			"file" : "SMALL_CLIP_APPLIER_400003.json",
+			"generation" : "Classic",
+			"model" : "400003",
+			"names" : 
+			[
+				"SMALL_CLIP_APPLIER"
+			]
+		},
+		{
+			"description" : "Large Needle Driver",
+			"file" : "LARGE_NEEDLE_DRIVER_400006.json",
+			"generation" : "Classic",
+			"model" : "400006",
+			"names" : 
+			[
+				"LARGE_NEEDLE_DRIVER"
+			]
+		},
+		{
+			"description" : "Round Tip Scissors",
+			"file" : "ROUND_TIP_SCISSORS_400007.json",
+			"generation" : "Classic",
+			"model" : "400007",
+			"names" : 
+			[
+				"ROUND_TIP_SCISSORS"
+			]
+		},
+		{
+			"description" : "Black Diamond Micro Forceps",
+			"file" : "MICRO_FORCEPS_400033.json",
+			"generation" : "Classic",
+			"model" : "400033",
+			"names" : 
+			[
+				"MICRO_FORCEPS",
+				"BLACK_DIAMOND_MICRO_FORCEPS"
+			]
+		},
+		{
+			"description" : "Round Tooth Forceps",
+			"file" : "ROUND_TOOTH_FORCEPS_400035.json",
+			"generation" : "Classic",
+			"model" : "400035",
+			"names" : 
+			[
+				"ROUND_TOOTH_FORCEPS"
+			]
+		},
+		{
+			"description" : "DeBakey Forceps",
+			"file" : "DEBAKEY_FORCEPS_400036.json",
+			"generation" : "Classic",
+			"model" : "400036",
+			"names" : 
+			[
+				"DEBAKEY_FORCEPS"
+			]
+		},
+		{
+			"description" : "Long Tip Forceps",
+			"file" : "LONG_TIP_FORCEPS_400048.json",
+			"generation" : "Classic",
+			"model" : "400048",
+			"names" : 
+			[
+				"LONG_TIP_FORCEPS"
+			]
+		},
+		{
+			"description" : "Cadiere Forceps",
+			"file" : "CADIERE_FORCEPS_400049.json",
+			"generation" : "Classic",
+			"model" : "400049",
+			"names" : 
+			[
+				"CADIERE_FORCEPS"
+			]
+		},
+		{
+			"description" : "Prograsp Forceps",
+			"file" : "PROGRASP_FORCEPS_400093.json",
+			"generation" : "Classic",
+			"model" : "400093",
+			"names" : 
+			[
+				"PROGRASP_FORCEPS"
+			]
+		},
+		{
+			"description" : "5mm Needle Driver",
+			"file" : "NEEDLE_DRIVER_400117.json",
+			"generation" : "Classic",
+			"model" : "400117",
+			"names" : 
+			[
+				"NEEDLE_DRIVER",
+				"5MM_NEEDLE_DRIVER"
+			]
+		},
+		{
+			"description" : "Bowel Grasper",
+			"file" : "BOWEL_GRASPER_400127.json",
+			"generation" : "Classic",
+			"model" : "400127",
+			"names" : 
+			[
+				"BOWEL_GRASPER"
+			]
+		},
+		{
+			"description" : "5mm Maryland Dissector",
+			"file" : "MARYLAND_DISSECTOR_400143.json",
+			"generation" : "Classic",
+			"model" : "400143",
+			"names" : 
+			[
+				"MARYLAND_DISSECTOR",
+				"5MM_MARYLAND_DISSECTOR"
+			]
+		},
+		{
+			"description" : "Maryland Bipolar Forceps",
+			"file" : "MARYLAND_BIPOLAR_FORCEPS_400172.json",
+			"generation" : "Classic",
+			"model" : "400172",
+			"names" : 
+			[
+				"MARYLAND_BIPOLAR_FORCEPS",
+				"BIPOLAR_MARYLAND_FORCEPS"
+			]
+		},
+		{
+			"description" : "Curved Scissors",
+			"file" : "CURVED_SCISSORS_400178.json",
+			"generation" : "Classic",
+			"model" : "400178",
+			"names" : 
+			[
+				"CURVED_SCISSORS"
+			]
+		},
+		{
+			"description" : "Monopolar Curved Scissors",
+			"file" : "MONOPOLAR_CURVED_SCISSORS_400179.json",
+			"generation" : "Classic",
+			"model" : "400179",
+			"names" : 
+			[
+				"MONOPOLAR_CURVED_SCISSORS",
+				"MONOPOLAR_CURVED_SCISSOR"
+			]
+		},
+		{
+			"description" : "Resano Forceps",
+			"file" : "RESANO_FORCEPS_400181.json",
+			"generation" : "Classic",
+			"model" : "400181",
+			"names" : 
+			[
+				"RESANO_FORCEPS"
+			]
+		},
+		{
+			"description" : "Permanent Cautery Hook",
+			"file" : "PERMANENT_CAUTERY_HOOK_400183.json",
+			"generation" : "Classic",
+			"model" : "400183",
+			"names" : 
+			[
+				"PERMANENT_CAUTERY_HOOK"
+			]
+		},
+		{
+			"description" : "Permanent Cautery Spatula",
+			"file" : "PERMANENT_CAUTERY_SPATULA_400184.json",
+			"generation" : "Classic",
+			"model" : "400184",
+			"names" : 
+			[
+				"PERMANENT_CAUTERY_SPATULA"
+			]
+		},
+		{
+			"description" : "Double Fenestrated Grasper",
+			"file" : "DOUBLE_FENESTRATED_GRASPER_400189.json",
+			"generation" : "Classic",
+			"model" : "400189",
+			"names" : 
+			[
+				"DOUBLE_FENESTRATED_GRASPER"
+			]
+		},
+		{
+			"description" : "Mega Needle Driver",
+			"file" : "MEGA_NEEDLE_DRIVER_400194.json",
+			"generation" : "Classic",
+			"model" : "400194",
+			"names" : 
+			[
+				"MEGA_NEEDLE_DRIVER"
+			]
+		},
+		{
+			"description" : "Fenestrated Bipolar Forceps",
+			"file" : "FENESTRATED_BIPOLAR_FORCEPS_400205.json",
+			"generation" : "Classic",
+			"model" : "400205",
+			"names" : 
+			[
+				"FENESTRATED_BIPOLAR_FORCEPS"
+			]
+		},
+		{
+			"description" : "Tenaculum Forceps",
+			"file" : "TENACULUM_FORCEPS_400207.json",
+			"generation" : "Classic",
+			"model" : "400207",
+			"names" : 
+			[
+				"TENACULUM_FORCEPS"
+			]
+		},
+		{
+			"description" : "Thoracic Grasper",
+			"file" : "THORACIC_GRASPER_400208.json",
+			"generation" : "Classic",
+			"model" : "400208",
+			"names" : 
+			[
+				"THORACIC_GRASPER"
+			]
+		},
+		{
+			"description" : "Large Clip Applier",
+			"file" : "LARGE_CLIP_APPLIER_400230.json",
+			"generation" : "Classic",
+			"model" : "400230",
+			"names" : 
+			[
+				"LARGE_CLIP_APPLIER"
+			]
+		},
+		{
+			"description" : "Large Suturecut Needle Driver",
+			"file" : "LRG_SUTURECUT_NEEDLE_DRIVER_400296.json",
+			"generation" : "Classic",
+			"model" : "400296",
+			"names" : 
+			[
+				"LRG_SUTURECUT_NEEDLE_DRIVER"
+			]
+		},
+		{
+			"description" : "Mega Suturecut Needle Driver",
+			"file" : "MEGA_SUTURECUT_NEEDLE_DRIVER_400309.json",
+			"generation" : "Classic",
+			"model" : "400309",
+			"names" : 
+			[
+				"MEGA_SUTURECUT_NEEDLE_DRIVER"
+			]
+		},
+		// S/Si
+		{
+			"description" : "Stapler 45",
+			"file" : "STAPLER_45_410298.json",
+			"generation" : "Si",
+			"model" : "410298",
+			"names" : 
+			[
+				"STAPLER_45"
+			]
+		},
+		{
+			"description" : "Potts Scissors",
+			"file" : "POTTS_SCISSORS_420001.json",
+			"generation" : "S",
+			"model" : "420001",
+			"names" : 
+			[
+				"POTTS_SCISSORS"
+			]
+		},
+		{
+			"description" : "Large Needle Driver",
+			"file" : "LARGE_NEEDLE_DRIVER_420006.json",
+			"generation" : "S",
+			"model" : "420006",
+			"names" : 
+			[
+				"LARGE_NEEDLE_DRIVER"
+			],
+			"version_max" : 11
+		},
+		{
+			"description" : "Large Needle Driver (Geared)",
+			"file" : "LARGE_NEEDLE_DRIVER_420006_GEARED.json",
+			"generation" : "S",
+			"model" : "420006",
+			"names" : 
+			[
+				"LARGE_NEEDLE_DRIVER"
+			],
+			"version_min" : 12
+		},
+		{
+			"description" : "Round Tip Scissors",
+			"file" : "ROUND_TIP_SCISSORS_420007.json",
+			"generation" : "S",
+			"model" : "420007",
+			"names" : 
+			[
+				"ROUND_TIP_SCISSORS"
+			]
+		},
+		{
+			"description" : "Black Diamond Micro Forceps",
+			"file" : "MICRO_FORCEPS_420033.json",
+			"generation" : "S",
+			"model" : "420033",
+			"names" : 
+			[
+				"MICRO_FORCEPS",
+				"BLACK_DIAMOND_MICRO_FORCEPS"
+			]
+		},
+		{
+			"description" : "DeBakey Forceps",
+			"file" : "DEBAKEY_FORCEPS_420036.json",
+			"generation" : "S",
+			"model" : "420036",
+			"names" : 
+			[
+				"DEBAKEY_FORCEPS"
+			]
+		},
+		{
+			"description" : "Long Tip Forceps",
+			"file" : "LONG_TIP_FORCEPS_420048.json",
+			"generation" : "S",
+			"model" : "420048",
+			"names" : 
+			[
+				"LONG_TIP_FORCEPS"
+			]
+		},
+		{
+			"description" : "Cadiere Forceps",
+			"file" : "CADIERE_FORCEPS_420049.json",
+			"generation" : "S",
+			"model" : "420049",
+			"names" : 
+			[
+				"CADIERE_FORCEPS"
+			]
+		},
+		{
+			"description" : "Prograsp Forceps",
+			"file" : "PROGRASP_FORCEPS_420093.json",
+			"generation" : "S",
+			"model" : "420093",
+			"names" : 
+			[
+				"PROGRASP_FORCEPS"
+			]
+		},
+		{
+			"description" : "5mm Needle Driver",
+			"file" : "NEEDLE_DRIVER_420117.json",
+			"generation" : "S",
+			"model" : "420117",
+			"names" : 
+			[
+				"NEEDLE_DRIVER"
+			]
+		},
+		{
+			"description" : "Maryland Bipolar Forceps",
+			"file" : "MARYLAND_BIPOLAR_FORCEPS_420172.json",
+			"generation" : "S",
+			"model" : "420172",
+			"names" : 
+			[
+				"MARYLAND_BIPOLAR_FORCEPS"
+			]
+		},
+		{
+			"description" : "Curved Scissors",
+			"file" : "CURVED_SCISSORS_420178.json",
+			"generation" : "S",
+			"model" : "420178",
+			"names" : 
+			[
+				"CURVED_SCISSORS"
+			]
+		},
+		{
+			"description" : "Monopolar Curved Scissors",
+			"file" : "MONOPOLAR_CURVED_SCISSORS_420179.json",
+			"generation" : "S",
+			"model" : "420179",
+			"names" : 
+			[
+				"MONOPOLAR_CURVED_SCISSORS"
+			]
+		},
+		{
+			"description" : "Resano Forceps",
+			"file" : "RESANO_FORCEPS_420181.json",
+			"generation" : "S",
+			"model" : "420181",
+			"names" : 
+			[
+				"RESANO_FORCEPS"
+			]
+		},
+		{
+			"description" : "Permanent Cautery Hook",
+			"file" : "PERMANENT_CAUTERY_HOOK_420183.json",
+			"generation" : "S",
+			"model" : "420183",
+			"names" : 
+			[
+				"PERMANENT_CAUTERY_HOOK"
+			]
+		},
+		{
+			"description" : "Permanent Cautery Spatula",
+			"file" : "PERMANENT_CAUTERY_SPATULA_420184.json",
+			"generation" : "S",
+			"model" : "420184",
+			"names" : 
+			[
+				"PERMANENT_CAUTERY_SPATULA"
+			]
+		},
+		{
+			"description" : "Mega Needle Driver",
+			"file" : "MEGA_NEEDLE_DRIVER_420194.json",
+			"generation" : "S",
+			"model" : "420194",
+			"names" : 
+			[
+				"MEGA_NEEDLE_DRIVER"
+			]
+		},
+		{
+			"description" : "Fenestrated Bipolar Forceps",
+			"file" : "FENESTRATED_BIPOLAR_FORCEPS_420205.json",
+			"generation" : "S",
+			"model" : "420205",
+			"names" : 
+			[
+				"FENESTRATED_BIPOLAR_FORCEPS"
+			]
+		},
+		{
+			"description" : "Large Clip Applier",
+			"file" : "LARGE_CLIP_APPLIER_420230.json",
+			"generation" : "S",
+			"model" : "420230",
+			"names" : 
+			[
+				"LARGE_CLIP_APPLIER"
+			]
+		},
+		{
+			"description" : "Large Suturecut Needle Driver",
+			"file" : "LARGE_SUTURECUT_NEEDLEDRIVER_420296.json",
+			"generation" : "S",
+			"model" : "420296",
+			"names" : 
+			[
+				"LARGE_SUTURECUT_NEEDLEDRIVER"
+			]
+		},
+		{
+			"description" : "Mega Suturecut Needle Driver",
+			"file" : "MEGA_SUTURECUT_NEEDLE_DRIVER_420309.json",
+			"generation" : "S",
+			"model" : "420309",
+			"names" : 
+			[
+				"MEGA_SUTURECUT_NEEDLE_DRIVER"
+			]
+		},
+		{
+			"description" : "Medium-large Clip Applier",
+			"file" : "MEDIUM-LARGE_CLIP_APPLIER_420327.json",
+			"generation" : "S",
+			"model" : "420327",
+			"names" : 
+			[
+				"MEDIUM-LARGE_CLIP_APPLIER"
+			]
+		}
+	]
+}
+<----
+M- ConfigurePID: can't find "pid" setting for arm "PSM2", using default: "pid/sawControllersPID-PSM.json"
+D- Class mtsPID: AddStateTable: added state table "Configuration" and corresponding interface "StateTableConfiguration" to task "PSM2-PID"
+M- Class mtsPID: PSM2-PID Configure: using /home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/pid/sawControllersPID-PSM.json
+M- Class mtsPID: Configure: PSM2-PID using file "/home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/pid/sawControllersPID-PSM.json"
+----> content of configuration file: 
+{
+	"pid" : 
+	[
+		{
+			"d_gain" : 6.0,
+			"i_gain" : 0.0,
+			"index" : 0,
+			"name" : "yaw",
+			"p_gain" : 120.0,
+			"type" : "REVOLUTE"
+		},
+		{
+			"d_gain" : 5.0,
+			"i_gain" : 0.0,
+			"index" : 1,
+			"name" : "pitch",
+			"p_gain" : 120.0,
+			"type" : "REVOLUTE"
+		},
+		{
+			"d_gain" : 200.0,
+			"i_gain" : 0.0,
+			"index" : 2,
+			"name" : "insertion",
+			"p_gain" : 6000.0,
+			"type" : "PRISMATIC"
+		},
+		{
+			"d_gain" : 0.089999999999999997,
+			"i_gain" : 0.0,
+			"index" : 3,
+			"name" : "roll",
+			"p_gain" : 6.0,
+			"type" : "REVOLUTE"
+		},
+		{
+			"d_gain" : 0.089999999999999997,
+			"i_gain" : 0.0,
+			"index" : 4,
+			"name" : "wrist_pitch",
+			"p_gain" : 6.0,
+			"type" : "REVOLUTE"
+		},
+		{
+			"d_gain" : 0.089999999999999997,
+			"i_gain" : 0.0,
+			"index" : 5,
+			"name" : "wrist_yaw",
+			"p_gain" : 6.0,
+			"type" : "REVOLUTE"
+		},
+		{
+			"d_gain" : 0.089999999999999997,
+			"i_gain" : 0.0,
+			"index" : 6,
+			"name" : "jaw",
+			"p_gain" : 6.0,
+			"type" : "REVOLUTE"
+		}
+	]
+}
+<----
+-M Class mtsPID: PSM2-PID Reset Controller
+M- Class mtsIntuitiveResearchKitSUJ: Configure: SUJ using file "/home/hossein/ros2_ws/src/sitl_ros2_dvrk/sitl_ros2_dvrk/sitl_daVinci_configs/suj-ECM-1-2-3.json"
+----> content of configuration file: 
+/* -*- Mode: Javascript; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+{
+	"arms" : 
+	[
+		{
+			"DH" : 
+			{
+				"links" : 
+				[
+					{
+						"A" : 0.089599999999999999,
+						"D" : 0.0,
+						"alpha" : 0.0,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 0.0,
+						"theta" : 0.0,
+						"type" : "prismatic"
+					},
+					{
+						"A" : 0.0,
+						"D" : 0.41660000000000003,
+						"alpha" : 0.0,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 0.0,
+						"theta" : 0.0,
+						"type" : "revolute"
+					},
+					{
+						"A" : 0.43180000000000002,
+						"D" : 0.1429,
+						"alpha" : 0.0,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 0.0,
+						"theta" : 0.0,
+						"type" : "revolute"
+					},
+					{
+						"A" : 0.43180000000000002,
+						"D" : -0.34589999999999999,
+						"alpha" : 0.0,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 1.5708,
+						"theta" : 0.0,
+						"type" : "revolute"
+					},
+					{
+						"A" : 0.0,
+						"D" : 0.0,
+						"alpha" : -0.7853,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 1.5708,
+						"theta" : 0.0,
+						"type" : "revolute"
+					},
+					{
+						"A" : -0.066699999999999995,
+						"D" : 0.0,
+						"alpha" : 0.0,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 0.0,
+						"theta" : 0.0,
+						"type" : "revolute"
+					}
+				]
+			},
+			"brake-release-current" : 1.5,
+			"name" : "ECM",
+			"plug-number" : 1,
+			"primary-offsets" : 
+			[
+				-0.098947999999999994,
+				-2.3820000000000001,
+				-3.0573000000000001,
+				6.2171000000000003,
+				0,
+				0
+			],
+			"primary-scales" : 
+			[
+				0.25466,
+				1.0656000000000001,
+				1.3612,
+				-1.3712,
+				0,
+				0
+			],
+			"secondary-offsets" : 
+			[
+				-0.11506,
+				-2.3824999999999998,
+				-3.0766,
+				6.2171000000000003,
+				0,
+				0
+			],
+			"secondary-scales" : 
+			[
+				0.25818999999999998,
+				1.0649999999999999,
+				1.3684000000000001,
+				-1.3705000000000001,
+				0,
+				0
+			],
+			"serial-number" : "SE054269",
+			/* original offset provided by ISI, but we need to have z up for GC in ECM code
+               "suj-tip-to-tool-origin": {
+               "Translation": [0.6126, 0.0000,   0.1016],
+               "Rotation" : [[ 0.0000, 1.0000,  0.0000],
+               [ -1.0000,  0.0000,  0.0000],
+               [ 0.0000,  0.0000,  1.0000]]
+               } *//* offset with 45 degree rotation so z is defined up */
+			"suj-tip-to-tool-origin" : 
+			{
+				"Rotation" : 
+				[
+					[
+						0.0,
+						0.70710678100000002,
+						-0.70710678100000002
+					],
+					[
+						-1.0,
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.70710678100000002,
+						0.70710678100000002
+					]
+				],
+				"Translation" : 
+				[
+					0.61260000000000003,
+					0.0,
+					0.1016
+				]
+			},
+			"type" : "ECM",
+			"world-origin-to-suj" : 
+			{
+				"Rotation" : 
+				[
+					[
+						0.0,
+						-1.0,
+						0.0
+					],
+					[
+						1.0,
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0,
+						1.0
+					]
+				],
+				"Translation" : 
+				[
+					0.0,
+					0.0,
+					0.42999999999999999
+				]
+			}
+		},
+		{
+			"DH" : 
+			{
+				"links" : 
+				[
+					{
+						"A" : 0.089599999999999999,
+						"D" : 0.0,
+						"alpha" : 0.0,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 0.0,
+						"theta" : 0.0,
+						"type" : "prismatic"
+					},
+					{
+						"A" : 0.0,
+						"D" : 0.41660000000000003,
+						"alpha" : 0.0,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 0.0,
+						"theta" : 0.0,
+						"type" : "revolute"
+					},
+					{
+						"A" : 0.43180000000000002,
+						"D" : 0.1429,
+						"alpha" : 0.0,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 0.0,
+						"theta" : 0.0,
+						"type" : "revolute"
+					},
+					{
+						"A" : 0.43180000000000002,
+						"D" : -0.13020000000000001,
+						"alpha" : 0.0,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 1.5708,
+						"theta" : 0.0,
+						"type" : "revolute"
+					},
+					{
+						"A" : 0.0,
+						"D" : 0.40889999999999999,
+						"alpha" : 1.5708,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 0.0,
+						"theta" : 0.0,
+						"type" : "revolute"
+					},
+					{
+						"A" : 0.0,
+						"D" : -0.10290000000000001,
+						"alpha" : -1.5708,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : -1.5708,
+						"theta" : 0.0,
+						"type" : "revolute"
+					}
+				]
+			},
+			"brake-release-current" : 2.2000000000000002,
+			"name" : "PSM1",
+			"plug-number" : 2,
+			"primary-offsets" : 
+			[
+				-0.042507000000000003,
+				-2.367,
+				-3.0434999999999999,
+				3.0712000000000002,
+				-3.0840999999999998,
+				-3.1135999999999999
+			],
+			"primary-scales" : 
+			[
+				0.25316,
+				1.0521,
+				1.3531,
+				-1.3657999999999999,
+				1.3757999999999999,
+				1.3843000000000001
+			],
+			"secondary-offsets" : 
+			[
+				-0.043367999999999997,
+				-2.3816999999999999,
+				-3.0503,
+				3.0668000000000002,
+				-3.0884999999999998,
+				-3.1097999999999999
+			],
+			"secondary-scales" : 
+			[
+				0.25318000000000002,
+				1.0556000000000001,
+				1.3588,
+				-1.3635999999999999,
+				1.3797999999999999,
+				1.3844000000000001
+			],
+			"serial-number" : "SE054268",
+			"suj-tip-to-tool-origin" : 
+			{
+				"Rotation" : 
+				[
+					[
+						0.0,
+						1.0,
+						0.0
+					],
+					[
+						-1.0,
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0,
+						1.0
+					]
+				],
+				"Translation" : 
+				[
+					0.4864,
+					0.0,
+					0.15240000000000001
+				]
+			},
+			"type" : "PSM",
+			"world-origin-to-suj" : 
+			{
+				"Rotation" : 
+				[
+					[
+						-1.0,
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						-1.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0,
+						1.0
+					]
+				],
+				"Translation" : 
+				[
+					-0.1016,
+					-0.1016,
+					0.42999999999999999
+				]
+			}
+		},
+		{
+			"DH" : 
+			{
+				"links" : 
+				[
+					{
+						"A" : 0.089599999999999999,
+						"D" : 0.0,
+						"alpha" : 0.0,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 0.0,
+						"theta" : 0.0,
+						"type" : "prismatic"
+					},
+					{
+						"A" : 0.0,
+						"D" : 0.41660000000000003,
+						"alpha" : 0.0,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 0.0,
+						"theta" : 0.0,
+						"type" : "revolute"
+					},
+					{
+						"A" : 0.43180000000000002,
+						"D" : 0.1429,
+						"alpha" : 0.0,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 0.0,
+						"theta" : 0.0,
+						"type" : "revolute"
+					},
+					{
+						"A" : 0.43180000000000002,
+						"D" : -0.13020000000000001,
+						"alpha" : 0.0,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 1.5708,
+						"theta" : 0.0,
+						"type" : "revolute"
+					},
+					{
+						"A" : 0.0,
+						"D" : 0.40889999999999999,
+						"alpha" : 1.5708,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 0.0,
+						"theta" : 0.0,
+						"type" : "revolute"
+					},
+					{
+						"A" : 0.0,
+						"D" : -0.10290000000000001,
+						"alpha" : -1.5708,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : -1.5708,
+						"theta" : 0.0,
+						"type" : "revolute"
+					}
+				]
+			},
+			"brake-release-current" : 2.2000000000000002,
+			"name" : "PSM2",
+			"plug-number" : 3,
+			"primary-offsets" : 
+			[
+				-0.041341999999999997,
+				-2.3637999999999999,
+				-3.0901999999999998,
+				3.0632999999999999,
+				-3.1880000000000002,
+				-3.0825999999999998
+			],
+			"primary-scales" : 
+			[
+				0.25363000000000002,
+				1.0511999999999999,
+				1.3707,
+				-1.3609,
+				1.4125000000000001,
+				1.3725000000000001
+			],
+			"secondary-offsets" : 
+			[
+				-0.043388000000000003,
+				-2.3841000000000001,
+				-3.0788000000000002,
+				3.0448,
+				-3.1888000000000001,
+				-3.1137999999999999
+			],
+			"secondary-scales" : 
+			[
+				0.25358999999999998,
+				1.0610999999999999,
+				1.3684000000000001,
+				-1.3547,
+				1.4135,
+				1.385
+			],
+			"serial-number" : "SE054270",
+			"suj-tip-to-tool-origin" : 
+			{
+				"Rotation" : 
+				[
+					[
+						0.0,
+						1.0,
+						0.0
+					],
+					[
+						-1.0,
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0,
+						1.0
+					]
+				],
+				"Translation" : 
+				[
+					0.4864,
+					0.0,
+					0.15240000000000001
+				]
+			},
+			"type" : "PSM",
+			"world-origin-to-suj" : 
+			{
+				"Rotation" : 
+				[
+					[
+						1.0,
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						1.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0,
+						1.0
+					]
+				],
+				"Translation" : 
+				[
+					0.1016,
+					-0.1016,
+					0.42999999999999999
+				]
+			}
+		},
+		{
+			"DH" : 
+			{
+				"links" : 
+				[
+					{
+						"A" : 0.089599999999999999,
+						"D" : 0.0,
+						"alpha" : 0.0,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 0.0,
+						"theta" : 0.0,
+						"type" : "prismatic"
+					},
+					{
+						"A" : 0.0,
+						"D" : 0.34039999999999998,
+						"alpha" : 0.0,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 0.0,
+						"theta" : 0.0,
+						"type" : "revolute"
+					},
+					{
+						"A" : 0.58420000000000005,
+						"D" : 0.1429,
+						"alpha" : 0.0,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 0.0,
+						"theta" : 0.0,
+						"type" : "revolute"
+					},
+					{
+						"A" : 0.43180000000000002,
+						"D" : 0.2571,
+						"alpha" : 0.0,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 1.5708,
+						"theta" : 0.0,
+						"type" : "revolute"
+					},
+					{
+						"A" : 0.0,
+						"D" : 0.40889999999999999,
+						"alpha" : 1.5708,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : 0.0,
+						"theta" : 0.0,
+						"type" : "revolute"
+					},
+					{
+						"A" : 0.0,
+						"D" : -0.10290000000000001,
+						"alpha" : -1.5708,
+						"convention" : "modified",
+						"mode" : "active",
+						"offset" : -1.5708,
+						"theta" : 0.0,
+						"type" : "revolute"
+					}
+				]
+			},
+			"brake-release-current" : 2.2000000000000002,
+			"name" : "PSM3",
+			"plug-number" : 4,
+			"primary-offsets" : 
+			[
+				-0.34443200000000002,
+				-2.3925000000000001,
+				3.0663,
+				-3.1124999999999998,
+				-3.1368999999999998,
+				-3.0244
+			],
+			"primary-scales" : 
+			[
+				0.2621,
+				1.0596000000000001,
+				-1.3678999999999999,
+				1.3863000000000001,
+				1.403,
+				1.3474999999999999
+			],
+			"secondary-offsets" : 
+			[
+				-0.57684000000000002,
+				-2.3956,
+				3.0827,
+				-3.0811999999999999,
+				-3.1240000000000001,
+				-3.0234000000000001
+			],
+			"secondary-scales" : 
+			[
+				0.25690000000000002,
+				1.0611999999999999,
+				-1.3706,
+				1.3782000000000001,
+				1.4039999999999999,
+				1.3492999999999999
+			],
+			"serial-number" : "SE054271",
+			"suj-tip-to-tool-origin" : 
+			{
+				"Rotation" : 
+				[
+					[
+						0.0,
+						1.0,
+						0.0
+					],
+					[
+						-1.0,
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0,
+						1.0
+					]
+				],
+				"Translation" : 
+				[
+					0.4864,
+					0.0,
+					0.15240000000000001
+				]
+			},
+			"type" : "Motorized PSM",
+			"world-origin-to-suj" : 
+			{
+				"Rotation" : 
+				[
+					[
+						0.0,
+						-1.0,
+						0.0
+					],
+					[
+						1.0,
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0,
+						1.0
+					]
+				],
+				"Translation" : 
+				[
+					0.0,
+					0.0,
+					0.12640000000000001
+				]
+			}
+		}
+	]
+}
+<----
+D- Class mtsIntuitiveResearchKitSUJ: AddStateTable: added state table "ECM" and corresponding interface "StateTableECM" to task "SUJ"
+D- Class mtsIntuitiveResearchKitSUJ: AddStateTable: added state table "ECMBrakeCurrent" and corresponding interface "StateTableECMBrakeCurrent" to task "SUJ"
+D- Class mtsIntuitiveResearchKitSUJ: AddStateTable: added state table "PSM1" and corresponding interface "StateTablePSM1" to task "SUJ"
+D- Class mtsIntuitiveResearchKitSUJ: AddStateTable: added state table "PSM1BrakeCurrent" and corresponding interface "StateTablePSM1BrakeCurrent" to task "SUJ"
+D- Class mtsIntuitiveResearchKitSUJ: AddStateTable: added state table "PSM2" and corresponding interface "StateTablePSM2" to task "SUJ"
+D- Class mtsIntuitiveResearchKitSUJ: AddStateTable: added state table "PSM2BrakeCurrent" and corresponding interface "StateTablePSM2BrakeCurrent" to task "SUJ"
+D- Class mtsIntuitiveResearchKitSUJ: AddStateTable: added state table "PSM3" and corresponding interface "StateTablePSM3" to task "SUJ"
+D- Class mtsIntuitiveResearchKitSUJ: AddStateTable: added state table "PSM3BrakeCurrent" and corresponding interface "StateTablePSM3BrakeCurrent" to task "SUJ"
+M- Class mtsRobot1394QtWidget: Configure: 
+M- Class mtsRobot1394QtWidget: Create: default create method for component "ECM IO"
+M- Class mtsRobot1394QtWidget: Configure: 
+M- Class mtsRobot1394QtWidget: Create: default create method for component "PSM1 IO"
+M- Class mtsRobot1394QtWidget: Configure: 
+M- Class mtsRobot1394QtWidget: Create: default create method for component "PSM2 IO"
+M- Class mtsRobot1394QtWidget: Configure: 
+M- Class mtsRobot1394QtWidget: Create: default create method for component "SUJ IO"
+M- Class mtsPIDQtWidget: Configure: 
+M- Class mtsIntuitiveResearchKitECMQtWidget: Configure: 
+M- Class mtsPIDQtWidget: Configure: 
+M- Class mtsIntuitiveResearchKitPSMQtWidget: Configure: 
+M- Class mtsPIDQtWidget: Configure: 
+M- Class mtsIntuitiveResearchKitPSMQtWidget: Configure: 
+M- Class mtsDaVinciEndoscopeFocusQtWidget: Configure: 
+-M Class mtsIntuitiveResearchKitECM: RemoveInterfaceRequired: removed required interface "ExecIn"
+M- Class mtsIntuitiveResearchKitECM: Create: creating thread for task ECM
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- Class mtsRobot1394QtWidget: Create: default create method for component "ECM IO"
+M- Class mtsIntuitiveResearchKitECMQtWidget: Create: default create method for component "ECM-GUI"
+M- Class mtsPID: Create: getting thread from component io
+M- Class mtsPIDQtWidget: Create: default create method for component "ECM-PID-GUI"
+M- Class mtsIntuitiveResearchKitSUJQtWidget: Create: default create method for component "ECM-SUJ"
+M-M- osaThread::CreateInternal: create thread named: Unnamed
+ Class mtsIntuitiveResearchKitECM: Starting StartupInternal (periodic) for ECM
+M- Class mtsIntuitiveResearchKitECM: StartupInternal: started for task "ECM"
+M- osaThread::CreateInternal: create thread named: Unnamed
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #4: ECM: desired state DISABLED
+-M Class mtsIntuitiveResearchKitPSM: RemoveInterfaceRequired: removed required interface "ExecIn"
+M- Class mtsIntuitiveResearchKitPSM: Create: creating thread for task PSM1
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- Class mtsRobot1394QtWidget: Create: default create method for component "PSM1 IO"
+M- Class mtsIntuitiveResearchKitPSMQtWidget: Create: default create method for component "PSM1-GUI"
+M- Class mtsPID: Create: getting thread from component io
+M- Class mtsPIDQtWidget: Create: default create method for component "PSM1-PID-GUI"
+M- Class mtsIntuitiveResearchKitSUJQtWidget: Create: default create method for component "PSM1-SUJ"
+-M Class mtsIntuitiveResearchKitPSM: RemoveInterfaceRequired: removed required interface "ExecIn"
+M- Class mtsIntuitiveResearchKitPSM: Create: creating thread for task PSM2
+mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #5: ECM: current state DISABLED 
+mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #5: ECM: current state DISABLED 
+saThread::CreateInternal: create thread named: Unnamed
+ Class mtsIntuitiveResearchKitPSM: Starting StartupInternal (periodic) for PSM1
+ Class mtsIntuitiveResearchKitPSM: Starting StartupInternal (periodic) for PSM1
+M- Class mtsRobot1394QtWidget: Create: default create method for component "PSM2 IO"
+mtsIntuitiveResearchKitPSM: M- Class PSM1"
+mtsIntuitiveResearchKitPSM: M- Class PSM1"
+"
+mtsIntuitiveResearchKitPSM: M- Class PSM1"
+"
+M- Class mtsIntuitiveResearchKitECM: StartupInternal: ended for task "ECM"
+M- Class mtsPID: Create: getting thread from component io
+M- Class mtsPIDQtWidget: Create: default create method for component "PSM2-PID-GUI"
+M- Class mtsIntuitiveResearchKitSUJQtWidget: Create: default create method for component "PSM2-SUJ"
+M- Class mtsIntuitiveResearchKitSUJQtWidget: Create: default create method for component "PSM3-SUJ"
+-M Class mtsIntuitiveResearchKitSUJ: RemoveInterfaceRequired: removed required interface "ExecIn"
+M- Class mtsIntuitiveResearchKitSUJ: Create: creating thread for task SUJ
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- Class mtsIntuitiveResearchKitPSM: StartupInternal: started for task "-MM2ve"
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #3: PSM1: desired state DISABLED
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #3: PSM1: desired state DISABLED
+M- Class mtsRobot1394QtWidget: Create: default create method for component "SUJ IO"
+-M Class mtsIntuitiveResearchKitConsole: RemoveInterfaceRequired: removed required interface "ExecIn"
+M- Class mtsIntuitiveResearchKitConsole: Create: creating thread for task console
+M- osaThread::CreateInternal: create thread named: Unnamed
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #4: PSM2: current state DISABLED
+ Class mtsIntuitiveResearchKitSUJ: Starting StartupInternal (periodic) for SUJ
+M- Class mtsIntuitiveResearchKitSUJ: StartupInternal: started for task "SUJ"
+M- Class mtsIntuitiveResearchKitConsoleQtWidget: Create: default create method for component "consoleGUI"
+M- Class mtsIntuitiveResearchKitConsoleQtWidget: Create: default create method for com "ExecIn"
+nsoleGUI"
+M- Class mtsIntuitiveResearchKitSUJ: AreAllInterfacesRequiredConnected: component "SUJ", void pointer to optional required/input interface "PSM3" (required/input not connected to provided/output)
+-M Class mtsDaVinciEndoscopeFocus: RemoveInterfaceRequired: removed required interface "ExecIn"
+M- Class mtsDaVinciEndoscopeFocus: Create: creating thread for task daVinciEndoscopeFocus
+M- osaThread::CreateInternal: create thread named: Unnamed
+-M Class mtsIntuitiveResearchKitSUJ-Mth Class SUJ:Arm: iveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #4: PSM1: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ-Mth Class SUJ:Arm: iveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #4: PSM1: current state DISABLED
+1.72918e+09s, #1: SUJ: desired state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:ECM: 1.72918e+09s, #1: ECM SUJ: desired state DISABLED
+M- Class mtsIntuitiveResearchKitPSM: StartupInternal: ended for task "PSM2"
+ Class mtsIntuitiveResearchKitConsole: RunInternal: begin task console
+M- Class mtsIntuitiveResearchKitConsole: StartupInternal: started for task "console"
+ Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #1: PSM1 SUJ: desired state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: -M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #1: console started, dVRK 2.3.0 / cisst 1.3.0
+-M Class mtsIntuitiveResearchKitConsole: console:Main: -M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #1: console started, dVRK 2.3.0 / cisst 1.3.0
+.72918e+09s, #1: PSM2 SUJ: desired state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM3: 1.72918e+09s, #1: PSM3 SUJ: desired state DISABLED
+M- Class mtsIntuitiveResearchKitPSM: StartupInternal: ended for task "PSM1"
+M- Class mtsDaVinciEndoscopeFocusQtWidget: Create: default create method for component "daVinciEndoscopeFocus-GUI"
+M- Class mtsDaVinciEndoscopeFocusQtWidget: Create: default create method for component "daVinciEndoscopeFocus-GUI"
+M- Class mtsIntuitiveResearchKitConsole: StartupInternal: ended for task "console"
+M- Class mtsDaVinciHeadSensor: Create: creating thread for task daVinciHeadSensor
+M- Class mtsDaVinciHeadSensor: Create: creating thread for task daVinciHeadSensor
+M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
+M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
+M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
+M- osaThread::CreateInternal: create thread named: Unnamed
+ Class mtsDaVinciEndoscopeFocus: RunInternal: begin task daVinciEndoscopeFocus
+M- Class mtsDaVinciEndoscopeFocus: StartupInternal: started for task "daVinciEndoscopeFocus"
+M- Class mtsDaVinciEndoscopeFocus: StartupInternal: ended for task "daVinciEndoscopeFocus"
+M- Class mtsDaVinciEndoscopeFocus: RunInternal: wait to start task "daVinciEndoscopeFocus"
+osaThread::CreateInternal: create thread named: Unnamed
+M-M- osaThread::CreateInternal: create thread named: Unnamed
+ Class mtsDaVinciHeadSensor: RunInternal: begin task daVinciHeadSensor
+M- Class mtsDaVinciHeadSensor: StartupInternal: started for task "daVinciHeadSensor"
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- Class mtsDaVinciHeadSensor: StartupInternal: ended for task "daVinciHeadSensor"
+M- Class mtsDaVinciHeadSensor: RunInternal: wait to start task "daVinciHeadSensor"
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- osaThread::CreateInternal: create thread named: Unnamed
+-M Class mtsRobotIO1394: RemoveInterfaceRequired: removed required interface "ExecIn"
+M- Class mtsRobotIO1394: Create: creating thread for task io
+M- osaThread::CreateInternal: create thread named: Unnamed
+M- Class mtsRobotIO1394QtWidgetFactory: Create: default create method for component "robotWidgetFactory"
+M-M- osaThread::CreateInternal: create thread named: Unnamed
+ Class mtsRobotIO1394: Starting StartupInternal (periodic) for io
+M- Class mtsRobotIO1394: StartupInternal: started for task "io"
+M- Class mtsRobot1394QtWidget: WaitForState: called for component "ECM IO" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitECMQtWidget: WaitForState: called for component "ECM-GUI" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
+M- Class mtsPIDQtWidget: WaitForState: called for component "ECM-PID-GUI" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitSUJQtWidget: WaitForState: called for component "ECM-SUJ" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
+M- Class mtsRobot1394QtWidget: WaitForState: called for component "PSM1 IO" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitPSMQtWidget: WaitForState: called for component "PSM1-GUI" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
+M- Class mtsPIDQtWidget: WaitForState: called for component "PSM1-PID-GUI" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitSUJQtWidget: WaitForState: called for component "PSM1-SUJ" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
+M- Class mtsRobot1394QtWidget: WaitForState: called for component "PSM2 IO" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitPSMQtWidget: WaitForState: called for component "PSM2-GUI" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
+M- Class mtsPIDQtWidget: WaitForState: called for component "PSM2-PID-GUI" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitSUJQtWidget: WaitForState: called for component "PSM2-SUJ" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitSUJQtWidget: WaitForState: called for component "PSM3-SUJ" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitSUJ: WaitForState: waiting for task "SUJ" to enter state "mtsComponentState
+  State:ready"
+M- Class mtsRobotIO1394: StartupInternal: ended for task "io"
+-M Class mtsPID: RunEventHandler: initializing thread for ECM-PID
+M- Class mtsPID: Starting StartupInternal (periodic) for ECM-PID
+M- Class mtsPID: StartupInternal: started for task "ECM-PID"
+M- Class mtsPID: Startup: configuration_js:
+prmConfigurationJoint
+Timestamp (auto): 0.00000 (invalid)
+  Name:[yaw, pitch, insertion, roll]  Type:[REVOLUTE, REVOLUTE, PRISMATIC, REVOLUTE]  PositionMin:[-1.5708, -0.785398, 0, -1.55334]  PositionMax:[1.5708, 1.11701, 0.255, 1.55334]  VelocityMin:[]  VelocityMax:[]  AccelerationMin:[]  AccelerationMax:[]  EffortMin:[-26.9321, -26.9321, -80.6549, -0.876588]  EffortMax:[26.9321, 26.9321, 80.6549, 0.876588]
+M- Class mtsPID: StartupInternal: ended for task "ECM-PID"
+-M Class mtsPID: RunEventHandler: initializing thread for PSM1-PID
+M- Class mtsPID: Starting StartupInternal (periodic) for PSM1-PID
+M- Class mtsPID: StartupInternal: started for task "PSM1-PID"
+M- Class mtsPID: Startup: configuration_js:
+prmConfigurationJoint
+Timestamp (auto): 0.00000 (invalid)
+  Name:[yaw, pitch, insertion, roll, wrist_pitch, wrist_yaw, jaw]  Type:[REVOLUTE, REVOLUTE, PRISMATIC, REVOLUTE, REVOLUTE, REVOLUTE, REVOLUTE]  PositionMin:[-1.58825, -0.925025, 0, -3.03687, -3.03687, -3.03687, -3.03687]  PositionMax:[1.58825, 0.925025, 0.24, 3.03687, 3.03687, 3.03687, 3.03687]  VelocityMin:[]  VelocityMax:[]  AccelerationMin:[]  AccelerationMax:[]  EffortMin:[-3.3161, -3.3161, -9.87793, -0.343642, -0.343642, -0.343642, -0.343642]  EffortMax:[3.3161, 3.3161, 9.87793, 0.343642, 0.343642, 0.343642, 0.343642]
+M- Class mtsPID: StartupInternal: ended for task "PSM1-PID"
+-M Class mtsPID: RunEventHandler: initializing thread for PSM2-PID
+M- Class mtsPID: Starting StartupInternal (periodic) for PSM2-PID
+M- Class mtsPID: StartupInternal: started for task "PSM2-PID"
+M- Class mtsPID: Startup: configuration_js:
+prmConfigurationJoint
+Timestamp (auto): 0.00000 (invalid)
+  Name:[yaw, pitch, insertion, roll, wrist_pitch, wrist_yaw, jaw]  Type:[REVOLUTE, REVOLUTE, PRISMATIC, REVOLUTE, REVOLUTE, REVOLUTE, REVOLUTE]  PositionMin:[-1.58825, -0.925025, 0, -3.03687, -3.03687, -3.03687, -3.03687]  PositionMax:[1.58825, 0.925025, 0.24, 3.03687, 3.03687, 3.03687, 3.03687]  VelocityMin:[]  VelocityMax:[]  AccelerationMin:[]  AccelerationMax:[]  EffortMin:[-3.3161, -3.3161, -9.87793, -0.343642, -0.343642, -0.343642, -0.343642]  EffortMax:[3.3161, 3.3161, 9.87793, 0.343642, 0.343642, 0.343642, 0.343642]
+M- Class mtsPID: StartupInternal: ended for task "PSM2-PID"
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:Arm: 1.72918e+09s, #2: SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:ECM: 1.72918e+09s, #2: ECM SUJ: current state DISABLED
+M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #2: PSM1 SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #2: PSM2 SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM3: 1.72918e+09s, #2: PSM3 SUJ: current state DISABLED
+M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
+M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
+M- Class mtsIntuitiveResearchKitSUJ: StartupInternal: ended for task "SUJ"
+ Class mtsIntuitiveResearchKitSUJ: WaitForState: waited for 0.029022 seconds.
+M- Class mtsRobot1394QtWidget: WaitForState: called for component "SUJ IO" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitConsoleQtWidget: WaitForState: called for component "consoleGUI" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
+M- Class mtsDaVinciEndoscopeFocusQtWidget: WaitForState: called for component "daVinciEndoscopeFocus-GUI" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
+M- Class mtsRobotIO1394QtWidgetFactory: WaitForState: called for component "robotWidgetFactory" for state "mtsComponentState
+  State:ready" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitECM: Start: starting task ECM
+M- Class mtsIntuitiveResearchKitECM: Start: started task ECM
+M- Class mtsRobot1394QtWidget: Start: default start method for component "ECM IO"
+M- Class mtsRobot1394QtWidget: Startup
+M- Class mtsIntuitiveResearchKitECMQtWidget: Start: default start method for component "ECM-GUI"
+M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
+M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #6: ECM: current state DISABLED
+M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
+M- Class mtsPID: Start: starting task ECM-PID
+M- Class mtsPID: Start: started task ECM-PID
+M- Class mtsPIDQtWidget: Start: default start method for component "ECM-PID-GUI"
+M- Class mtsPIDQtWidget: mtsPIDQtWidget::Startup
+M- Class mtsIntuitiveResearchKitSUJQtWidget: Start: default start method for component "ECM-SUJ"
+M- Class mtsIntuitiveResearchKitPSM: Start: starting task PSM1
+M- Class mtsIntuitiveResearchKitPSM: Start: started task PSM1
+M- Class mtsRobot1394QtWidget: Start: default start method for component "PSM1 IO"
+M- Class mtsRobot1394QtWidget: Startup
+M- Class mtsIntuitiveResearchKitPSMQtWidget: Start: default start method for component "PSM1-GUI"
+M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
+M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
+1.72918e+09s, #5: PSM1: current state DISABLED
+M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
+M- Class mtsPID: Start: starting task PSM1-PID
+M- Class mtsPID: Start: started task PSM1-PID
+M- Class mtsPIDQtWidget: Start: default start method for component "PSM1-PID-GUI"
+M- Class mtsPIDQtWidget: mtsPIDQtWidget::Startup
+M- Class mtsIntuitiveResearchKitSUJQtWidget: Start: default start method for component "PSM1-SUJ"
+M- Class mtsIntuitiveResearchKitPSM: Start: starting task PSM2
+M- Class mtsIntuitiveResearchKitPSM: Start: started task PSM2
+M- Class mtsRobot1394QtWidget: Start: default start method for component "PSM2 IO"
+M- Class mtsRobot1394QtWidget: Startup
+M- Class mtsIntuitiveResearchKitPSMQtWidget: Start: default start method for component "PSM2-GUI"
+M- Class mtsIntuitiveResearchKitConsole: -MnInternal: wait to start task "orconsole"
+ Class 5: PSM2: current state DISABLED
+M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "5: PSM2: current state DISABLED
+M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
+M- Class mtsIntuitiveResearchKitConsole: RunInternal: wait to start task "console"
+M- Class mtsPID: Start: starting task PSM2-PID
+M- Class mtsPID: Start: started task PSM2-PID
+M- Class mtsPIDQtWidget: Start: default start method for component "PSM2-PID-GUI"
+M- Class mtsPIDQtWidget: mtsPIDQtWidget::Startup
+M- Class mtsIntuitiveResearchKitSUJQtWidget: Start: default start method for component "PSM2-SUJ"
+M- Class mtsIntuitiveResearchKitSUJQtWidget: Start: default start method for component "PSM3-SUJ"
+M- Class mtsIntuitiveResearchKitSUJ: Start: starting task SUJ
+M- Class mtsIntuitiveResearchKitSUJ: Start: started task SUJ
+M- Class mtsRobot1394QtWidget: Start: default start method for component "SUJ IO"
+M- Class mtsRobot1394QtWidget: Startup
+M- Class mtsIntuitiveResearchKitConsole: Start: starting task console
+M- Class mtsIntuitiveResearchKitConsole: Start: started task console
+M- Class mtsIntuitiveResearchKitConsoleQtWidget: Start: default start method for component "consoleGUI"
+M- Class mtsIntuitiveResearchKitConsoleQtWidget: mtsIntuitiveResearchKitConsoleQtWidget::Startup
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #2: ECM: desired state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #3: ECM: current state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #4: ECM: current state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #5: PSM1: desired state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #6: PSM1: current state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #7: PSM1: current state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #8: PSM2: desired state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #9: PSM2: current state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #10: PSM2: current state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #11: SUJ: desired state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #12: SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:Arm: 1.72918e+09s, #3: SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:ECM: 1.72918e+09s, #3: ECM SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #13: SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #3: PSM1 SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #3: PSM2 SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM3: 1.72918e+09s, #3: PSM3 SUJ: current state DISABLED
+-W Class mtsIntuitiveResearchKitSUJ: SUJ:Arm: 1.72918e+09s, #1: SUJ: unexpected multiplexer value
+-W Class mtsIntuitiveResearchKitSUJ: -W Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #1: SUJ: unexpected multiplexer value
+SUJ:ECM: 1.72918e+09s, #1: ECM SUJ: unexpected multiplexer value
+-W Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #1: PSM1 SUJ: unexpected multiplexer value
+-W Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #1: PSM2 SUJ: unexpected multiplexer value
+-W Class mtsIntuitiveResearchKitSUJ: SUJ:PSM3: 1.72918e+09s, #1: PSM3 SUJ: unexpected multiplexer value
+-E Class mtsIntuitiveResearchKitSUJ: File: mtsIntuitiveResearchKitSUJ.cpp Line: 932 -  get_and_convert_potentiometers: mux from IO board, actual: 1791, expected: 0
+M- Class mtsDaVinciEndoscopeFocus: Start: starting task daVinciEndoscopeFocus
+M- Class mtsDaVinciEndoscopeFocus: Start: started task daVinciEndoscopeFocus
+M- Class mtsDaVinciEndoscopeFocusQtWidget: Start: default start method for component "daVinciEndoscopeFocus-GUI"
+M- Class mtsDaVinciHeadSensor: Start: starting task daVinciHeadSensor
+M- Class mtsDaVinciHeadSensor: Start: started task daVinciHeadSensor
+M- Class mtsRobotIO1394: Start: starting task io
+M- Class mtsRobotIO1394: Start: started task io
+M- Class mtsRobotIO1394QtWidgetFactory: Start: default start method for component "robotWidgetFactory"
+M- Class mtsRobot1394QtWidget: WaitForState: called for component "ECM IO" for state "mtsComponentState
+  State:active" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitECMQtWidget: WaitForState: called for component "ECM-GUI" for state "mtsComponentState
+  State:active" has no effect for mtsComponent
+M- Class mtsPIDQtWidget: WaitForState: called for component "ECM-PID-GUI" for state "mtsComponentState
+  State:active" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitSUJQtWidget: WaitForState: called for component "ECM-SUJ" for state "mtsComponentState
+  State:active" has no effect for mtsComponent
+M- Class mtsRobot1394QtWidget: WaitForState: called for component "PSM1 IO" for state "mtsComponentState
+  State:active" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitPSMQtWidget: WaitForState: called for component "PSM1-GUI" for state "mtsComponentState
+  State:active" has no effect for mtsComponent
+M- Class mtsPIDQtWidget: WaitForState: called for component "PSM1-PID-GUI" for state "mtsComponentState
+  State:active" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitSUJQtWidget: WaitForState: called for component "PSM1-SUJ" for state "mtsComponentState
+  State:active" has no effect for mtsComponent
+M- Class mtsRobot1394QtWidget: WaitForState: called for component "PSM2 IO" for state "mtsComponentState
+  State:active" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitPSMQtWidget: WaitForState: called for component "PSM2-GUI" for state "mtsComponentState
+  State:active" has no effect for mtsComponent
+M- Class mtsPIDQtWidget: WaitForState: called for component "PSM2-PID-GUI" for state "mtsComponentState
+  State:active" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitSUJQtWidget: WaitForState: called for component "PSM2-SUJ" for state "mtsComponentState
+  State:active" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitSUJQtWidget: WaitForState: called for component "PSM3-SUJ" for state "mtsComponentState
+  State:active" has no effect for mtsComponent
+M- Class mtsRobot1394QtWidget: WaitForState: called for component "SUJ IO" for state "mtsComponentState
+  State:active" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitConsoleQtWidget: WaitForState: called for component "consoleGUI" for state "mtsComponentState
+  State:active" has no effect for mtsComponent
+M- Class mtsDaVinciEndoscopeFocusQtWidget: WaitForState: called for component "daVinciEndoscopeFocus-GUI" for state "mtsComponentState
+  State:active" has no effect for mtsComponent
+M- Class mtsRobotIO1394QtWidgetFactory: WaitForState: called for component "robotWidgetFactory" for state "mtsComponentState
+  State:active" has no effect for mtsComponent
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #14: console: clutch released
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #15: console: camera released
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #16: console: operator present
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: -M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #6: PSM1: adapter detected
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: -M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #6: PSM1: adapter detected
+1.72918e+09s, #6: PSM2: adapter detected
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #17: PSM1: adapter detected
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #18: PSM2: adapter detected
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #7: PSM2: tool detected
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #19: PSM2: tool detected
+-M Class mtsRobotIO1394: io:PSM2-Dallas: 1.72918e+09s, #1: PSM2-Dallas: requested tool read
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #20: PSM2-Dallas: requested tool read
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:ECM: 1.72918e+09s, #4: ECM SUJ: not clutched
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #4: PSM1 SUJ: not clutched
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #4: PSM2 SUJ: not clutched
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:ECM: 1.72918e+09s, #5: ECM SUJ: clutched
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #5: PSM1 SUJ: not clutched
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #5: PSM2 SUJ: not clutched
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM3: 1.72918e+09s, #4: PSM3 SUJ: not clutched
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #21: console: operator not present
+-M Class mtsRobotIO1394: io:PSM2-Dallas: 1.72918e+09s, #2: PSM2-Dallas: found tool type "FENESTRATED_BIPOLAR_FORCEPS:420205[13]"
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #22: PSM2-Dallas: found tool type "FENESTRATED_BIPOLAR_FORCEPS:420205[13]"
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #8: PSM2: setting up for tool type "FENESTRATED_BIPOLAR_FORCEPS:420205[13]"
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #23: PSM2: setting up for tool type "FENESTRATED_BIPOLAR_FORCEPS:420205[13]"
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #9: PSM2: using tool file "FENESTRATED_BIPOLAR_FORCEPS_420205.json" for: Fenestrated Bipolar Forceps for da Vinci S (420205[..])
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #24: PSM2: using tool file "FENESTRATED_BIPOLAR_FORCEPS_420205.json" for: Fenestrated Bipolar Forceps for da Vinci S (420205[..])
+M- Class mtsIntuitiveResearchKitPSM: Configure: PSM2 using file "/home/hossein/ros2_ws/src/cisst-saw/sawIntuitiveResearchKit/core/components/../../share/tool/FENESTRATED_BIPOLAR_FORCEPS_420205.json"
+----> content of configuration file: 
+/* -*- Mode: Javascript; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+{
+	// see dVRK user guide
+	"DH" : 
+	{
+		"convention" : "modified",
+		"joints" : 
+		[
+			{
+				"A" : 0.0,
+				"D" : 0.46700000000000003,
+				"alpha" : 0.0,
+				"ftmax" : 0.33000000000000002,
+				"mode" : "active",
+				"name" : "roll",
+				"offset" : 0.0,
+				"qmax" : 4.4505999999999997, //  255 degrees
+				"qmin" : -4.4505999999999997, // -255 degrees
+				"theta" : 0.0,
+				"type" : "revolute"
+			},
+			{
+				"A" : 0.0,
+				"D" : 0.0,
+				"alpha" : -1.5708,
+				"ftmax" : 0.25,
+				"mode" : "active",
+				"name" : "wrist_pitch",
+				"offset" : -1.5708,
+				"qmax" : 1.2217, //  70 degrees
+				"qmin" : -1.2217, // -70 degrees
+				"theta" : 0.0,
+				"type" : "revolute"
+			},
+			{
+				"A" : 0.010699999999999999,
+				"D" : 0.0,
+				"alpha" : -1.5708,
+				"ftmax" : 0.20000000000000001,
+				"mode" : "active",
+				"name" : "wrist_yaw",
+				"offset" : -1.5708,
+				"qmax" : 1.5708, //  90 degrees
+				"qmin" : -1.5708, // -90 degrees
+				"theta" : 0.0,
+				"type" : "revolute"
+			}
+		]
+	},
+	// values from the dVRK user guide, see tool appendix C, ISI numbers rounded to 6 digits
+	"coupling" : 
+	{
+		"ActuatorToJointPosition" : 
+		[
+			[
+				-1.5632330000000001,
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				1.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				-0.63027299999999997,
+				0.457982,
+				0.457982
+			],
+			[
+				0.0,
+				0.0,
+				-0.915964,
+				0.915964
+			]
+		]
+	},
+	"jaw" : 
+	{
+		"ftmax" : 0.19,
+		"qmax" : 1.3962600000000001, //  80 degrees - overriding ISI values
+		// for last joint, manual says [0, 30] but we need -40 to allow stronger torque, 80 to open wide
+		"qmin" : -0.69813199999999997 // -40 degrees  -overriding ISI values
+	},
+	// angles used to engage the tool, in radians
+	// make sure these are within the range of motion IN the cannula
+	// max range on roll, 10, 10, 0 degrees
+	"tool-engage-position" : 
+	{
+		"lower" : 
+		[
+			-4.5377999999999998,
+			-0.17453299999999999,
+			-0.17453299999999999,
+			0.0
+		],
+		"upper" : 
+		[
+			4.5377999999999998,
+			0.17453299999999999,
+			0.17453299999999999,
+			0.0
+		]
+	},
+	// rotation to match ISI convention (for read-only research API on commercial da Vinci)
+	"tooltip-offset" : 
+	[
+		[
+			0.0,
+			-1.0,
+			0.0,
+			0.0
+		],
+		[
+			0.0,
+			0.0,
+			1.0,
+			0.0
+		],
+		[
+			-1.0,
+			0.0,
+			0.0,
+			0.0
+		],
+		[
+			0.0,
+			0.0,
+			0.0,
+			1.0
+		]
+	]
+}
+<----
+M- Class mtsIntuitiveResearchKitPSM: ConfigureDH PSM2: loaded kinematics
+    MODIFIED DH    1.5708         0         0         0         hinge active        1.5708       -1.588        1.588       3.3161
+    MODIFIED DH   -1.5708         0         0         0         hinge active       -1.5708    -0.925025     0.925025       3.3161
+    MODIFIED DH    1.5708         0         0         0        slider active       -0.4318            0         0.24      9.87793
+    MODIFIED DH         0         0         0     0.467         hinge active             0      -4.4506       4.4506         0.33
+    MODIFIED DH   -1.5708         0         0         0         hinge active       -1.5708      -1.2217       1.2217         0.25
+    MODIFIED DH   -1.5708    0.0107         0         0         hinge active       -1.5708      -1.5708       1.5708          0.2
+
+M- Class mtsIntuitiveResearchKitPSM: ConfigureTool PSM2: loaded kinematics
+    MODIFIED DH    1.5708         0         0         0         hinge active        1.5708       -1.588        1.588       3.3161
+    MODIFIED DH   -1.5708         0         0         0         hinge active       -1.5708    -0.925025     0.925025       3.3161
+    MODIFIED DH    1.5708         0         0         0        slider active       -0.4318            0         0.24      9.87793
+    MODIFIED DH         0         0         0     0.467         hinge active             0      -4.4506       4.4506         0.33
+    MODIFIED DH   -1.5708         0         0         0         hinge active       -1.5708      -1.2217       1.2217         0.25
+    MODIFIED DH   -1.5708    0.0107         0         0         hinge active       -1.5708      -1.5708       1.5708          0.2
+
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #7: PSM1: desired state ENABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #25: PSM1: desired state ENABLED
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #7: ECM: desired state ENABLED
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #10: PSM2: desired state ENABLED
+1.72918e+09s, #26: ECM: desired state ENABLED
+1.72918e+09s, #26: ECM: desired state ENABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:Arm: 1.72918e+09s, #4: SUJ: desired state ENABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:ECM: 1.72918e+09s, #6: ECM SUJ: desired state ENABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #6: PSM1 SUJ: desired state ENABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #27: PSM2: desired state ENABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #27: PSM2: desired state ENABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #6: PSM2 SUJ: desired state ENABLED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #8: PSM1: power requested
+1.72918e+09s, #28: SUJ: desired state ENABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM3: 1.72918e+09s, #5: PSM3 SUJ: desired state ENABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #29: PSM1: power requested
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #9: PSM1: current state POWERING
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #30: PSM1: current state POWERING
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #8: ECM: power requested
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #31: ECM: power requested
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #31: ECM: power requested
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #9: ECM: current state POWERING
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #32: ECM: current state POWERING
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #11: PSM2: power requested
+-M-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #11: PSM2: power requested
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:Arm: 1.72918e+09s, #5: SUJ: power requested
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:ECM: 1.72918e+09s, #7: ECM SUJ: power requested
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #33: PSM2: power requested
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #12: PSM2: current state POWERING
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #12: PSM2: current state POWERING
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #7: PSM1 SUJ: power requested
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #34: PSM2: current state POWERING
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #7: PSM2 SUJ: power requested
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #35: SUJ: power requested
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM3: 1.72918e+09s, #6: PSM3 SUJ: power requested
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:Arm: 1.72918e+09s, #6: SUJ: current state POWERING
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:ECM: 1.72918e+09s, #8: ECM SUJ: current state POWERING
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #36: SUJ: current state POWERING
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #8: PSM1 SUJ: current state POWERING
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #8: PSM2 SUJ: current state POWERING
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM3: 1.72918e+09s, #7: PSM3 SUJ: current state POWERING
+-M Class mtsRobotIO1394: io:ECM: 1.72918e+09s, #1: IO: ECM watchdog ok
+-M Class mtsIntuitiveResearchKitConsole: console:Main: -M Class mtsRobotIO1394: io:PSM1: 1.72918e+09s, #37: IO: ECM watchdog ok
+1.72918e+09s, #1: -M Class mtsIntuitiveResearchKitConsole: console:Main: -M Class mtsRobotIO1394: io:PSM1: 1.72918e+09s, #37: IO: ECM watchdog ok
+1.72918e+09s, #1: IO: PSM1 watchdog ok
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #38: IO: PSM1 watchdog ok
+-M Class mtsRobotIO1394: io:PSM2: 1.72918e+09s, #1: IO: PSM2 watchdog ok
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #39: IO: PSM2 watchdog ok
+-M Class mtsRobotIO1394: io:SUJ: 1.72918e+09s, #1: IO: SUJ watchdog ok
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #40: IO: SUJ watchdog ok
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:Arm: 1.72918e+09s, #7: SUJ: PSM1 primary and secondary potentiometers agree
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:ECM: 1.72918e+09s, #9: ECM SUJ: PSM1 primary and secondary potentiometers agree
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #41: SUJ: PSM1 primary and secondary potentiometers agree
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #41: SUJ: PSM1 primary and secondary potentiometers agree
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #9: PSM1 SUJ: PSM1 primary and secondary potentiometers agree
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #9: PSM2 SUJ: PSM1 primary and secondary potentiometers agree
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM3: 1.72918e+09s, #8: PSM3 SUJ: PSM1 primary and secondary potentiometers agree
+-M Class mtsIntuitiveResearchKitSUJ: get_and_convert_potentiometers recovery
+ - SUJ: PSM1
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #10: PSM1 SUJ: measured_cp updated
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #10: PSM2 SUJ: measured_cp updated
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM3: 1.72918e+09s, #9: PSM3 SUJ: measured_cp updated
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #10: ECM: power on
+-M Class mtsIntuitiveResearchKitConsole: console:Main: -M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #11: ECM: current state ENABLED
+1.72918e+09-M Class mtsIntuitiveResearchKitConsole: console:Main: -M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #11: ECM: current state ENABLED
+1.72918e+09s, #42: ECM: power on
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #43: ECM: current state ENABLED
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #13: PSM2: power on
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #44: PSM2: power on
+-M Class -M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #44: PSM2: power on
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #14: PSM2: current state ENABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #45: PSM2: current state ENABLED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #10: PSM1: power on
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #46: PSM1: power on
+-M ClasmtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #11: PSM1: current state ENABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #47: PSM1: current state ENABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:Arm: 1.72918e+09s, #8: SUJ: power on
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:ECM: 1.72918e+09s, #10: ECM SUJ: power on
+-M Class mtsIntuitiveResearchKitConsole: console:Main: -M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #11: PSM1 SUJ: power on
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #11: PSM2 SUJ: power on
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM3: 1.72918e+09s, #10: PSM3 SUJ: power on
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:Arm: 1.72918e+09s, #9: SUJ: current state ENABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:ECM: 1.72918e+09s, #11: ECM SUJ: current state ENABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #49: SUJ: current state ENABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #49: SUJ: current state ENABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #12: PSM1 SUJ: current state ENABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #12: PSM2 SUJ: current state ENABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM3: 1.72918e+09s, #11: PSM3 SUJ: current state ENABLED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: -M Class mtsIntuitiveResearchKitSUJ: 1.72918e+09s, #SUJ:Arm: 12: PSM1: desired state HOMED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: -M Class mtsIntuitiveResearchKitSUJ: 1.72918e+09s, #SUJ:Arm: 12: PSM1: desired state HOMED
+1.72918e+09s, #10: SUJ: desired state ENABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:ECM: 1.72918e+09s, #12: ECM SUJ: desired state ENABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #50: PSM1: desired state HOMED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #13: PSM1 SUJ: desired state ENABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #51: SUJ: desired state ENABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #51: SUJ: desired state ENABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #13: PSM2 SUJ: desired state ENABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM3: 1.72918e+09s, #12: PSM3 SUJ: desired state ENABLED
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #12: ECM: desired state HOMED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #52: ECM: desired state HOMED
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #15: PSM2: desired state HOMED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #53: PSM2: desired state HOMED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #13: PSM1: current state CALIBRATING_ENCODERS_FROM_POTS
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #54: PSM1: current state CALIBRATING_ENCODERS_FROM_POTS
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #13: ECM: current state CALIBRATING_ENCODERS_FROM_POTS
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #55: ECM: current state CALIBRATING_ENCODERS_FROM_POTS
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #16: PSM2: current state CALIBRATING_ENCODERS_FROM_POTS
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #56: PSM2: current state CALIBRATING_ENCODERS_FROM_POTS
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #14: PSM1: encoders seem to be already biased
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #57: PSM1: encoders seem to be already biased
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #15: PSM1: current state ENCODERS_BIASED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #58: PSM1: current state ENCODERS_BIASED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #16: PSM1: control JOINT_SPACE/TRAJECTORY_MODE
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #59: PSM1: control JOINT_SPACE/TRAJECTORY_MODE
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #17: PSM1: current state HOMING
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #60: PSM1: current state HOMING
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #14: ECM: encoders seem to be already biased
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #61: ECM: encoders seem to be already biased
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #15: ECM: current state ENCODERS_BIASED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #62: ECM: current state ENCODERS_BIASED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #18: PSM1: control UNDEFINED_SPACE/UNDEFINED_MODE
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #63: PSM1: control UNDEFINED_SPACE/UNDEFINED_MODE
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #19: PSM1: current state HOMED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #64: PSM1: current state HOMED
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #17: PSM2: encoders seem to be already biased
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #65: PSM2: encoders seem to be already biased
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #16: ECM: control JOINT_SPACE/TRAJECTORY_MODE
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #66: PSM2: current state ENCODERS_BIASED
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #17: ECM: current state HOMING
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #17: ECM: current state HOMING
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #67: ECM: control JOINT_SPACE/TRAJECTORY_MODE
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #19: PSM2: control JOINT_SPACE/TRAJECTORY_MODE
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #68: ECM: current state HOMING
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #18: ECM: control UNDEFINED_SPACE/UNDEFINED_MODE
+PSM2:Arm: tsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #68: ECM: current state HOMING
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #18: ECM: control UNDEFINED_SPACE/UNDEFINED_MODE
+PSM2:Arm: 1.72918e+09s, #20: PSM2: current state HOMING
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #19: ECM: current state HOMED
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #21: PSM2: control UNDEFINED_SPACE/UNDEFINED_MODE
+1.72918e+09s, #69: ECM: contros, #
+: PSM1: current state ENGAGING_ADAPTER1.72918e+09s, #69: ECM: contros, #
+: PSM1: current state ENGAGING_ADAPTER
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #22: PSM2: current state HOMED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #70: ECM: current state HOMED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #71: PSM1: current state ENGAGING_ADAPTER
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #72: PSM2: control JOINT_SPACE/TRAJECTORY_MODE
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #73: PSM2: current state HOMING
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #21: PSM1: control JOINT_SPACE/TRAJECTORY_MODE
+1.72918e+09s, #74: PSM2: control UNDEFINED_SPACE/UNDEFINED_MODE
+-W Class mtsPIDPSM1-PID:Controller: 1.72918e+09s, #1: PSM1-PID: position limit, mask (1 for limit):            0            0            1            0            0            0            0
+PSM1-PID:Controller: 1.72918e+09s, #1: PSM1-PID: position limit, mask (1 for limit):            0            0            1            0            0            0            0
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #75: PSM2: current state HOMED
+-W Class mtsPID: PSM1-PID: position limit, mask (1 for limit):            0            0            1            0            0            0            0, 
+ requested:    0.0848497    0.0114528      0.00000  0.000268283-W Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #2: PSM1-PID: position limit, mask (1 for limit):            0            0            1            0            0            0            0
+-W Class mtsPID: PSM1-PID: position limit, mask (1 for limit):            0            0            1            0            0            0            0, 
+ requested:    0.0848497    0.0114528      0.00000  0.000268283-W Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #2: PSM1-PID: position limit, mask (1 for limit):            0            0            1            0            0            0            0
+  0.000804849   0.00389010  0.000536566, 
+ lower limits:     -1.58825    -0.925025      0.00000     -3.03687 -M Class mtsIntuitiveResearchKitConsole: console:Main:  1.72918e+09s, #76: PSM1: control JOINT_SPACE/TRAJECTORY_MODE
+    -3.03687     -3.03687, 
+ upper limits:      1.58825     0.925025     0.240000       3.03687      3.03687
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #23: PSM2: current state HOMED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #77: PSM2: current state HOMED
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #24: PSM2: current state HOMED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #78: PSM2: current state HOMED
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #25: PSM2: current state ENGAGING_TOOL
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #79: PSM2: current state ENGAGING_TOOL
+M- Class mtsIntuitiveResearchKitPSM: RunEngagingTool: distance to RCM is 0.190971, depth threshold is 0.025
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #26: PSM2: tool tip is outside the cannula, assuming it doesn't need to "engage".  If the tool is not engaged properly, move the sterile adapter all the way up and re-insert the tool.
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #80: PSM2: tool tip is outside the cannula, assuming it doesn't need to "engage".  If the tool is not engaged properly, move the sterile adapter all the way up and re-insert the tool.
+1.72918e+09s, #27: PSM2: current state TOOL_ENGAGED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #81: PSM2: current state TOOL_ENGAGED
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #28: PSM2: control JOINT_SPACE/TRAJECTORY_MODE
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #82: PSM2: control JOINT_SPACE/TRAJECTORY_MODE
+-W Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #1: PSM1: PID position limit
+-W Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #3: PSM1: PID position limit
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #29: PSM2: control UNDEFINED_SPACE/UNDEFINED_MODE
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #83: PSM2: control UNDEFINED_SPACE/UNDEFINED_MODE
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #30: PSM2: current state HOMED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #84: PSM2: current state HOMED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #22: PSM1: engaging adapter 1 of 4
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #85: PSM1: engaging adapter 1 of 4
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:ECM: 1.72918e+09s, #13: ECM SUJ: measured_cp updated
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #23: PSM1: engaging adapter 2 of 4
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #86: PSM1: engaging adapter 2 of 4
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #24: PSM1: engaging adapter 3 of 4
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #87: PSM1: engaging adapter 3 of 4
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #25: PSM1: engaging adapter 4 of 4
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #88: PSM1: engaging adapter 4 of 4
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #26: PSM1: control UNDEFINED_SPACE/UNDEFINED_MODE
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #89: PSM1: control UNDEFINED_SPACE/UNDEFINED_MODE
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #27: PSM1: current state HOMED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #90: PSM1: current state HOMED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #28: PSM1: desired state DISABLED
+1.72918e+09s, #31: PSM2: desired state DISABLED
+1.72918e+09s, #31: PSM2: desired state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #91: PSM1: desired state DISABLED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: -M1.72918e+09s, #29: PSM1: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:ECM: 1.72918e+09s, #14: ECM SUJ: desired state DISABLED
+1.72918e+09s, #92: PSM1: current state DISABLED
+1.72918e+09s, #32: PSM2: current state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #93: PSM2: desired state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #93: PSM2: desired state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #14: PSM1 SUJ: desired state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #14: PSM2 SUJ: desired state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #94: PSM2: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM3: 1.72918e+09s, #13: PSM3 SUJ: desired state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #95: SUJ: desired state DISABLED
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #20: ECM: desired state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #96: ECM: desired state DISABLED
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #21: ECM: current state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #97: ECM: current state DISABLED
+-W Class mtsRobotIO1394: CheckState: ECM, actuator 1 power: -0.536566 > limit: 0.2
+-W Class mtsRobotIO1394: CheckState: ECM, actuator 1 power: -0.477246 > limit: 0.2
+-W Class mtsRobotIO1394: CheckState: ECM, actuator 1 power: -0.403812 > limit: 0.2
+-W Class mtsRobotIO1394: CheckState: ECM, actuator 1 power: -0.331141 > limit: 0.2
+-W Class mtsRobotIO1394: CheckState: ECM, actuator 1 power: -0.26381 > limit: 0.2
+-W Class mtsRobotIO1394: CheckState: ECM, actuator 1 power: -0.201057 > limit: 0.2
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:Arm: 1.72918e+09s, #12: SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:ECM: 1.72918e+09s, #15: ECM SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #98: SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #15: PSM1 SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #15: PSM2 SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM3: 1.72918e+09s, #14: PSM3 SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #33: PSM2: desired state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #99: PSM2: desired state DISABLED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #30: PSM1: desired state DISABLED
+-M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #30: PSM1: desired state DISABLED
+-M Class mtsIntuitiveResearchKitPSM: PSM2:Arm: 1.72918e+09s, #34: PSM2: current state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #100: PSM2: current state DISABLED
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: -M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #22: ECM: desired state DISABLED1.72918e+09s, #31: PSM1: current state DISABLED
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: -M Class mtsIntuitiveResearchKitPSM: PSM1:Arm: 1.72918e+09s, #22: ECM: desired state DISABLED1.72918e+09s, #31: PSM1: current state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #101: PSM1: desired state DISABLED
+-M Class mtsIntuitiveResearchKitECM: ECM:Arm: 1.72918e+09s, #23: ECM: current state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #102: PSM1: current state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #103: ECM: desired state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #104: ECM: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:Arm: 1.72918e+09s, #13: SUJ: desired state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:ECM: 1.72918e+09s, #16: ECM SUJ: desired state DISABLED
+-MSUJ: desired state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #16: PSM1 SUJ: desired state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #16: PSM2 SUJ: desired state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM3: 1.72918e+09s, #15: PSM3 SUJ: desired state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:Arm: 1.72918e+09s, #14: SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:ECM: 1.72918e+09s, #17: ECM SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitConsole: console:Main: 1.72918e+09s, #106: SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM1: 1.72918e+09s, #17: PSM1 SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM2: 1.72918e+09s, #17: PSM2 SUJ: current state DISABLED
+-M Class mtsIntuitiveResearchKitSUJ: SUJ:PSM3: 1.72918e+09s, #16: PSM3 SUJ: current state DISABLED
+M- Class mtsIntuitiveResearchKitECM: Kill: task "ECM", current state "mtsComponentState
+  State:active"
+M- Class mtsRobot1394QtWidget: Kill: default kill method for component "ECM IO"
+-M Class mtsIntuitiveResearchKitECM: RunInternal: End of task ECM
+M- Class mtsIntuitiveResearchKitECM: ECM: Cleanup
+M- Class mtsIntuitiveResearchKitECM: CleanupInternal: ended for task "ECM"
+M- Class mtsIntuitiveResearchKitECMQtWidget: Kill: default kill method for component "ECM-GUI"
+M- Class mtsPID: Kill: task "ECM-PID", current state "mtsComponentState
+  State:active"
+M- Class mtsPIDQtWidget: Kill: default kill method for component "ECM-PID-GUI"
+M- Class mtsPIDQtWidget: mtsPIDQtWidget::Cleanup
+M- Class mtsIntuitiveResearchKitSUJQtWidget: Kill: default kill method for component "ECM-SUJ"
+M- Class mtsIntuitiveResearchKitPSM: Kill: task "PSM1", current state "mtsComponentState
+  State:active"
+M- Class mtsRobot1394QtWidget: Kill: default kill method for component "PSM1 IO"
+M- Class mtsIntuitiveResearchKitPSMQtWidget: Kill: default kill method for component "PSM1-GUI"
+M- Class mtsPID: Kill: task "PSM1-PID", current state "mtsComponentState
+  State:active"
+M- Class mtsPIDQtWidget: Kill: default kill method for component "PSM1-PID-GUI"
+M- Class mtsPIDQtWidget: mtsPIDQtWidget::Cleanup
+M- Class mtsIntuitiveResearchKitSUJQtWidget: Kill: default kill method for component "PSM1-SUJ"
+M- Class mtsIntuitiveResearchKitPSM: Kill: task "PSM2", current state "mtsComponentState
+  State:active"
+M- Class mtsRobot1394QtWidget: Kill: default kill method for component "PSM2 IO"
+M- Class mtsIntuitiveResearchKitPSMQtWidget: Kill: default kill method for component "PSM2-GUI"
+M- Class mtsPID: Kill: task "PSM2-PID", current state "mtsComponentState
+  State:active"
+M- Class mtsPIDQtWidget: Kill: default kill method for component "PSM2-PID-GUI"
+M- Class mtsPIDQtWidget: mtsPIDQtWidget::Cleanup
+M- Class mtsIntuitiveResearchKitSUJQtWidget: Kill: default kill method for component "PSM2-SUJ"
+M- Class mtsIntuitiveResearchKitSUJQtWidget: Kill: default kill method for component "PSM3-SUJ"
+M- Class mtsIntuitiveResearchKitSUJ: Kill: task "SUJ", current state "mtsComponentState
+  State:active"
+M- Class mtsRobot1394QtWidget: Kill: default kill method for component "SUJ IO"
+M- Class mtsIntuitiveResearchKitConsole: Kill: task "console", current state "mtsComponentState
+  State:active"
+M- Class mtsIntuitiveResearchKitConsole: Kill: task "console", current state "mtsComponentState
+  State:active"
+M- Class mtsIntuitiveResearchKitConsoleQtWidget: Kill: default kill method for component "consoleGUI"
+M- Class mtsIntuitiveResearchKitConsoleQtWidget: mtsIntuitiveResearchKitConsoleQtWidget::Cleanup
+M- Class mtsIntuitiveResearchKitConsole: RunInternal: end of task "console"M- Class mtsDaVinciEndoscopeFocusM- Class mtsIntuitiveResearchKitConsole: RunInternal: end of task "console"M- Class mtsDaVinciEndoscopeFocus: Kill: task "daVinciEndoscopeFocus", current state "mtsComponentState
+  State:active"
+M- Class mtsDaVinciEndoscopeFocusonsole: Cleanup
+M- Class mtsDaVinciEndoscopeFocus: Kill: task "daVinciEndoscopeFocus", current state "mtsComponentState
+  State:active"
+M- Class mtsDaVinciEndoscopeFocusQtWidget: Kill: default kill method for component "daVinciEndoscopeFocus-GUI"
+M- Class mtsDaVinciEndoscopeFocusconsole"
+M- Class mtsDaVinciEndoscopeFocusconsole"
+M- Class mtsDaVinciEndoscopeFocusQtWidget: Cleanup
+M- Class mtsDaVinciHeadSensor: Kill: task "daVinciHeadSensor", current state "mtsComponentState
+  State:active"
+M- Class mtsDaVinciHeadSensor: Kill: task "daVinciHeadSensor", current state "mtsComponentState
+  State:active"
+ Class mtsDaVinciEndoscopeFocus: RunInternal: end of task "daVinciEndoscopeFocus"
+M- Class mtsDaVinciHeadSensor: RunInternal: end of task "daVinciHeadSensor"
+M- Class mtsDaVinciEndoscopeFocus: M- Class ternal: ended for task "daVinciEndoscopeFocus"
+tsDaVinciHeadSensor: M- Class mtsDaVinciEndoscopeFocus: M- Class ternal: ended for task "daVinciEndoscopeFocus"
+tsDaVinciHeadSensor: CleanupInternal: ended for task "daVinciHeadSensor"
+M- Class mtsRobotIO1394: Kill: task "io", current state "mtsComponentState
+  State:active"
+-M Class mtsPID: ChangeStateEventHandler: calling Kill for ECM-PID
+M- Class mtsPID: Kill: task "ECM-PID", current state "mtsComponentState
+  State:finishing"
+-M Class mtsPID: ChangeStateEventHandler: calling Kill for PSM1-PID
+M- Class mtsPID: Kill: task "PSM1-PID", current state "mtsComponentState
+  State:finishing"
+-M Class mtsPID: ChangeStateEventHandler: calling Kill for PSM2-PID
+M- Class mtsPID: Kill: task "PSM2-PID", current state "mtsComponentState
+  State:finishing"
+M- Class mtsRobotIO1394QtWidgetFactory: Kill: default kill method for component "robotWidgetFactory"
+-M Class mtsIntuitiveResearchKitPSM: RunInternal: End of task PSM1
+M- Class mtsRobot1394QtWidget: WaitForState: called for component "ECM IO" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+M- Class mtsRobot1394QtWidget: WaitForState: called for component "ECM IO" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitPSM: PSM1: Cleanup
+M- Class mtsIntuitiveResearchKitECMQtWidget: WaitForState: called for component "ECM-GUI" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitPSM: CleanupInternal: ended for task "PSM1"
+M- Class mtsIntuitiveResearchKitPSM: CleanupInternal: ended for task "PSM1"
+M- Class mtsPIDQtWidget: WaitForState: called for component "ECM-PID-GUI" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitSUJQtWidget: WaitForState: called for component "ECM-SUJ" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+M- Class mtsRobot1394QtWidget: WaitForState: called for component "PSM1 IO" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitPSMQtWidget: WaitForState: called for component "PSM1-GUI" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+M- Class mtsPIDQtWidget: WaitForState: called for component "PSM1-PID-GUI" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitSUJQtWidget: WaitForState: called for component "PSM1-SUJ" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitPSM: WaitForState: waiting for task "PSM2" to enter state "mtsComponentState
+  State:finished"
+-M Class mtsIntuitiveResearchKitPSM: RunInternal: End of task PSM2
+M- Class mtsIntuitiveResearchKitPSM: PSM2: Cleanup
+M- Class mtsIntuitiveResearchKitPSM: CleanupInternal: ended for task "PSM2"
+M- Class mtsRobot1394QtWidget: WaitForState: called for component "PSM2 IO" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitPSMQtWidget: WaitForState: called for component "PSM2-GUI" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+M- Class mtsPIDQtWidget: WaitForState: called for component "PSM2-PID-GUI" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitSUJQtWidget: WaitForState: called for component "PSM2-SUJ" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitSUJQtWidget: WaitForState: called for component "PSM3-SUJ" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitSUJ: WaitForState: waiting for task "SUJ" to enter state "mtsComponentState
+  State:finished"
+-M Class mtsIntuitiveResearchKitSUJ: RunInternal: End of task SUJ
+M- Class mtsIntuitiveResearchKitSUJ: CleanupInternal: ended for task "SUJ"
+M- Class mtsRobot1394QtWidget: WaitForState: called for component "SUJ IO" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+M- Class mtsIntuitiveResearchKitConsoleQtWidget: WaitForState: called for component "consoleGUI" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+M- Class mtsDaVinciEndoscopeFocusQtWidget: WaitForState: called for component "daVinciEndoscopeFocus-GUI" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+-M Class mtsRobotIO1394: RunInternal: End of task io
+-M Class mtsPID: ChangeStateEventHandler: calling Kill for ECM-PID
+M- Class mtsPID: Kill: task "ECM-PID", current state "mtsComponentState
+  State:finishing"
+-M Class mtsPID: ChangeStateEventHandler: calling Kill for PSM1-PID
+M- Class mtsPID: Kill: task "PSM1-PID", current state "mtsComponentState
+  State:finishing"
+-M Class mtsPID: ChangeStateEventHandler: calling Kill for PSM2-PID
+M- Class mtsPID: Kill: task "PSM2-PID", current state "mtsComponentState
+  State:finishing"
+M- Class mtsRobotIO1394: CleanupInternal: ended for task "io"
+M- Class mtsRobotIO1394QtWidgetFactory: WaitForState: called for component "robotWidgetFactory" for state "mtsComponentState
+  State:finished" has no effect for mtsComponent
+M- Class cmnClassRegister: SetLogMaskClassAll: log mask has been set to "  " for the following classes: cmnBool, cmnChar, cmnCommandLineOptions, cmnDeSerializer, cmnDouble, cmnInt, cmnJointTypeProxy, cmnLoggerQtWidget, cmnLong, cmnLongLong, cmnPath, cmnSerializer, cmnShort, cmnUChar, cmnUInt, cmnULong, cmnULongLong, cmnUShort, cmnXMLPath, dvrk_console, mtsBool, mtsBool1, mtsBool2, mtsBool3, mtsBool4, mtsBool5, mtsBool6, mtsBoolMat, mtsBoolVec, mtsChar, mtsChar1, mtsChar2, mtsChar3, mtsChar4, mtsChar5, mtsChar6, mtsCharMat, mtsCharVec, mtsCollectorEvent, mtsCollectorFactory, mtsCollectorQtComponent, mtsCollectorQtFactory, mtsCollectorState, mtsComponent, mtsComponentAddLatency, mtsComponentConstructorArg, mtsComponentConstructorArgProxy, mtsComponentConstructorNameAndDouble, mtsComponentConstructorNameAndInt, mtsComponentConstructorNameAndLong, mtsComponentConstructorNameAndString, mtsComponentConstructorNameAndUInt, mtsComponentConstructorNameAndULong, mtsComponentStateChangeProxy, mtsComponentStateProxy, mtsComponentStatusControlProxy, mtsComponentViewer, mtsConnection, mtsDaVinciEndoscopeFocus, mtsDaVinciEndoscopeFocusQtWidget, mtsDaVinciHeadSensor, mtsDescriptionComponentClassProxy, mtsDescriptionComponentClassVecProxy, mtsDescriptionComponentProxy, mtsDescriptionConnectionProxy, mtsDescriptionConnectionVecProxy, mtsDescriptionInterfaceFullNameProxy, mtsDescriptionInterfaceFullNameVecProxy, mtsDescriptionInterfaceProxy, mtsDescriptionLoadLibraryProxy, mtsDouble, mtsDouble1, mtsDouble2, mtsDouble3, mtsDouble4, mtsDouble5, mtsDouble6, mtsDoubleAnRot2, mtsDoubleAxAnRot3, mtsDoubleFrm4x4, mtsDoubleMat, mtsDoubleMatFrm3, mtsDoubleMatRot2, mtsDoubleMatRot3, mtsDoubleQuat, mtsDoubleQuatFrm3, mtsDoubleQuatRot3, mtsDoubleRodRot3, mtsDoubleVec, mtsEndUserInterfaceArgProxy, mtsEventHandlerList, mtsExecutionResultProxy, mtsFloat, mtsFloat1, mtsFloat2, mtsFloat3, mtsFloat4, mtsFloat5, mtsFloat6, mtsFloatAnRot2, mtsFloatAxAnRot3, mtsFloatFrm4x4, mtsFloatMat, mtsFloatMatFrm3, mtsFloatMatRot2, mtsFloatMatRot3, mtsFloatQuat, mtsFloatQuatFrm3, mtsFloatQuatRot3, mtsFloatRodRot3, mtsFloatVec, mtsHIDHeadSensor, mtsHIDHeadSensorConfigurationProxy, mtsInt, mtsInt1, mtsInt2, mtsInt3, mtsInt4, mtsInt5, mtsInt6, mtsIntMat, mtsIntVec, mtsInterfaceProvided, mtsInterfaceProvidedDescriptionProxy, mtsInterfaceRequired, mtsInterfaceRequiredDescriptionProxy, mtsIntervalStatistics, mtsIntervalStatisticsQtWidgetComponent, mtsIntuitiveResearchKitArm, mtsIntuitiveResearchKitArmQtWidget, mtsIntuitiveResearchKitArmTypesProxy, mtsIntuitiveResearchKitConsole, mtsIntuitiveResearchKitConsoleQt, mtsIntuitiveResearchKitConsoleQtWidget, mtsIntuitiveResearchKitECM, mtsIntuitiveResearchKitECMQtWidget, mtsIntuitiveResearchKitEndoscopeTypesProxy, mtsIntuitiveResearchKitMTM, mtsIntuitiveResearchKitMTMQtWidget, mtsIntuitiveResearchKitPSM, mtsIntuitiveResearchKitPSMQtWidget, mtsIntuitiveResearchKitSUJ, mtsIntuitiveResearchKitSUJFixed, mtsIntuitiveResearchKitSUJQtWidget, mtsIntuitiveResearchKitSUJSi, mtsIntuitiveResearchKitToolDescriptionProxy, mtsIntuitiveResearchKitToolTypesProxy, mtsIntuitiveResearchKitUDPStreamer, mtsLogMessage, mtsLong, mtsLongLong, mtsLongMat, mtsLongVec, mtsManagerComponentBase, mtsManagerComponentClient, mtsManagerComponentServer, mtsManagerComponentServices, mtsManagerGlobal, mtsManagerGlobalInterface, mtsManagerLocal, mtsManagerLocalInterface, mtsMessageProxy, mtsMessageQtWidgetComponent, mtsPID, mtsPIDAxisConfigurationProxy, mtsPIDConfigurationProxy, mtsPIDQtWidget, mtsPSMCompensation, mtsQtApplication, mtsQtApplicationConstructorArg, mtsQtWidgetBoolRead, mtsQtWidgetBoolVecRead, mtsQtWidgetBoolVecWrite, mtsQtWidgetBoolWrite, mtsQtWidgetComponent, mtsQtWidgetDoubleRead, mtsQtWidgetDoubleVecRead, mtsQtWidgetDoubleVecWrite, mtsQtWidgetDoubleWrite, mtsQtWidgetEvent, mtsQtWidgetFunction, mtsQtWidgetIntRead, mtsQtWidgetIntWrite, mtsQtWidgetInterfaceRequired, mtsQtWidgetStateIndexRead, mtsQtWidgetStateIndexWrite, mtsQtWidgetStdStringRead, mtsQtWidgetStdStringWrite, mtsROSBridge, mtsRobot1394QtWidget, mtsRobotIO1394, mtsRobotIO1394QtWidgetFactory, mtsShort, mtsShortMat, mtsShortVec, mtsSocketBaseQtWidget, mtsSocketClientPSM, mtsSocketProxyClient, mtsSocketProxyClientConstructorArg, mtsSocketProxyInitData, mtsSocketProxyServer, mtsSocketProxyServerConstructorArg, mtsSocketServerPSM, mtsStateIndex, mtsStateTable, mtsStateTableIndexRange, mtsStdCharVecProxy, mtsStdDoubleVecProxy, mtsStdString, mtsStdStringListProxy, mtsStdStringVec, mtsStdStringVecProxy, mtsStdVct3VecProxy, mtsSystemQtWidgetComponent, mtsTask, mtsTaskConstructorArg, mtsTaskConstructorArgProxy, mtsTaskContinuous, mtsTaskContinuousConstructorArg, mtsTaskContinuousConstructorArgProxy, mtsTaskFromCallback, mtsTaskFromCallbackAdapter, mtsTaskFromSignal, mtsTaskMain, mtsTaskPeriodic, mtsTaskPeriodicConstructorArg, mtsTaskPeriodicConstructorArgProxy, mtsTeleOperationECM, mtsTeleOperationECMQtWidget, mtsTeleOperationPSM, mtsTeleOperationPSMQtWidget, mtsTextToSpeech, mtsUChar, mtsUChar1, mtsUChar2, mtsUChar3, mtsUChar4, mtsUChar5, mtsUChar6, mtsUCharMat, mtsUCharVec, mtsUInt, mtsUInt1, mtsUInt2, mtsUInt3, mtsUInt4, mtsUInt5, mtsUInt6, mtsUIntMat, mtsUIntVec, mtsULong, mtsULongMat, mtsULongVec, mtsUShort, mtsUShortMat, mtsUShortVec, mtsVct1, mtsVct2, mtsVct2x2, mtsVct3, mtsVct3x3, mtsVct4, mtsVct4x4, mtsVct5, mtsVct6, mtsVct7, mtsVct8, mtsVct9, mtsVctBool1, mtsVctBool2, mtsVctBool3, mtsVctBool4, mtsVctBool5, mtsVctBool6, mtsVctBool7, mtsVctBool8, mtsVctBool9, mtsVctBoolVec, mtsVctChar1, mtsVctChar2, mtsVctChar3, mtsVctChar4, mtsVctChar5, mtsVctChar6, mtsVctChar7, mtsVctChar8, mtsVctChar9, mtsVctCharVec, mtsVctDoubleMat, mtsVctDoubleVec, mtsVctFloat1, mtsVctFloat2, mtsVctFloat3, mtsVctFloat4, mtsVctFloat5, mtsVctFloat6, mtsVctFloat7, mtsVctFloat8, mtsVctFloat9, mtsVctFloatMat, mtsVctFloatVec, mtsVctFrm3, mtsVctFrm4x4, mtsVctInt1, mtsVctInt2, mtsVctInt3, mtsVctInt4, mtsVctInt5, mtsVctInt6, mtsVctInt7, mtsVctInt8, mtsVctInt9, mtsVctIntMat, mtsVctIntVec, mtsVctLong1, mtsVctLong2, mtsVctLong3, mtsVctLong4, mtsVctLong5, mtsVctLong6, mtsVctLong7, mtsVctLong8, mtsVctLong9, mtsVctLongVec, mtsVctMatRot3, mtsVctShort1, mtsVctShort2, mtsVctShort3, mtsVctShort4, mtsVctShort5, mtsVctShort6, mtsVctShort7, mtsVctShort8, mtsVctShort9, mtsVctShortVec, mtsVctUChar1, mtsVctUChar2, mtsVctUChar3, mtsVctUChar4, mtsVctUChar5, mtsVctUChar6, mtsVctUChar7, mtsVctUChar8, mtsVctUChar9, mtsVctUCharVec, mtsVctUInt1, mtsVctUInt2, mtsVctUInt3, mtsVctUInt4, mtsVctUInt5, mtsVctUInt6, mtsVctUInt7, mtsVctUInt8, mtsVctUInt9, mtsVctUIntVec, mtsVctULong1, mtsVctULong2, mtsVctULong3, mtsVctULong4, mtsVctULong5, mtsVctULong6, mtsVctULong7, mtsVctULong8, mtsVctULong9, mtsVctULongVec, mtsVctUShort1, mtsVctUShort2, mtsVctUShort3, mtsVctUShort4, mtsVctUShort5, mtsVctUShort6, mtsVctUShort7, mtsVctUShort8, mtsVctUShort9, mtsVctUShortVec, mtsWatchdogClient, mtsWatchdogServer, mts_ros_crtk_bridge_provided, mts_ros_crtk_bridge_required, osa1394Proxy, osaSerialPort, osaSocket, osaSocketServer, osaTimeServer, prmActuatorJointCouplingProxy, prmActuatorParameters, prmActuatorState, prmCameraInfo, prmCameraInfoProxy, prmCartesianImpedance, prmCartesianImpedanceHalfPlaneGainsProxy, prmCartesianImpedanceProxy, prmConfigurationJoint, prmConfigurationJointProxy, prmDepthMap, prmDepthMapProxy, prmEventButton, prmEventButtonQtWidgetComponent, prmForceCartesianGet, prmForceCartesianGetQtWidgetComponent, prmForceCartesianSet, prmForceTorqueJointSet, prmForceTorqueJointSetProxy, prmForwardKinematicsRequest, prmForwardKinematicsRequestProxy, prmForwardKinematicsResponse, prmForwardKinematicsResponseProxy, prmGainParameters, prmIMUSensors, prmIMUSensorsProxy, prmImageFrame, prmImageFrameProxy, prmInputData, prmInputDataProxy, prmInputDataQtWidgetComponent, prmInverseKinematicsRequest, prmInverseKinematicsRequestProxy, prmInverseKinematicsResponse, prmInverseKinematicsResponseProxy, prmKeyValueProxy, prmMaskedBoolVec, prmMaskedCharVec, prmMaskedDoubleVec, prmMaskedFloatVec, prmMaskedIntVec, prmMaskedLongVec, prmMaskedShortVec, prmMaskedUCharVec, prmMaskedUIntVec, prmMaskedULongVec, prmMaskedUShortVec, prmOperatingState, prmOperatingStateProxy, prmPositionCartesianArrayGet, prmPositionCartesianArrayGetProxy, prmPositionCartesianArrayGetQtWidget, prmPositionCartesianGet, prmPositionCartesianGetProxy, prmPositionCartesianSet, prmPositionCartesianSetProxy, prmPositionJointGet, prmPositionJointGetProxy, prmPositionJointSet, prmPositionJointSetProxy, prmRobotState, prmStateJoint, prmStateJointProxy, prmStateRobotQtWidgetComponent, prmVelocityCartesianGet, prmVelocityCartesianGetProxy, prmVelocityCartesianSet, prmVelocityJointGet, prmVelocityJointSet, sawRobotIO1394_osaActuator1394ConfigurationProxy, sawRobotIO1394_osaActuatorMappingProxy, sawRobotIO1394_osaAnalogBrake1394ConfigurationProxy, sawRobotIO1394_osaBrakeMappingProxy, sawRobotIO1394_osaDallasChip1394ConfigurationProxy, sawRobotIO1394_osaDigitalInput1394ConfigurationProxy, sawRobotIO1394_osaDigitalOutput1394ConfigurationProxy, sawRobotIO1394_osaDrive1394ConfigurationProxy, sawRobotIO1394_osaEncoder1394ConfigurationProxy, sawRobotIO1394_osaLimitsProxy, sawRobotIO1394_osaLinearFunctionProxy, sawRobotIO1394_osaPort1394ConfigurationProxy, sawRobotIO1394_osaPot1394ConfigurationProxy, sawRobotIO1394_osaPotTolerance1394ConfigurationProxy, sawRobotIO1394_osaRobot1394ConfigurationProxy, socketCommandPSMProxy, socketHeaderProxy, socketMessagesProxy, socketStatePSMProxy, 
+M- Class cmnLogger: SetMaskFunction: function mask set to "  "
