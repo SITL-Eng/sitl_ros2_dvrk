@@ -11,7 +11,7 @@ from geometry_msgs.msg import PoseStamped
 from sensor_msgs.msg import JointState
 from message_filters import ApproximateTimeSynchronizer, Subscriber
 
-from sitl_ros2_dvrk.utils import tf_utils, aruco_utils, ik_devel_utils
+from utils import tf_utils, aruco_utils, ik_devel_utils
 
 
 
@@ -36,9 +36,7 @@ class PUB_CUSTOM_DVRK_CP(Node):
         self.custom_psm2_local_cp = self.create_publisher(PoseStamped, "/PSM2/custom/local/setpoint_cp", 10)
         self.custom_psm1_local_jaw_cp = self.create_publisher(PoseStamped, "/PSM1/custom/local/jaw/setpoint_cp", 10)
         self.custom_psm2_local_jaw_cp = self.create_publisher(PoseStamped, "/PSM2/custom/local/jaw/setpoint_cp", 10)
-        self.custom_ecm_local_cp = self.create_publisher(PoseStamped, "/ECM/custom/local/setpoint_cp", 10)
-
-        
+        self.custom_ecm_local_cp = self.create_publisher(PoseStamped, "/ECM/custom/local/setpoint_cp", 10)  
 
         # Initialize subscribers
         self.psm1_js = Subscriber(self, JointState, "/PSM1/setpoint_js")
