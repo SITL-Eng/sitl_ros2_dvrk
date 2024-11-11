@@ -9,29 +9,7 @@ import numpy as np
 np.seterr(all="ignore")
 import math
 from geometry_msgs.msg import PoseStamped
-from sitl_ros2_dvrk.utils import tf_utils, ik_devel_utils
-import tf2_ros
-import tf2_geometry_msgs
-from rclpy.duration import Duration
-
-from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
-
-
-def custom_qos_profile(queue_size):
-    return QoSProfile(
-        history                   = HistoryPolicy.KEEP_LAST,
-        depth                     = queue_size,
-        reliability               = ReliabilityPolicy.RELIABLE,
-        durability                = DurabilityPolicy.VOLATILE,
-        # deadline                  = ,
-        # lifespan                  = ,
-        # liveliness                = ,
-        # liveliness_lease_duration = 
-    )
-
-# print with node id
-# def print(node, message):
-#     node.get_logger().info('%s -> %s' % (node.get_name(), message))
+from utils import ik_utils, tf_utils
 
 # example of application using arm.py
 class DVRK_CTRL:
@@ -135,7 +113,7 @@ class DVRK_CTRL:
 
     def init_ik(self):
         # IK module
-        self.arm_ik = ik_devel_utils.dvrk_custom_ik(
+        self.arm_ik = ik_utils.dvrk_custom_ik(
             calib_fn = "/home/hossein/aruco_data/psm1_calib_results_final_new_v2.mat",
             wT = 1, wR = 0.1, init_jp = np.copy(self.arm.setpoint_jp()), Joffsets = np.array([30, 30, 5, 60, 80, 80])
         )

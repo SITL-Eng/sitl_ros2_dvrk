@@ -1,0 +1,8 @@
+<launch>
+    <node name="cp"  pkg="sitl_ros2_dvrk"  exec="pub_custom_cp"  output="screen">
+    </node>
+
+    <node name="tf"  pkg="sitl_ros2_dvrk"  exec="pub_custom_tf"  output="screen">
+    </node>
+
+</launch>

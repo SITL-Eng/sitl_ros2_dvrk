@@ -4,7 +4,14 @@ import cv2
 import numpy as np
 np.seterr(all="ignore")
 import math
+import yaml
+
 from geometry_msgs.msg import TransformStamped, Transform, PointStamped, PoseStamped, Pose
+
+def load_tf_data(tf_data_path):
+    with open(tf_data_path, 'r') as file:
+        tf_data = yaml.safe_load(file)
+    return tf_data
 
 def vec2hat(x):
     if len(x.shape) == 2:
@@ -254,3 +261,21 @@ def ptstamped2pt3d(msg):
     pt[1] = msg.point.y
     pt[2] = msg.point.z
     return pt
+
+g_psm1tip_psm1jaw = cv2vecs2g(
+    np.array([0.0,0.0,0.0]), np.array([-0.005, -0.0025, 0.0147])
+)
+
+g_psm2tip_psm2jaw = cv2vecs2g(
+    np.array([0.0,0.0,0.0]), np.array([-0.004, 0.0, 0.019])
+)
+
+g_map_odom = cv2vecs2g(np.array([0,0,1])*math.radians(90),np.array([0,0,1])).dot(
+    cv2vecs2g(np.array([1,0,0])*math.radians(90),np.array([0,0,0]))
+)
+
+def g_ecm_dvrk(cam_type):
+    if cam_type == "30":
+        return cv2vecs2g(np.array([1,0,0])*math.radians(30),np.array([0,0,0]))
+    elif cam_type == "0":
+        return cv2vecs2g(np.array([0.0,0.0,0.0]),np.array([0,0,0]))

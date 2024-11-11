@@ -1,15 +1,18 @@
 from setuptools import find_packages, setup
+import os
+from glob import glob
 
 package_name = 'sitl_ros2_dvrk'
 
 setup(
     name=package_name,
-    version='0.0.0',
+    version='1.0.0',
     packages=find_packages(exclude=['test']),
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name), glob('launch/*.xml')),
     ],
     install_requires=[
         'setuptools',
@@ -37,10 +40,9 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "pub_cp = sitl_ros2_dvrk.pub_cp:main",
-            "pub_tf = sitl_ros2_dvrk.pub_tf:main",
+            "pub_custom_cp = sitl_ros2_dvrk.pub_custom_cp:main",
+            "pub_custom_tf = sitl_ros2_dvrk.pub_custom_tf:main",
             "custom_control_test = sitl_ros2_dvrk.custom_control:main"
-            
         ],
     },
 )

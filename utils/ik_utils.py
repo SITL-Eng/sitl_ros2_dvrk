@@ -5,9 +5,8 @@ import numpy as np
 np.seterr(all="ignore")
 import math
 import scipy.io as sio
-from scipy.optimize import least_squares, newton, minimize
-from scipy.spatial.transform import Rotation
-from sitl_ros2_dvrk.utils import tf_utils, dvrk_utils
+from scipy.optimize import least_squares, minimize
+from utils import tf_utils
 import time
 from pyquaternion import Quaternion
 
@@ -54,6 +53,10 @@ def get_tip_pose(thetas, arm_calib_data):
 
         # Get the overall transformation matrix
         return g1.dot(g2).dot(g3).dot(g4).dot(arm_calib_data.gst0)
+    
+def get_tip_pose_jaw(thetas, arm_calib_data):
+    # Get the overall transformation matrix
+    return get_tip_pose(thetas, arm_calib_data).dot(arm_calib_data.g_psmtip_psmjaw)
 
 class get_arm_calib_data(object):
     def __init__(self,calib_fn):
@@ -63,10 +66,16 @@ class get_arm_calib_data(object):
                 psm_x      = calib_data["psm1_x"]
                 self.arm   = "PSM1"
                 self.gst0  = calib_data["psm1_gst0"].reshape(4,4)
+                self.g_psmtip_psmjaw = tf_utils.g_psm1tip_psm1jaw
             elif "psm2" in calib_fn:
                 psm_x      = calib_data["psm2_x"]
                 self.arm   = "PSM2"
-                self.gst0  = calib_data["psm2_gst0"].reshape(4,4)
+                self.gst0  = calib_data["psm2_gst0"].reshape(4,4).dot(
+                    tf_utils.cv2vecs2g(
+                        np.array([1.0, 0.0, 0.0])*np.radians(5), np.array([0.0, 0.0, 0.0])
+                    )
+                )
+                self.g_psmtip_psmjaw = tf_utils.g_psm2tip_psm2jaw
             self.xi1   = psm_x[0:6]
             self.xi2   = psm_x[6:12]
             self.xi3   = psm_x[12:18]
@@ -75,6 +84,7 @@ class get_arm_calib_data(object):
             self.xi6   = psm_x[30:36]
             self.k     = psm_x[36:42]
             self.m     = psm_x[42:48]
+            
         elif "ecm" in calib_fn:
             ecm_x      = calib_data["ecm_x"]
             self.arm   = "ECM"
@@ -89,23 +99,20 @@ class get_arm_calib_data(object):
             print("Invalid Arm Calibration File...")
             
 class dvrk_custom_ik():
-    def __init__(self, params):
-        self.arm = dvrk_utils.DVRK_CTRL(
-            params["arm_name"],
-            params["expected_interval"]
-        )
-        self.arm_calib_data = get_arm_calib_data(params["calib_fn"])
+    def __init__(self, calib_fn, wT, wR, init_jp, Joffsets):
+        self.arm_calib_data = get_arm_calib_data(calib_fn)
         # self.arm_fk = get_arm_fk(params["calib_fn"])
-        self.wT = params["TransWeight"]
-        self.wR = params["RotWeight"]
-        self.g_psmtip_psmjaw = tf_utils.cv2vecs2g(np.array([0.0,0.0,0.0]),np.array([0.002,-0.0035,0.015]))
-        self.target = np.copy(self.arm.get_cp())
-        self.constraints = self.load_constraints(params)
+        self.wT = wT
+        self.wR = wR
+        self.target = np.eye(4)
+        # self.constraints = self.load_constraints(params)
+        self.constraints = self.get_constraints(init_jp, Joffsets)
         
     def __del__(self):
         print("Destructing class dvrk_custom_ik...")
         
     def load_constraints(self, params):
+        # When using least_squares
         # return (
         #     np.array(
         #         [
@@ -128,6 +135,7 @@ class dvrk_custom_ik():
         #         ]
         #     )
         # )
+        # When using minimize
         return (
             (math.radians(params["joint1_min"]),math.radians(params["joint1_max"])),
             (math.radians(params["joint2_min"]),math.radians(params["joint2_max"])),
@@ -136,8 +144,46 @@ class dvrk_custom_ik():
             (math.radians(params["joint5_min"]),math.radians(params["joint5_max"])),
             (math.radians(params["joint6_min"]),math.radians(params["joint6_max"]))
         )
+    
+    def get_constraints(self, init_jp, Joffsets):
+        constraints = []
+        for i, (jp, Joffset) in enumerate(zip(init_jp, Joffsets)):
+            min_jp = jp - math.radians(Joffset)
+            max_jp = jp + math.radians(Joffset)
+            if i == 0:
+                if min_jp < math.radians(-85):
+                    min_jp = math.radians(-85)
+                if max_jp > math.radians(85):
+                    max_jp = math.radians(85)
+            elif i == 1:
+                if min_jp < math.radians(-45):
+                    min_jp = math.radians(-45)
+                if max_jp > math.radians(35):
+                    max_jp = math.radians(35)
+            elif i == 2:
+                if min_jp < 0.01:
+                    min_jp = 0.01
+                if max_jp > 0.24:
+                    max_jp = 0.24
+            elif i == 3:
+                if min_jp < math.radians(-160):
+                    min_jp = math.radians(-160)
+                if max_jp > math.radians(160):
+                    max_jp = math.radians(160)
+            elif i == 4:
+                if min_jp < math.radians(-60):
+                    min_jp = math.radians(-60)
+                if max_jp > math.radians(60):
+                    max_jp = math.radians(60)
+            elif i == 5:
+                if min_jp < math.radians(-95):
+                    min_jp = math.radians(-95)
+                if max_jp > math.radians(95):
+                    max_jp = math.radians(95)
+            constraints.append((min_jp, max_jp))
+        return tuple(constraints)
         
-    def jacobian(self,thetas):
+    def jacobian(self, thetas):
         J = np.zeros((6,6))
         g1 = getTransformMatrix(self.arm_calib_data.xi1, thetas[0], self.arm_calib_data.k[0], self.arm_calib_data.m[0])
         g2 = getTransformMatrix(self.arm_calib_data.xi2, thetas[1], self.arm_calib_data.k[1], self.arm_calib_data.m[1])
@@ -152,18 +198,11 @@ class dvrk_custom_ik():
         J[:,5] = tf_utils.adjoint(g1.dot(g2).dot(g3).dot(g4).dot(g5)).dot(self.arm_calib_data.xi6)
         return J
     
-    def get_tip_pose_jaw(self,thetas):
-        # Get the overall transformation matrix
-        return get_tip_pose(thetas, self.arm_calib_data).dot(self.g_psmtip_psmjaw)
-    
-    def distance(self,query):
+    def distance(self, query):
         distT = np.linalg.norm(query[:3, 3] - self.target[:3, 3])
         queryR  = Quaternion(matrix=query)
         targetR = Quaternion(matrix=self.target)
         distR = Quaternion.absolute_distance(queryR,targetR)
-        # distR = np.arccos(np.round((np.trace(query[:3, :3].dot(self.target[:3, :3].T)) - 1) / 2, 6))
-        # print("distT: ",distT)
-        # print("distR: ",distR)
         return self.wT*distT + self.wR*distR
             
     def opt_func(self,X):
@@ -172,37 +211,28 @@ class dvrk_custom_ik():
         )
         return d
 
-    def get_goal_jp(self):
-        x0 = self.arm.get_jp()
-        start = time.time()
+    def get_goal_jp(self, init_jp):
+        # start = time.time()
         # x = least_squares(
         #     self.opt_func,
-        #     x0,
+        #     init_jp,
         #     bounds=self.constraints,
         #     # max_nfev=10000,
         #     # xtol=None,
         #     # ftol=None,
         #     # loss="linear"
         # ).x
-         # Calculate Jacobian
-        # jacobian_func = Jacobian(lambda x: self.opt_func(x))
-        # jacobian = jacobian_func(x0)
 
-        # # Calculate Hessian
-        # hessian_func = Hessian(lambda x: self.opt_func(x))
-        # hessian = hessian_func(x0)
-        
-        x = minimize(self.opt_func, x0, method='SLSQP', bounds=self.constraints).x
-
-        print('Elapsed: %s' % (time.time() - start))
+        x = minimize(
+            self.opt_func,
+            init_jp,
+            # method='SLSQP',
+            tol=1e-10,
+            bounds=self.constraints
+        ).x
+        # print('Elapsed: %s' % (time.time() - start))
         return x
-
-    def move_to_goal(self,duration):
-        self.arm.run_servo_jp(
-            self.get_goal_jp(),
-            duration
-        )
-
+    
     def opt_func_jaw(self,X):
         # return distance(
         #     get_tip_pose_jaw(X[:6], self.arm_calib_data, self.g_psmtip_psmjaw),
@@ -211,11 +241,10 @@ class dvrk_custom_ik():
         #     X[7]
         # )
         return self.distance(
-            self.get_tip_pose_jaw(X),
+            get_tip_pose_jaw(X, self.arm_calib_data),
         )
     
-    def get_goal_jp_jaw(self):
-        x0 = self.arm.get_jp()
+    def get_goal_jp_jaw(self, init_jp):
         # x = least_squares(
         #     self.opt_func_jaw,
         #     x0,
@@ -225,11 +254,12 @@ class dvrk_custom_ik():
         #     # ftol=None,
         #     # loss="linear"
         # ).x
-        x = minimize(self.opt_func_jaw, x0, method='SLSQP', bounds=self.constraints).x
+        x = minimize(
+            self.opt_func_jaw, 
+            init_jp, 
+            # method='SLSQP',
+            tol=1e-10,
+            bounds=self.constraints
+        ).x
         return x
     
-    def move_to_goal_jaw(self,duration):
-        self.arm.run_servo_jp(
-            self.get_goal_jp_jaw(),
-            duration
-        )
