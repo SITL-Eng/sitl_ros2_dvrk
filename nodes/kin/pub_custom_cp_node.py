@@ -51,7 +51,6 @@ class PUB_CUSTOM_DVRK_CP(Node):
         self.g_psm1tip_psm1jaw = tf_utils.g_psm1tip_psm1jaw
         self.g_psm2tip_psm2jaw = tf_utils.g_psm2tip_psm2jaw
 
-
     def ecm_callback(self, ecm_js):
         ecm_jp = np.array(ecm_js.position)
         g_ecmbase_ecmtip = ik_utils.get_tip_pose(ecm_jp, self.ecm_params).dot(self.g_ecm_dvrk)

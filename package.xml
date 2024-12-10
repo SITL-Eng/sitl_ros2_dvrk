@@ -2,10 +2,10 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>sitl_ros2_dvrk</name>
-  <version>0.0.0</version>
+  <version>1.0.0</version>
   <description>This package provides an interface for connecting to the dVRK console over ROS2, specifically modified for UIC SITL's da Vinci Robot.</description>
-  <maintainer email="haeri.hsn@gmail.com">hossein</maintainer>
-  <license>MIT</license>
+  <maintainer email="sitldvrk@gmail.com">sitleng</maintainer>
+  <license>Apache-2.0</license>
 
   <!-- dependencies -->
   <depend>rclpy</depend>

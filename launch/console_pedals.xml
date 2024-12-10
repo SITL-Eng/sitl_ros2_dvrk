@@ -1,0 +1,10 @@
+<launch>
+    <node name="mp_read"     pkg="sitl_ros2_dvrk"  exec="pub_pedal_mp_r"  output="screen">
+    </node>
+
+    <node name="mp_write"    pkg="sitl_ros2_dvrk"  exec="sub_pedal_mp_w"  output="screen">
+    </node>
+
+    <node name="dvrk_pedal"  pkg="sitl_ros2_dvrk"  exec="pub_pedal_dvrk"  output="screen">
+    </node>
+</launch>

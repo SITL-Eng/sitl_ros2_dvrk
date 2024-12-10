@@ -33,16 +33,20 @@ setup(
         'dvrk_video',
     ],
     zip_safe=True,
-    maintainer='hossein',
-    maintainer_email='haeri.hsn@gmail.com',
+    maintainer='sitleng',
+    maintainer_email='sitldvrk@gmail.com',
     description="This package provides an interface for connecting to the dVRK console over ROS2, specifically modified for UIC SITL's da Vinci Robot.",
-    license='MIT',  
-    tests_require=['pytest'],
+    license='Apache-2.0',
     entry_points={
         'console_scripts': [
-            "pub_custom_cp = sitl_ros2_dvrk.pub_custom_cp:main",
-            "pub_custom_tf = sitl_ros2_dvrk.pub_custom_tf:main",
-            "custom_control_test = sitl_ros2_dvrk.custom_control:main"
+            "pub_custom_cp         = sitl_ros2_dvrk.kin.pub_custom_cp:main",
+            "pub_custom_tf         = sitl_ros2_dvrk.kin.pub_custom_tf:main",
+            "custom_control_test   = sitl_ros2_dvrk.kin.custom_control:main",
+            'pub_pedal_dvrk        = sitl_ros2_dvrk.pedal.pub_pedal_dvrk:main',
+            'pub_pedal_mp_r        = sitl_ros2_dvrk.pedal.pub_pedal_mp_r:main',
+            'sub_pedal_mp_w        = sitl_ros2_dvrk.pedal.sub_pedal_mp_w:main',
+            'pub_pedal_mp_w_test   = sitl_ros2_dvrk.pedal.pub_pedal_mp_w_test:main',
+            'rec_davinci_kin_pedal = sitl_ros2_dvrk.rec.rec_davinci_kin_pedal:main',
         ],
     },
 )

@@ -25,3 +25,6 @@ def to_sec(msg):
     nanoseconds = msg.header.stamp.nanosec
     # Convert to float seconds
     return seconds + nanoseconds * 1e-9
+
+def rosbag_path(node, base_path):
+    return f"{base_path}/{now(node).sec}"

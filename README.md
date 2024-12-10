@@ -17,11 +17,15 @@ Clone and install the required dVRK ROS 2 packages (cisst-saw, crtk, dvrk) from 
 
 Make sure the  package [sitl_ros2_interfaces](https://github.com/hossein-haeri/sitl_ros2_interfaces) is installed in your ROS2 workspace src directory. If not, clone and build it within your workspace. This package is required for custom ros2 messages.
 
-### 4. Install `​pyquaternion`
+### 4. Install Python Packages
 
-You will need `​pyquaternion` for quaternion operations. Install it using `​pip`:
+1. You will need `​pyquaternion` for quaternion operations. Install it using `​pip`:
 
 `pip install pyquaternion`
+
+2. Please install pyserial to access the arduino controlling the monopolar pedal.
+
+`pip install pyserial`
 
 ### 5. Set Up Calibration Data
 
