@@ -3,6 +3,93 @@
 import sys
 import dvrk
 import crtk
+import numpy as np
+import math
+from geometry_msgs.msg import PoseStamped
+from utils import ik_utils, tf_utils
+
+class DVRK_CTRL:
+    def __init__(self, ral, arm_name, expected_interval):
+        self.arm_name = arm_name
+        self.ral = ral
+        self.expected_interval = expected_interval
+        self.sleep_rate = self.ral.create_rate(1.0 / self.expected_interval)
+
+        self.arm = dvrk.arm(
+            ral=self.ral,
+            arm_name=self.arm_name,
+            expected_interval=expected_interval
+        )
+
+        self.arm_cp = None  # Latest Cartesian position
+        self.jaw_cp = None  # Latest Jaw position
+
+    def init_ik(self, calib_fn):
+        self.arm_ik = ik_utils.dvrk_custom_ik(
+            calib_fn=calib_fn,
+            wT=1, wR=0.1, init_jp=np.copy(self.arm.setpoint_jp()), Joffsets=np.array([30, 30, 5, 60, 80, 80])
+        )
+
+    def add_subscribers(self, cp_topic, jaw_topic):
+        """ Subscribe to external ROS2 topics for Cartesian position updates """
+        self.arm_cp_sub = self.ral.subscriber(cp_topic, PoseStamped, self.arm_cp_callback)
+        self.jaw_cp_sub = self.ral.subscriber(jaw_topic, PoseStamped, self.jaw_cp_callback)
+
+    def arm_cp_callback(self, msg):
+        """ Callback to update arm Cartesian position """
+        self.arm_cp = tf_utils.posestamped2g(msg)
+
+    def jaw_cp_callback(self, msg):
+        """ Callback to update jaw Cartesian position """
+        self.jaw_cp = tf_utils.posestamped2g(msg)
+
+    def get_cp(self):
+        while self.arm_cp is None:
+            pass  # Wait until data is available
+        return self.arm_cp
+
+    def get_jaw_cp(self):
+        while self.jaw_cp is None:
+            pass  # Wait until data is available
+        return self.jaw_cp
+
+    def move_arm(self, goal, duration=5):
+        """ Move arm to the specified joint position """
+        self.arm.move_jp(goal).wait()
+
+    def move_jaw(self, angle, duration=2):
+        """ Move jaw to specified angle """
+        self.arm.jaw.servo_jp(math.radians(angle)).wait()
+
+    def home(self):
+        """ Home the arm before operation """
+        self.arm.enable(10)
+        self.arm.home(10)
+        self.move_arm(np.zeros_like(self.arm.setpoint_jp()), 5)
+
+    def run(self):
+        """ Main execution loop """
+        self.home()
+        self.ral.spin()
+
+def main():
+    control = DVRK_CTRL("PSM1", 0.01)
+    control.add_subscribers("/PSM1/custom/setpoint_cp", "/PSM1/jaw/custom/setpoint_cp")
+    control.run()
+
+if __name__ == '__main__':
+    main()
+
+
+
+
+
+
+
+
+import sys
+import dvrk
+import crtk
 import rclpy
 from rclpy.node import Node
 import numpy as np
@@ -17,8 +104,6 @@ class DVRK_CTRL:
     # configuration
     def __init__(self, arm_name, expected_interval):
         self.arm_name = arm_name
-        # super().__init__(node_name)
-        # print(self, 'configuring dvrk_arm_test for %s' % arm_name)
         self.ral = crtk.ral(self.arm_name) # node is created inside the ral as ral._node obejct
         self.expected_interval = expected_interval
         self.sleep_rate = self.ral.create_rate(1.0 / self.expected_interval)

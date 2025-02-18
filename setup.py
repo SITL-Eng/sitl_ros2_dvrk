@@ -39,14 +39,21 @@ setup(
     license='Apache-2.0',
     entry_points={
         'console_scripts': [
+            # custom kinematics
             "pub_custom_cp         = sitl_ros2_dvrk.kin.pub_custom_cp:main",
             "pub_custom_tf         = sitl_ros2_dvrk.kin.pub_custom_tf:main",
             "custom_control_test   = sitl_ros2_dvrk.kin.custom_control:main",
+            # custom pedal
             'pub_pedal_dvrk        = sitl_ros2_dvrk.pedal.pub_pedal_dvrk:main',
             'pub_pedal_mp_r        = sitl_ros2_dvrk.pedal.pub_pedal_mp_r:main',
             'sub_pedal_mp_w        = sitl_ros2_dvrk.pedal.sub_pedal_mp_w:main',
             'pub_pedal_mp_w_test   = sitl_ros2_dvrk.pedal.pub_pedal_mp_w_test:main',
             'rec_davinci_kin_pedal = sitl_ros2_dvrk.rec.rec_davinci_kin_pedal:main',
+            # auto dissection
+            'grasp_key             = sitl_ros2_dvrk.auto.grasp_key:main',
+            'grasp_gallb           = sitl_ros2_dvrk.auto.grasp:main',
+            'dissect_key           = sitl_ros2_dvrk.auto.dissect_key:main',
+            'dissect_gallb         = sitl_ros2_dvrk.auto.dissect:main',
         ],
     },
 )

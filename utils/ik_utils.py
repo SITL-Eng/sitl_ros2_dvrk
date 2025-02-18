@@ -226,8 +226,8 @@ class dvrk_custom_ik():
         x = minimize(
             self.opt_func,
             init_jp,
-            # method='SLSQP',
-            tol=1e-10,
+            method='SLSQP',
+            tol=1e-6,
             bounds=self.constraints
         ).x
         # print('Elapsed: %s' % (time.time() - start))
@@ -257,8 +257,8 @@ class dvrk_custom_ik():
         x = minimize(
             self.opt_func_jaw, 
             init_jp, 
-            # method='SLSQP',
-            tol=1e-10,
+            method='SLSQP',
+            tol=1e-6,
             bounds=self.constraints
         ).x
         return x
