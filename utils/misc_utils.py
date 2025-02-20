@@ -66,12 +66,21 @@ def project_point_to_cnt(point, cnt):
     projected_point = point - distance * normal  # Move towards the plane
     return projected_point
 
-def cnt_axes_3d(cnt):
+def cnt_axes_3d_neg(cnt):
     pca = PCA(n_components=3)
     pca.fit(cnt)
     pca_comps = pca.components_
     for i, pca_comp in enumerate(pca_comps):
         if pca_comp[i] > 0:
+            pca_comps[i] = -pca_comp
+    return pca_comps
+
+def cnt_axes_3d_pos(cnt):
+    pca = PCA(n_components=3)
+    pca.fit(cnt)
+    pca_comps = pca.components_
+    for i, pca_comp in enumerate(pca_comps):
+        if pca_comp[i] < 0:
             pca_comps[i] = -pca_comp
     return pca_comps
 
@@ -92,12 +101,24 @@ def proj_curve_to_line(r, curve, pt):
         curve.shape[0]
     )
 
-def align_fbfjaw(ctrd_3d, bnd_ct, proj_ctrd_3d, g_fbfjaw):
+def align_pca_comps(pca_comps):
+    new_pca_comps = np.zeros_like(pca_comps)
+    for i, pca_comp in enumerate(pca_comps):
+        axis_idx = np.argmax(np.abs(pca_comp))
+        if pca_comp[axis_idx] < 0:
+            pca_comp = -pca_comp
+        new_pca_comps[i] = pca_comp
+    return new_pca_comps
+
+def align_fbfjaw(ctrd_3d, bnd_3d, skel_3d, g_fbfjaw):
+    pca = PCA(n_components=3)
+    pca.fit(np.concatenate([bnd_3d, skel_3d]))
+    pca_comps = pca.components_
+    pca_comps = align_pca_comps(pca_comps)
     # Align the Z-axis
-    z_axis = unit_vector(bnd_ct - ctrd_3d)
+    z_axis = unit_vector(pca_comps[0])
     # Align the X-axis
-    x_axis = unit_vector(ctrd_3d - proj_ctrd_3d)
-    x_axis = unit_vector(x_axis - np.dot(x_axis, z_axis) * z_axis)
+    x_axis = unit_vector(-pca_comps[2])
     y_axis = unit_vector(np.cross(z_axis, x_axis))
     # Project current_tip onto the line defined by ctrd_3d and proj_ctrd_3d
     projection_point = project_point_to_line(g_fbfjaw[:3, 3], ctrd_3d, x_axis)    
@@ -105,72 +126,33 @@ def align_fbfjaw(ctrd_3d, bnd_ct, proj_ctrd_3d, g_fbfjaw):
     new_g_fbfjaw = np.copy(g_fbfjaw)
     new_g_fbfjaw[:3, :3] = np.vstack([x_axis, y_axis, z_axis]).T
     new_g_fbfjaw[:3, 3]  = projection_point
-    return new_g_fbfjaw
+    return new_g_fbfjaw, pca_comps
 
-def boundary_straightness_3d(curve):
-    """
-    Measure how straight the 3D boundary is by fitting a best-fit plane and 
-    minimizing deviation from it.
-    """
-    x, y, z = curve[:, 0], curve[:, 1], curve[:, 2]
+def get_pull_dir_mag(g_fbfjaw, bnd_3d):
+    grasp_pt = g_fbfjaw[:3, 3]  
+
+    # Find curve center and compute weights based on proximity to center
+    curve_center = np.mean(bnd_3d, axis=0)
+    dists_to_center = np.linalg.norm(bnd_3d - curve_center, axis=1)
     
-    # Fit a plane ax + by + cz + d = 0 using least squares
-    A = np.c_[x, y, np.ones_like(x)]
-    C, _, _, _ = np.linalg.lstsq(A, z, rcond=None)
+    # Higher weight towards the center (inverted distance)
+    weights = np.exp(-dists_to_center / np.mean(dists_to_center))  
+    weights /= np.sum(weights)  
+
+    # Compute weighted mean to center data
+    weighted_mean = np.average(bnd_3d, axis=0, weights=weights)
+    centered_bnd_3d = bnd_3d - weighted_mean
+
+    # Perform PCA
+    pca = PCA(n_components=2)
+    pca.fit(centered_bnd_3d)
     
-    # Compute z deviation from the best-fit plane
-    z_pred = C[0] * x + C[1] * y + C[2]
-    return np.var(z - z_pred)  # Minimize deviation from the plane
+    # Use the negative of the second principal axis as the pull direction
+    pull_dir = -pca.components_[1]  
+    pull_dir /= np.linalg.norm(pull_dir)  
 
-def stretch_boundary_geometric_3d(curve, grasp_pt, stretch_factor=1.2, stiffness=0.5):
-    """
-    Approximate tissue stretching by pulling boundary points radially outward in 3D.
+    # Compute pull magnitude based on deviation along the secondary axis
+    deviations = np.dot(centered_bnd_3d, pca.components_[1])  
+    avg_pull_mag = np.average(np.abs(deviations), weights=weights)  
 
-    Parameters:
-    - curve: (N,3) array of boundary points.
-    - grasp_pt: (3,) array representing the grasping point.
-    - stretch_factor: Scalar controlling how much the boundary stretches.
-    - stiffness: Higher values mean less movement for distant points.
-
-    Returns:
-    - new_curve: (N,3) array of deformed boundary points.
-    """
-    new_curve = curve.copy()
-    
-    for i in range(len(curve)):
-        vec_to_grasp = grasp_pt - curve[i]  # Direction toward grasp point
-        dist = np.linalg.norm(vec_to_grasp)  # Distance to grasp point
-        
-        if dist > 0:
-            move_vec = (vec_to_grasp / dist) * (stretch_factor / (1 + stiffness * dist))
-            new_curve[i] += move_vec  # Move point outward
-            
-    return new_curve
-
-def optimize_pull_3d(curve, grasp_pt, max_pull=20.0):
-    """
-    Find the optimal 3D pull vector to straighten the boundary.
-
-    Parameters:
-    - curve: (N,3) array of boundary points.
-    - grasp_pt: (3,) array of the initial grasping point.
-    - max_pull: Maximum allowed pull distance in any direction.
-
-    Returns:
-    - optimal_pull_vector: The best (x,y,z) shift to apply to the grasping point.
-    """
-    
-    def obj_func(pull_vector):
-        # Apply stretch transformation
-        new_curve = stretch_boundary_geometric_3d(curve, grasp_pt + pull_vector)
-        return boundary_straightness_3d(new_curve)  # Minimize curve deviation
-    
-    # Run optimization
-    result = minimize(
-        obj_func, 
-        x0=np.array([0.0, 0.0, 0.0]),  # Start with no movement
-        bounds=[(-max_pull, max_pull)] * 3,  # Limit pull range in all 3 axes
-        method='L-BFGS-B'
-    )
-
-    return result.x  # Optimal (x, y, z) pull vector
+    return pull_dir, avg_pull_mag

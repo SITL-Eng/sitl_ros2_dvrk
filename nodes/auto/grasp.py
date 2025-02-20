@@ -21,7 +21,7 @@ class GRASP:
         self.key           = None
         self.ctrd_3d       = None
         self.grasp_3d      = None
-        self.cnt_3d        = None
+        self.skel_3d       = None
         self.bnd_3d        = None
         self.g_fbf         = None
         self.g_fbfjaw      = None
@@ -104,8 +104,8 @@ class GRASP:
     def bnd_3d_cb(self, bnd_3d_msg):
         self.bnd_3d = pcl_utils.pcl2nparray(bnd_3d_msg)
 
-    def cnt_3d_cb(self, cnt_3d_msg):
-        self.cnt_3d = pcl_utils.pcl2nparray(cnt_3d_msg)
+    def skel_3d_cb(self, skel_3d_msg):
+        self.skel_3d = pcl_utils.pcl2nparray(skel_3d_msg)
 
     def ctrd_3d_cb(self, ctrd_3d_msg):
         self.ctrd_3d = tf_utils.ptstamped2pt3d(ctrd_3d_msg)
@@ -150,9 +150,9 @@ class GRASP:
             self.params['queue_size']
         )
         self.ral.subscriber(
-            self.params['cnt_topic'],
+            self.params['skel_topic'],
             PointCloud2,
-            self.cnt_3d_cb,
+            self.skel_3d_cb,
             self.params['queue_size']
         )
         self.ral.subscriber(
@@ -200,93 +200,100 @@ class GRASP:
         R_tf = np.vstack((x_tf, y_tf, z_tf)).T
         return tf_utils.gen_g(R_tf, des_loc) 
     
-    # def proj_curve_to_line_obj_func(self, r, curve, pt, min_dist):
-    #     # Ensure r is within bounds
-    #     r = np.clip(r, 0, 1)
-    #     proj_line = misc_utils.proj_curve_to_line(r, curve, pt)
+    # ---------------------------------------------------------------------------------------------------------------- #
+    def proj_curve_to_line_obj_func(self, r, curve, pt, min_dist):
+        # Ensure r is within bounds
+        r = np.clip(r, 0, 1)
+        proj_line = misc_utils.proj_curve_to_line(r, curve, pt)
 
-    #     # Calculate distances between original curve points and projected line points
-    #     distances = np.linalg.norm(curve - proj_line, axis=1)
+        # Calculate distances between original curve points and projected line points
+        distances = np.linalg.norm(curve - proj_line, axis=1)
 
-    #     # Penalty for distances below the threshold
-    #     penalty_factor = 1000
-    #     penalties = np.where(distances < min_dist, penalty_factor * (min_dist - distances), 0)
+        # Penalty for distances below the threshold
+        penalty_factor = 1000
+        penalties = np.where(distances > min_dist, penalty_factor * (distances - min_dist), 0)
 
-    #     # Objective is to minimize the total distance, with penalties for violations
-    #     return np.sum(distances) + np.sum(penalties)
+        # Objective is to minimize the total distance, with penalties for violations
+        return np.sum(distances) + np.sum(penalties)
     
-    # def optimize_ratio(self, init_r, curve, pt, min_dist):
-    #     result = minimize(self.proj_curve_to_line_obj_func, init_r, args=(curve, pt, min_dist),
-    #                     bounds=[(0, 1)], method='L-BFGS-B')
-    #     optimal_r = result.x[0]
-    #     return optimal_r
+    def optimize_ratio(self, init_r, curve, pt, min_dist):
+        result = minimize(self.proj_curve_to_line_obj_func, init_r, args=(curve, pt, min_dist),
+                        bounds=[(0, 1)], method='L-BFGS-B')
+        optimal_r = result.x[0]
+        return optimal_r
     
-    # def get_pull_dir_mag(self, ctrd_3d, bnd_3d, min_pull_dist):
-    #     optimal_r = self.optimize_ratio(0.5, bnd_3d, ctrd_3d, min_pull_dist)
-    #     proj_line = misc_utils.proj_curve_to_line(optimal_r, bnd_3d, ctrd_3d)
-    #     pull_dirs = proj_line - bnd_3d
-    #     pull_dirs_norm = pull_dirs / np.linalg.norm(pull_dirs, axis=1)[:, np.newaxis]
-    #     avg_pull_dir = np.mean(pull_dirs_norm, axis=0)
-    #     avg_pull_dir /= np.linalg.norm(avg_pull_dir)  # Ensure it's a unit vector
-    #     pull_mags = np.linalg.norm(pull_dirs, axis=1)
-    #     avg_pull_mag = np.mean(pull_mags)
-    #     return avg_pull_dir, avg_pull_mag
+    def get_pull_dir_mag(self, ctrd_3d, bnd_3d, min_pull_dist):
+        optimal_r = self.optimize_ratio(0.5, bnd_3d, ctrd_3d, min_pull_dist)
+        proj_line = misc_utils.proj_curve_to_line(optimal_r, bnd_3d, ctrd_3d)
+        pull_dirs = proj_line - bnd_3d
+        pull_dirs_norm = pull_dirs / np.linalg.norm(pull_dirs, axis=1)[:, np.newaxis]
+        avg_pull_dir = np.mean(pull_dirs_norm, axis=0)
+        avg_pull_dir /= np.linalg.norm(avg_pull_dir)  # Ensure it's a unit vector
+        pull_mags = np.linalg.norm(pull_dirs, axis=1)
+        avg_pull_mag = np.mean(pull_mags)
+        return avg_pull_dir, avg_pull_mag
+    
+    # ---------------------------------------------------------------------------------------------------------------- #
 
-    def tf_align(self, g_armbase_armtip, g_fbfjaw, cnt_3d, bnd_3d, ctrd_3d):
-        bnd_center = misc_utils.midpt_curve(bnd_3d)
-        proj_ctrd_3d = misc_utils.project_point_to_cnt(ctrd_3d, cnt_3d)
-        new_g_fbfjaw = misc_utils.align_fbfjaw(ctrd_3d, bnd_center, proj_ctrd_3d, g_fbfjaw)
+    def tf_align(self, g_armbase_armjaw, g_fbfjaw, bnd_3d, skel_3d, ctrd_3d, grasp_ratio=0.5, grasp_depth=0.003):
+        new_g_fbfjaw, pca_comps = misc_utils.align_fbfjaw(ctrd_3d, bnd_3d, skel_3d, g_fbfjaw)
+        self.ral.loginfo(f"new_g_fbfjaw: {new_g_fbfjaw}")
         g_offset = tf_utils.ginv(g_fbfjaw).dot(new_g_fbfjaw)
-        grasp_3d = (proj_ctrd_3d + bnd_center) / 2
-        return g_armbase_armtip.dot(g_offset), grasp_3d
+        self.ral.loginfo(f"g_offset: {g_offset}")
+        skel_bnd_vec = pca_comps[1]
+        ctrd_bnd_vecs = bnd_3d - ctrd_3d
+        bnd_intersect_idx = np.argmin([np.linalg.norm(ctrd_bnd_vec - skel_bnd_vec) for ctrd_bnd_vec in ctrd_bnd_vecs])
+        grasp_3d = (bnd_3d[bnd_intersect_idx] + ctrd_3d)*grasp_ratio + pca_comps[2]*grasp_depth
+        return g_armbase_armjaw.dot(g_offset), grasp_3d
     
-    def tf_grasp(self, g_armbase_armtip, g_fbfjaw, grasp_3d):
+    def tf_grasp(self, g_armbase_armjaw, g_fbfjaw, grasp_3d):
         new_g_fbfjaw = np.copy(g_fbfjaw)
         new_g_fbfjaw[:3,3] = grasp_3d
         g_offset = tf_utils.ginv(g_fbfjaw).dot(new_g_fbfjaw)
-        g_grasp = g_armbase_armtip.dot(g_offset)
+        g_grasp = g_armbase_armjaw.dot(g_offset)
         self.ral.loginfo(f"g_offset: {g_offset}")
         return g_grasp
     
-    # def tf_pull(self, g_ecmtip_armtip, g_armbase_armtip, ctrd_3d, bnd_3d):
-    #     g_armbase_ecmopencv = g_armbase_armtip.dot(
-    #         tf_utils.ginv(self.g_ecmopencv_ecmdvrk.dot(g_ecmtip_armtip))
-    #     )
-    #     pull_dir, pull_dist = self.get_pull_dir_mag(ctrd_3d, bnd_3d, self.min_pull_dist)
-    #     g_pull = ik_utils.get_tip_pose_jaw(self.jp_grasp, self.arm_ik.arm_calib_data)
-    #     g_pull[:3,3] += tf_utils.gdotv(g_armbase_ecmopencv, pull_dir*pull_dist)
-    #     return g_pull
-
-    def tf_pull(self, g_ecmtip_armtip, g_armbase_armtip, g_fbfjaw, bnd_3d):
-        g_armbase_ecmopencv = g_armbase_armtip.dot(
-            tf_utils.ginv(self.g_ecmopencv_ecmdvrk.dot(g_ecmtip_armtip))
-        )
-        optimal_pull_vec = misc_utils.optimize_pull_3d(bnd_3d, g_fbfjaw[:3,3], self.max_pull_dist)
-        pull_dir = misc_utils.unit_vector(optimal_pull_vec)
-        pull_dist = np.linalg.norm(optimal_pull_vec)
-        g_pull = ik_utils.get_tip_pose_jaw(self.jp_grasp, self.move_ik.arm_calib_data)
-        g_pull[:3,3] += tf_utils.gdotv(g_armbase_ecmopencv, pull_dir*pull_dist)
+    def tf_pull(self, g_armbase_armjaw, g_fbfjaw, bnd_3d):
+        new_g_fbfjaw = np.copy(g_fbfjaw)
+        pull_dir, pull_dist = self.get_pull_dir_mag(g_fbfjaw[:3,3], bnd_3d, self.max_pull_dist)
+        self.ral.loginfo(f"pull_dir: {pull_dir}, pull_dist: {pull_dist}")
+        new_g_fbfjaw[:3,3] += pull_dir*pull_dist
+        g_offset = tf_utils.ginv(g_fbfjaw).dot(new_g_fbfjaw)
+        g_pull = g_armbase_armjaw.dot(g_offset)
         return g_pull
+
+    # def tf_pull(self, g_armbase_armjaw, g_fbfjaw, bnd_3d):
+    #     new_g_fbfjaw = np.copy(g_fbfjaw)
+    #     pull_dir, pull_dist = misc_utils.get_pull_dir_mag(g_fbfjaw, bnd_3d)
+    #     self.ral.loginfo(f"pull_dir: {pull_dir}, pull_dist: {pull_dist}")
+    #     new_g_fbfjaw[:3,3] += pull_dir*pull_dist
+    #     g_offset = tf_utils.ginv(g_fbfjaw).dot(new_g_fbfjaw)
+    #     g_pull = g_armbase_armjaw.dot(g_offset)
+    #     return g_pull
 
     def dvrk_key_ctrl(self):
         while self.key != 't':
             """Process user key inputs in a timer-based loop."""
             if self.key == "a":
-                if self.bnd_3d is None or self.cnt_3d is None or self.ctrd_3d is None or self.g_fbfjaw is None:
+                if self.bnd_3d is None or self.ctrd_3d is None or self.g_fbfjaw is None:
                     self.ral.loginfo("Tissue has not been detected yet!")
                     continue
                 self.ral.loginfo("Aligning the forceps before grasping...")
                 g_align, self.grasp_3d = self.tf_align(
-                    self.custom_local_arm_cp, self.g_fbfjaw, self.cnt_3d,
-                    self.bnd_3d, self.ctrd_3d
+                    np.copy(self.custom_local_jaw_cp),
+                    np.copy(self.g_fbfjaw),
+                    np.copy(self.bnd_3d),
+                    np.copy(self.skel_3d),
+                    np.copy(self.ctrd_3d)
                 )
-                self.ral.loginfo(f"g_align: {g_align}")
                 self.align_ik.target = g_align
                 self.jp_align = self.align_ik.get_goal_jp_jaw(dvrk_utils.get_jp(self.arm))
                 self.ral.loginfo(f"jp_align: {self.jp_align}")
                 dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval, math.radians(0), 1)
                 dvrk_utils.run_arm_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jp_align, 5)
                 self.ral.loginfo("Finished aligning the forceps!")
+                self.key = None
 
             elif self.key == "g":
                 if self.jp_align is None:
@@ -294,7 +301,9 @@ class GRASP:
                     continue
                 self.ral.loginfo("Start grasping the tissue...")
                 g_grasp = self.tf_grasp(
-                    self.custom_local_arm_cp, self.g_fbf, self.grasp_3d
+                    np.copy(self.custom_local_jaw_cp),
+                    np.copy(self.g_fbfjaw),
+                    self.grasp_3d
                 )
                 self.move_ik.target = g_grasp
                 self.jp_grasp = self.move_ik.get_goal_jp_jaw(dvrk_utils.get_jp(self.arm))
@@ -303,24 +312,22 @@ class GRASP:
                 dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval, math.radians(-10), 2)
                 self.jp_release = np.copy(self.jp_grasp)
                 self.ral.loginfo("Finished grasping the tissue!")
+                self.key = None
 
             elif self.key == "p":
                 if self.ctrd_3d is None or self.bnd_3d is None:
                     self.ral.loginfo("Tissue has not been detected yet!")
                     continue
                 self.ral.loginfo("Pulling the tissue...")
-                # g_pull = self.tf_pull(
-                #     self.custom_arm_cp, self.custom_local_arm_cp,
-                #     self.ctrd_3d, self.bnd_3d
-                # )
                 g_pull = self.tf_pull(
-                    self.custom_arm_cp, self.custom_local_arm_cp,
+                    self.custom_local_jaw_cp,
                     self.g_fbfjaw, self.bnd_3d
                 )
                 self.move_ik.target = g_pull
                 self.jp_pull = self.move_ik.get_goal_jp_jaw(dvrk_utils.get_jp(self.arm))
                 dvrk_utils.run_arm_servo_jp(self.arm, self.sleep_rate, self.expected_interval,self.jp_pull, 5)
                 self.ral.loginfo("Finished pulling the tissue!")
+                self.key = None
 
             elif self.key == "r":
                 if self.jp_grasp is None:
@@ -333,22 +340,25 @@ class GRASP:
                 dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval,math.radians(-10), 2)
                 self.reset()
                 self.ral.loginfo("Finished releasing the tissue!")
+                self.key = None
 
             elif self.key == "o":
                 self.ral.loginfo("Opening the jaw...")
                 dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval,math.radians(self.jaw_open_angle), 2)
                 self.ral.loginfo("The jaws are opened!")
+                self.key = None
 
             elif self.key == "c":
                 self.ral.loginfo("Closing the jaw...")
                 dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval,math.radians(-10), 2)
                 self.ral.loginfo("The jaws are closed!")
+                self.key = None
 
             elif self.key == "i":
                 self.ral.loginfo("Moving to initial position...")
                 dvrk_utils.run_arm_servo_jp(self.arm, self.sleep_rate, self.expected_interval,self.init_jp, 5)
                 self.ral.loginfo("Moved to initial position!")
-            self.key = None
+                self.key = None
 
     def run(self):
         self.add_arm_ik()
