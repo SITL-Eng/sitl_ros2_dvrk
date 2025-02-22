@@ -1,6 +1,6 @@
 <launch>
-    <node name="grasp_key"   pkg="sitl_ros2_dvrk" exec="grasp_key"   output="screen">
-    </node>
+    <!-- <node name="grasp_key"   pkg="sitl_ros2_dvrk" exec="grasp_key"   output="screen">
+    </node> -->
 
     <node name="grasp_gallb" pkg="sitl_ros2_dvrk" exec="grasp_gallb" output="screen">
     </node>

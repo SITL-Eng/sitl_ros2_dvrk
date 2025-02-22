@@ -28,6 +28,6 @@ class SUB_PEDAL_MP_W(Node):
     def pedal_mp_w_cb(self, msg):
         command = msg.data
         if command:
-            self.arduino.write('H'.encode())
-        else:
             self.arduino.write('L'.encode())
+        else:
+            self.arduino.write('H'.encode())

@@ -1,6 +1,6 @@
 <launch>
-    <node name="dissect_key"   pkg="sitl_ros2_dvrk" exec="dissect_key"   output="screen">
-    </node>
+    <!-- <node name="dissect_key"   pkg="sitl_ros2_dvrk" exec="dissect_key"   output="screen">
+    </node> -->
 
     <node name="dissect_gallb" pkg="sitl_ros2_dvrk" exec="dissect_gallb" output="screen">
     </node>

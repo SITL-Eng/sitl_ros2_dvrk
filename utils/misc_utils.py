@@ -26,8 +26,9 @@ def midpt_curve(curve):
 
 def project_point_to_line(point, line_point, line_vector):
     """
-    Projects a point onto a line defined by a point and a direction vector.
-    
+    Projects a point onto a line defined by a point and a direction vector,
+    ensuring the projection does not go in the opposite direction of the line vector.
+
     :param point: (x, y, z) coordinates of the point to be projected
     :param line_point: (x, y, z) coordinates of a point on the line
     :param line_vector: (vx, vy, vz) direction vector of the line
@@ -36,13 +37,12 @@ def project_point_to_line(point, line_point, line_vector):
     point = np.array(point)
     line_point = np.array(line_point)
     line_vector = np.array(line_vector)
-    
-    # Compute t
+
     t = np.dot(point - line_point, line_vector) / np.dot(line_vector, line_vector)
-    
-    # Compute the projected point
+    t = max(0.02, t)  # Ensure t is non-negative
+
     projected_point = line_point + t * line_vector
-    return tuple(projected_point)
+    return projected_point
 
 def project_point_to_cnt(point, cnt):
     """
@@ -66,24 +66,6 @@ def project_point_to_cnt(point, cnt):
     projected_point = point - distance * normal  # Move towards the plane
     return projected_point
 
-def cnt_axes_3d_neg(cnt):
-    pca = PCA(n_components=3)
-    pca.fit(cnt)
-    pca_comps = pca.components_
-    for i, pca_comp in enumerate(pca_comps):
-        if pca_comp[i] > 0:
-            pca_comps[i] = -pca_comp
-    return pca_comps
-
-def cnt_axes_3d_pos(cnt):
-    pca = PCA(n_components=3)
-    pca.fit(cnt)
-    pca_comps = pca.components_
-    for i, pca_comp in enumerate(pca_comps):
-        if pca_comp[i] < 0:
-            pca_comps[i] = -pca_comp
-    return pca_comps
-
 def proj_curve_to_line(r, curve, pt):
     curve_len = curve_length(curve)
     curve2pt_vecs = pt - curve
@@ -101,6 +83,11 @@ def proj_curve_to_line(r, curve, pt):
         curve.shape[0]
     )
 
+def cnt_axes_3d(cnt):
+    pca = PCA(n_components=3)
+    pca.fit(cnt)
+    return pca.components_
+
 def align_pca_comps(pca_comps):
     new_pca_comps = np.zeros_like(pca_comps)
     for i, pca_comp in enumerate(pca_comps):
@@ -110,49 +97,44 @@ def align_pca_comps(pca_comps):
         new_pca_comps[i] = pca_comp
     return new_pca_comps
 
-def align_fbfjaw(ctrd_3d, bnd_3d, skel_3d, g_fbfjaw):
-    pca = PCA(n_components=3)
-    pca.fit(np.concatenate([bnd_3d, skel_3d]))
-    pca_comps = pca.components_
-    pca_comps = align_pca_comps(pca_comps)
-    # Align the Z-axis
-    z_axis = unit_vector(pca_comps[0])
+def align_pchjaw(bnd_3d, skel_3d, g_pchjaw):
+    # pca_comps = cnt_axes_3d(bnd_3d)
+    pca_comps = cnt_axes_3d(np.concatenate([bnd_3d, skel_3d]))
+    # Align the Y-axis
+    y_axis = unit_vector(pca_comps[0])
+    if y_axis[2] < 0:
+        y_axis = -y_axis
     # Align the X-axis
-    x_axis = unit_vector(-pca_comps[2])
-    y_axis = unit_vector(np.cross(z_axis, x_axis))
+    cnt_normal = unit_vector(pca_comps[2])
+    if cnt_normal[1] > 0:
+        cnt_normal = -cnt_normal
+    x_axis = unit_vector(cnt_normal - pca_comps[1])
+    if x_axis[2] > 0:
+        x_axis = -x_axis
+    z_axis = unit_vector(np.cross(x_axis, y_axis))
     # Project current_tip onto the line defined by ctrd_3d and proj_ctrd_3d
-    projection_point = project_point_to_line(g_fbfjaw[:3, 3], ctrd_3d, x_axis)    
+    projection_point = project_point_to_line(
+        g_pchjaw[:3, 3], bnd_3d[0],
+        cnt_normal
+    )
     # Construct the homogeneous transformation matrix
+    new_g_pchjaw = np.copy(g_pchjaw)
+    new_g_pchjaw[:3, :3] = np.vstack([x_axis, y_axis, z_axis]).T
+    new_g_pchjaw[:3, 3]  = projection_point
+    return new_g_pchjaw
+
+def align_fbfjaw(ctrd_3d, bnd_3d, skel_3d, g_fbfjaw):
+    pca_comps = cnt_axes_3d(np.concatenate([bnd_3d, skel_3d]))
+    # pca_comps = cnt_axes_3d(bnd_3d)
+    z_axis = unit_vector(pca_comps[1])
+    if z_axis[0] < 0:
+        z_axis = -z_axis
+    x_axis = unit_vector(pca_comps[2])
+    if x_axis[2] > 0:
+        x_axis = -x_axis
+    y_axis = unit_vector(np.cross(z_axis, x_axis))
+    projection_point = project_point_to_line(g_fbfjaw[:3, 3], ctrd_3d, x_axis)
     new_g_fbfjaw = np.copy(g_fbfjaw)
     new_g_fbfjaw[:3, :3] = np.vstack([x_axis, y_axis, z_axis]).T
     new_g_fbfjaw[:3, 3]  = projection_point
-    return new_g_fbfjaw, pca_comps
-
-def get_pull_dir_mag(g_fbfjaw, bnd_3d):
-    grasp_pt = g_fbfjaw[:3, 3]  
-
-    # Find curve center and compute weights based on proximity to center
-    curve_center = np.mean(bnd_3d, axis=0)
-    dists_to_center = np.linalg.norm(bnd_3d - curve_center, axis=1)
-    
-    # Higher weight towards the center (inverted distance)
-    weights = np.exp(-dists_to_center / np.mean(dists_to_center))  
-    weights /= np.sum(weights)  
-
-    # Compute weighted mean to center data
-    weighted_mean = np.average(bnd_3d, axis=0, weights=weights)
-    centered_bnd_3d = bnd_3d - weighted_mean
-
-    # Perform PCA
-    pca = PCA(n_components=2)
-    pca.fit(centered_bnd_3d)
-    
-    # Use the negative of the second principal axis as the pull direction
-    pull_dir = -pca.components_[1]  
-    pull_dir /= np.linalg.norm(pull_dir)  
-
-    # Compute pull magnitude based on deviation along the secondary axis
-    deviations = np.dot(centered_bnd_3d, pca.components_[1])  
-    avg_pull_mag = np.average(np.abs(deviations), weights=weights)  
-
-    return pull_dir, avg_pull_mag
+    return new_g_fbfjaw, x_axis

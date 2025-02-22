@@ -28,3 +28,6 @@ def to_sec(msg):
 
 def rosbag_path(node, base_path):
     return f"{base_path}/{now(node).sec}"
+
+def timer(node, period, callback):
+    return node.create_timer(period, callback)
