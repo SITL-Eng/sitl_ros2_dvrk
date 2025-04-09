@@ -22,19 +22,19 @@ class PUB_CUSTOM_DVRK_TF(Node):
             JointState,
             '/PSM1/setpoint_js',
             self.psm1_callback,
-            params['queue_size']            
+            params['queue_size']
         )
         self.psm2_js = self.create_subscription(
             JointState,
             '/PSM2/setpoint_js',
             self.psm2_callback,
-            params['queue_size']            
+            params['queue_size']
         )
         self.ecm_js = self.create_subscription(
             JointState,
             '/ECM/setpoint_js',
             self.ecm_callback,
-            params['queue_size']            
+            params['queue_size']
         )
 
     def init_tfs(self, cam_type):

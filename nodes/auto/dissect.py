@@ -162,23 +162,28 @@ class DISSECT:
 
     def tf_align(self, g_armbase_armjaw, g_pchjaw, bnd_3d, skel_3d):
         new_g_pchjaw = misc_utils.align_pchjaw(bnd_3d, skel_3d, g_pchjaw)
+        new_g_pchjaw = new_g_pchjaw.dot(tf_utils.g_pchjaw_offset)
         self.ral.loginfo(f"new_g_pchjaw: {new_g_pchjaw}")
         g_offset = tf_utils.ginv(g_pchjaw).dot(new_g_pchjaw)
         self.ral.loginfo(f"g_offset: {g_offset}")
         return g_armbase_armjaw.dot(g_offset)
     
-    def get_cur_traj_pt(self, prev_traj_pt, bnd_3d, g_pchjaw, d_thr=9e-3, ang_thr=45):
+    def get_cur_traj_pt(self, prev_traj_pt, bnd_3d, g_pchjaw, d_thr=1e-2, ang_thr=60):
         cur_traj_pt = np.copy(prev_traj_pt)
         th = g_pchjaw[:3,3]
         end_flag = False
         max_dist = 0
-        bnd_3d_dir = misc_utils.cnt_axes_3d(bnd_3d)[0]
+        bnd_3d_dir = misc_utils.unit_vector(bnd_3d[-1] - bnd_3d[0])
         traj_tree = KDTree(bnd_3d)
         matching_indices = traj_tree.query_ball_point(th, d_thr)
         if matching_indices:
             for idx in matching_indices:
                 dist = np.linalg.norm(bnd_3d[idx] - th)
-                angle = math.degrees(misc_utils.angle_btw_vecs(bnd_3d_dir, bnd_3d[idx]-th))
+                angle = math.degrees(
+                    misc_utils.angle_btw_vecs(
+                        bnd_3d_dir, bnd_3d[idx]-th
+                    )
+                )
                 if dist > max_dist and abs(angle) < ang_thr:
                     max_dist = dist
                     cur_traj_pt = bnd_3d[idx]
@@ -263,7 +268,7 @@ class DISSECT:
                         self.pedal_mp_pub.publish(self.pedal_mp_msg)
                     dvrk_utils.run_arm_servo_jp(
                         self.arm, self.sleep_rate, self.expected_interval,
-                        self.arm_ik.get_goal_jp(dvrk_utils.get_jp(self.arm)), 0.2
+                        self.arm_ik.get_goal_jp(dvrk_utils.get_jp(self.arm)), 0.1
                     )
                     if not init_flag and self.pedal_flag:
                         self.pedal_mp_msg.header.stamp = self.ral.now().to_msg()

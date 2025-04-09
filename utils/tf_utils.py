@@ -262,12 +262,24 @@ def ptstamped2pt3d(msg):
     pt[2] = msg.point.z
     return pt
 
+# g_psm1tip_psm1jaw = cv2vecs2g(
+#     np.array([0.0,0.0,0.0]), np.array([-0.005, -0.0025, 0.0147])
+# )
+
+# g_psm2tip_psm2jaw = cv2vecs2g(
+#     np.array([0.0,0.0,0.0]), np.array([-0.004, 0.0, 0.019])
+# )
+
 g_psm1tip_psm1jaw = cv2vecs2g(
-    np.array([0.0,0.0,0.0]), np.array([-0.005, -0.0025, 0.0147])
+    np.array([0.0,0.0,0.0]), np.array([-0.003, -0.002, 0.0147])
+)
+
+g_pchjaw_offset = cv2vecs2g(
+    math.radians(30)*np.array([0.0,1.0,0.0]), np.array([0,0,0])
 )
 
 g_psm2tip_psm2jaw = cv2vecs2g(
-    np.array([0.0,0.0,0.0]), np.array([-0.004, 0.0, 0.019])
+    math.radians(-10)*np.array([1.0,0.0,0.0]), np.array([-0.004, 0.002, 0.018])
 )
 
 g_map_odom = cv2vecs2g(np.array([0,0,1])*math.radians(90),np.array([0,0,1])).dot(

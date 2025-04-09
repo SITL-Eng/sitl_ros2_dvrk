@@ -54,6 +54,8 @@ setup(
             'grasp_gallb           = sitl_ros2_dvrk.auto.grasp:main',
             'dissect_key           = sitl_ros2_dvrk.auto.dissect_key:main',
             'dissect_gallb         = sitl_ros2_dvrk.auto.dissect:main',
+            # recordings
+            'rec_auto_dissect      = sitl_ros2_dvrk.rec.rec_auto_dissect:main',
         ],
     },
 )

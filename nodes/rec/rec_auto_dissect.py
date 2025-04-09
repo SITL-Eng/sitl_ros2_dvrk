@@ -1,0 +1,103 @@
+#!/usr/bin/env python3
+
+# ros libraries
+from rclpy.node import Node
+from rclpy.serialization import serialize_message
+import rosbag2_py
+import message_filters
+from sensor_msgs.msg import PointCloud2
+from geometry_msgs.msg import TransformStamped, PointStamped, PoseStamped
+
+# custom libraries
+from sitl_ros2_interfaces.msg import BoolStamped
+from utils import ros2_utils
+
+class REC_AUTO_DISSECT(Node):
+    def __init__(self, params, topic_names):
+        super().__init__(params['node_name'])
+
+        # initialize bag
+        self.bag_writer = rosbag2_py.SequentialWriter()
+        storage_options = rosbag2_py._storage.StorageOptions(
+            uri=params["save_path"],
+            storage_id='sqlite3'
+        )
+        converter_options = rosbag2_py._storage.ConverterOptions(
+            input_serialization_format='cdr',
+            output_serialization_format='cdr'
+        )
+        self.bag_writer.open(storage_options, converter_options)
+
+        self.topics = topic_names
+        self.create_bag_topics(topic_names)
+        self.ts = message_filters.ApproximateTimeSynchronizer(
+            self.gen_subs(topic_names, params["queue_size"]),
+            queue_size=params["queue_size"],
+            slop=params["slop"]
+        )
+        self.ts.registerCallback(self.callback)
+        self.target_sub = self.create_subscription(
+            PointStamped,
+            '/target',
+            self.target_cb,
+            params["queue_size"]
+        )
+
+    def gen_subs(self, topic_names, qos_profile):
+        subs = [] 
+        for topic_name in topic_names:
+            if 'kpt' in topic_name:
+                subs.append(
+                    message_filters.Subscriber(self, TransformStamped, topic_name, qos_profile=qos_profile)
+                )
+            elif 'custom' in topic_name:
+                subs.append(
+                    message_filters.Subscriber(self, PoseStamped, topic_name, qos_profile=qos_profile)
+                )
+            elif '3d' in topic_name:
+                subs.append(
+                    message_filters.Subscriber(self, PointCloud2, topic_name, qos_profile=qos_profile)
+                )
+            elif 'pedal' in topic_name:
+                subs.append(
+                    message_filters.Subscriber(self, BoolStamped, topic_name, qos_profile=qos_profile)
+                )
+            else:
+                continue
+        return subs
+    
+    def create_bag_topics(self, topic_names):
+        for topic_name in topic_names:
+            if 'kpt' in topic_name:
+                topic_type = 'geometry_msgs/msg/TransformStamped'
+            elif 'custom' in topic_name:
+                topic_type = 'geometry_msgs/msg/PoseStamped'
+            elif '3d' in topic_name:
+                topic_type = 'sensor_msgs/msg/PointCloud2'
+            elif 'pedal' in topic_name:
+                topic_type = 'sitl_ros2_interfaces/msg/BoolStamped'
+            elif 'target' in topic_name:
+                topic_type = 'geometry_msgs/msg/PointStamped'
+            else:
+                continue
+            topic_metadata = rosbag2_py._storage.TopicMetadata(
+                name=topic_name,
+                type=topic_type,
+                serialization_format='cdr'
+            )
+            self.bag_writer.create_topic(topic_metadata)
+
+    def callback(self, *msgs):
+        for i, msg in enumerate(msgs):
+            self.bag_writer.write(
+                self.topics[i],
+                serialize_message(msg),
+                self.get_clock().now().nanoseconds
+            )
+
+    def target_cb(self, msg):
+        self.bag_writer.write(
+            '/target',
+            serialize_message(msg),
+            self.get_clock().now().nanoseconds
+        )

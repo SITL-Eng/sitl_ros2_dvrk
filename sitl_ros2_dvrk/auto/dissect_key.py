@@ -1,6 +1,5 @@
 import rclpy
 from nodes.auto import dissect_key
-from rclpy.task import Future
 
 # "Press one of the following keys..."
 # "a: align instrument before following boundary."
@@ -14,16 +13,14 @@ def main(args=None):
 
     params = {
         'node_name': 'dissect_key',
-        'hz': 1000,
-        'queue_size': 5,
-        'key': 'f',
+        'hz': 100,
+        'queue_size': 1,
+        'key': 'i',
     }
 
     app = dissect_key.DISSECT_KEY(params)
     try:
-        future = Future()
-        rclpy.spin_until_future_complete(app, future)
-        # rclpy.spin(app)
+        rclpy.spin(app)
     except KeyboardInterrupt:
         pass
     finally:

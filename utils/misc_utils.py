@@ -1,6 +1,7 @@
 import numpy as np
 from sklearn.decomposition import PCA
 from scipy.optimize import minimize
+from scipy.interpolate import PchipInterpolator
 
 def unit_vector(v):
     return v/np.linalg.norm(v)
@@ -24,7 +25,12 @@ def midpt_curve(curve):
     middle_point = curve[mid_index]
     return middle_point
 
-def project_point_to_line(point, line_point, line_vector):
+def seq_dists(points):
+    dists = np.linalg.norm(np.diff(points, axis=0), axis=1)
+    dists = np.insert(dists, 0, 0)
+    return dists
+
+def project_point_to_line(point, line_point, line_vector, min_dist=0.01):
     """
     Projects a point onto a line defined by a point and a direction vector,
     ensuring the projection does not go in the opposite direction of the line vector.
@@ -39,9 +45,15 @@ def project_point_to_line(point, line_point, line_vector):
     line_vector = np.array(line_vector)
 
     t = np.dot(point - line_point, line_vector) / np.dot(line_vector, line_vector)
-    t = max(0.02, t)  # Ensure t is non-negative
+    t = max(min_dist, t)  # Ensure t is non-negative
 
     projected_point = line_point + t * line_vector
+    return projected_point
+
+def point_in_line(line_point, line_vector, dist=0.01):
+    line_point = np.array(line_point)
+    line_vector = np.array(line_vector)
+    projected_point = line_point + dist * line_vector
     return projected_point
 
 def project_point_to_cnt(point, cnt):
@@ -97,9 +109,28 @@ def align_pca_comps(pca_comps):
         new_pca_comps[i] = pca_comp
     return new_pca_comps
 
+def interp_3d(orig_points, num_interp_ratio=0.1, is_closed=True):
+    if orig_points is None or orig_points.size < 2:
+        return None
+    if is_closed:
+        orig_points = np.append(orig_points, orig_points[0].reshape(1,3), axis=0)
+    dists = seq_dists(orig_points)
+    filt_orig_pts = orig_points[~np.isclose(dists, 0)]
+    n_orig = np.cumsum(dists[~np.isclose(dists, 0)])
+    n_orig = n_orig/n_orig[-1] # normalize the array so the values are between [0, 1]
+    des_num_points = int(filt_orig_pts.shape[0]*(1 + num_interp_ratio))
+    n_des  = np.linspace(0, 1, num = des_num_points)
+    interpolated_points = np.zeros((des_num_points, 3))
+    for i in range(3):  # Loop over x, y, z dimensions
+        interp_func = PchipInterpolator(n_orig, filt_orig_pts[:,i])
+        interpolated_points[:,i] = interp_func(n_des)
+    return interpolated_points
+
 def align_pchjaw(bnd_3d, skel_3d, g_pchjaw):
-    # pca_comps = cnt_axes_3d(bnd_3d)
-    pca_comps = cnt_axes_3d(np.concatenate([bnd_3d, skel_3d]))
+    surface = interp_3d(
+        np.concatenate([bnd_3d, skel_3d])
+    )
+    pca_comps = cnt_axes_3d(surface)
     # Align the Y-axis
     y_axis = unit_vector(pca_comps[0])
     if y_axis[2] < 0:
@@ -108,14 +139,16 @@ def align_pchjaw(bnd_3d, skel_3d, g_pchjaw):
     cnt_normal = unit_vector(pca_comps[2])
     if cnt_normal[1] > 0:
         cnt_normal = -cnt_normal
-    x_axis = unit_vector(cnt_normal - pca_comps[1])
-    if x_axis[2] > 0:
+    # x_axis = unit_vector(pca_comps[1])
+    x_axis = unit_vector(pca_comps[1])
+    # x_axis = unit_vector(pca_comps[1] + pca_comps[2])
+    if x_axis.dot(unit_vector(skel_3d.mean(axis=0) - bnd_3d.mean(axis=0))) < 0:
         x_axis = -x_axis
     z_axis = unit_vector(np.cross(x_axis, y_axis))
+    # x_axis = unit_vector(np.cross(y_axis, z_axis))
     # Project current_tip onto the line defined by ctrd_3d and proj_ctrd_3d
-    projection_point = project_point_to_line(
-        g_pchjaw[:3, 3], bnd_3d[0],
-        cnt_normal
+    projection_point = point_in_line(
+        bnd_3d[0], cnt_normal, 0.01
     )
     # Construct the homogeneous transformation matrix
     new_g_pchjaw = np.copy(g_pchjaw)
@@ -124,16 +157,27 @@ def align_pchjaw(bnd_3d, skel_3d, g_pchjaw):
     return new_g_pchjaw
 
 def align_fbfjaw(ctrd_3d, bnd_3d, skel_3d, g_fbfjaw):
-    pca_comps = cnt_axes_3d(np.concatenate([bnd_3d, skel_3d]))
-    # pca_comps = cnt_axes_3d(bnd_3d)
+    pca_comps = cnt_axes_3d(
+        interp_3d(
+            np.concatenate([bnd_3d, skel_3d])
+        )
+    )
     z_axis = unit_vector(pca_comps[1])
-    if z_axis[0] < 0:
-        z_axis = -z_axis
+    # if z_axis[0] < 0:
+    #     z_axis = -z_axis
+
+    # y_axis = unit_vector(pca_comps[0])
+    # if y_axis[2] > 0:
+    #     y_axis = -y_axis
+    # x_axis = unit_vector(np.cross(y_axis, z_axis))
+    
     x_axis = unit_vector(pca_comps[2])
     if x_axis[2] > 0:
         x_axis = -x_axis
     y_axis = unit_vector(np.cross(z_axis, x_axis))
-    projection_point = project_point_to_line(g_fbfjaw[:3, 3], ctrd_3d, x_axis)
+    projection_point = point_in_line(
+        ctrd_3d, x_axis, 0.02
+    )
     new_g_fbfjaw = np.copy(g_fbfjaw)
     new_g_fbfjaw[:3, :3] = np.vstack([x_axis, y_axis, z_axis]).T
     new_g_fbfjaw[:3, 3]  = projection_point

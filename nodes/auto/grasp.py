@@ -5,6 +5,7 @@ from std_msgs.msg import String
 
 # Python Libraries
 import math
+import time
 import numpy as np
 from scipy.optimize import minimize
 from sklearn.decomposition import PCA
@@ -70,6 +71,8 @@ class GRASP:
         self.jaw_close_angle = math.radians(params["jaw_close_angle"])
         self.min_pull_dist   = params["min_pull_dist"]
         self.max_pull_dist   = params["max_pull_dist"]
+        self.grasp_depth     = params["grasp_depth"]
+        self.open_close_dur  = params["open_close_dur"]
 
     def add_arm_ik(self):
         self.init_jp = dvrk_utils.get_jp(self.arm)
@@ -196,58 +199,7 @@ class GRASP:
         R_tf = np.vstack((x_tf, y_tf, z_tf)).T
         return tf_utils.gen_g(R_tf, des_loc) 
     
-    # ---------------------------------------------------------------------------------------------------------------- #
-    # def curve_length(self, curve):
-    #     return np.sum(np.linalg.norm(curve[1:] - curve[:-1], axis=1))
-
-    # def proj_curve_to_line(self, r, curve, pt):
-    #     curve_len = self.curve_length(curve)
-    #     curve2pt_vecs = pt - curve
-    #     mid_pt_vecs = curve + curve2pt_vecs*r
-    #     mid_pt = np.mean(mid_pt_vecs, axis=0)
-        
-    #     # Calculate the direction vector for the stretched line as before
-    #     endpt_vec = curve[-1] - curve[0]
-    #     endpt_vec /= np.linalg.norm(endpt_vec)
-        
-    #     # Use the new midpoint and the same direction to define the stretched line
-    #     return np.linspace(
-    #         mid_pt - endpt_vec * curve_len / 2,
-    #         mid_pt + endpt_vec * curve_len / 2,
-    #         curve.shape[0]
-    #     )
-
-    # def proj_curve_to_line_obj_func(self, r, curve, pt, min_dist):
-    #     # Ensure r is within bounds
-    #     r = np.clip(r, 0, 1)
-    #     proj_line = self.proj_curve_to_line(r, curve, pt)
-
-    #     # Calculate distances between original curve points and projected line points
-    #     distances = np.linalg.norm(curve - proj_line, axis=1)
-
-    #     # Penalty for distances below the threshold
-    #     penalty_factor = 1000
-    #     penalties = np.where(distances > min_dist, penalty_factor * (distances - min_dist), 0)
-
-    #     # Objective is to minimize the total distance, with penalties for violations
-    #     return np.sum(distances) + np.sum(penalties)
-    
-    # def optimize_ratio(self, init_r, curve, pt, min_dist):
-    #     result = minimize(self.proj_curve_to_line_obj_func, init_r, args=(curve, pt, min_dist),
-    #                     bounds=[(0, 1)], method='L-BFGS-B')
-    #     optimal_r = result.x[0]
-    #     return optimal_r
-    
-    # def get_pull_dir_mag(self, ctrd_3d, bnd_3d, min_pull_dist):
-    #     optimal_r = self.optimize_ratio(0.5, bnd_3d, ctrd_3d, min_pull_dist)
-    #     proj_line = misc_utils.proj_curve_to_line(optimal_r, bnd_3d, ctrd_3d)
-    #     pull_dirs = proj_line - bnd_3d
-    #     pull_dirs_norm = pull_dirs / np.linalg.norm(pull_dirs, axis=1)[:, np.newaxis]
-    #     avg_pull_dir = np.mean(pull_dirs_norm, axis=0)
-    #     avg_pull_dir /= np.linalg.norm(avg_pull_dir)  # Ensure it's a unit vector
-    #     pull_mags = np.linalg.norm(pull_dirs, axis=1)
-    #     avg_pull_mag = np.mean(pull_mags)
-    #     return avg_pull_dir, avg_pull_mag
+    # ----------------------------------------------------------------------------------------------------------------
 
     def filt_bnd_pts(self, curve_points):
         pca = PCA(n_components=3)
@@ -257,38 +209,10 @@ class GRASP:
 
         projected_points = np.dot(curve_points - np.mean(curve_points, axis=0), main_axis)
 
-        threshold = np.percentile(np.abs(projected_points), 80)
+        threshold = np.percentile(np.abs(projected_points), 90)
         selected_points = curve_points[np.abs(projected_points) <= threshold]
 
         return selected_points
-
-    # def filt_bnd_pts(self, points, ref_point, max_angle_deg):
-    #     distances = np.linalg.norm(points - ref_point, axis=1)
-    #     closest_point = points[np.argmin(distances)]
-
-    #     # Reference direction: from ref_point to closest_point, normalized
-    #     ref_dir = closest_point - ref_point
-    #     norm_ref_dir = np.linalg.norm(ref_dir)
-    #     if norm_ref_dir == 0:
-    #         raise ValueError("Reference point is exactly on the curve; undefined reference direction.")
-    #     ref_dir /= norm_ref_dir
-
-    #     max_angle_rad = np.radians(max_angle_deg)
-
-    #     # Compute unit direction from ref_point to all points
-    #     directions = points - ref_point
-    #     norms = np.linalg.norm(directions, axis=1)
-    #     # Avoid division by zero; set zero norms to 1 (their corresponding points equal ref_point)
-    #     norms[norms == 0] = 1.0
-    #     unit_dirs = directions / norms[:, None]
-
-    #     # Compute angles using the dot product (clip for safety)
-    #     cos_angles = np.clip(np.dot(unit_dirs, ref_dir), -1.0, 1.0)
-    #     angles = np.arccos(cos_angles)
-
-    #     # Filter points based on the max angle threshold
-    #     mask = angles <= max_angle_rad
-    #     return points[mask]
 
     def get_pull_dir_mag(self, bnd_3d):
         """
@@ -296,7 +220,7 @@ class GRASP:
         :param points: (N, 3) array of 3D points representing the curve.
         :return: deviations (N,) array of distances to the reference line, and the average deviation vector.
         """
-        P1 = bnd_3d[0]  # First point
+        P1 = bnd_3d.mean(axis=0)
 
         # Direction vector of the reference line
         d_unit = misc_utils.cnt_axes_3d(bnd_3d)[0]
@@ -311,22 +235,36 @@ class GRASP:
             deviation_vector = Qi - Pi  # Vector from input points to the projected line
             deviation_magnitude = np.linalg.norm(deviation_vector)  # Distance to the line
             deviations.append(deviation_magnitude)
-            deviation_vectors.append(deviation_vector / deviation_magnitude if deviation_magnitude != 0 else deviation_vector)
+            if deviation_magnitude != 0:
+                deviation_vectors.append(deviation_vector / deviation_magnitude)
 
         deviations = np.array(deviations)
         deviation_vectors = np.vstack(deviation_vectors)
         return np.mean(deviation_vectors, axis=0), np.mean(deviations)
+
+    # def get_pull_dir_mag(self, bnd_3d, pull_dir):
+    #     bnd_center = misc_utils.midpt_curve(bnd_3d)
+
+    #     # Compute projections and deviations
+    #     deviations = []
+
+    #     for Pi in bnd_3d:
+    #         proj_mag = np.dot(Pi - bnd_center, pull_dir)
+    #         deviations.append(proj_mag)
+
+    #     deviations = np.array(deviations)
+    #     return np.mean(deviations)
     
     # ---------------------------------------------------------------------------------------------------------------- #
 
-    def tf_align(self, g_armbase_armjaw, g_fbfjaw, bnd_3d, skel_3d, ctrd_3d, grasp_ratio=0.7, grasp_depth=0.01):
+    def tf_align(self, g_armbase_armjaw, g_fbfjaw, bnd_3d, skel_3d, ctrd_3d, grasp_depth=0.015):
         new_g_fbfjaw, bnd_normal = misc_utils.align_fbfjaw(ctrd_3d, bnd_3d, skel_3d, g_fbfjaw)
         self.ral.loginfo(f"new_g_fbfjaw: {new_g_fbfjaw}")
         g_offset = tf_utils.ginv(g_fbfjaw).dot(new_g_fbfjaw)
         self.ral.loginfo(f"g_offset: {g_offset}")
         # bnd_pca_comps = misc_utils.cnt_axes_3d(bnd_3d)
         bnd_center = misc_utils.midpt_curve(bnd_3d)
-        grasp_3d = (bnd_center + ctrd_3d)/2 - bnd_normal*0.01
+        grasp_3d = (bnd_center + ctrd_3d)/2 - bnd_normal*grasp_depth
         return g_armbase_armjaw.dot(g_offset), grasp_3d
     
     def tf_grasp(self, g_armbase_armjaw, g_fbfjaw, grasp_3d):
@@ -366,12 +304,13 @@ class GRASP:
                     np.copy(self.g_fbfjaw),
                     np.copy(self.bnd_3d),
                     np.copy(self.skel_3d),
-                    np.copy(self.ctrd_3d)
+                    np.copy(self.ctrd_3d),
+                    self.grasp_depth
                 )
                 self.arm_ik.target = g_align
                 self.jp_align = self.arm_ik.get_goal_jp_jaw(dvrk_utils.get_jp(self.arm))
                 self.ral.loginfo(f"jp_align: {self.jp_align}")
-                dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jaw_close_angle, 1)
+                dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jaw_close_angle, self.open_close_dur)
                 dvrk_utils.run_arm_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jp_align, 5)
                 self.ral.loginfo("Finished aligning the forceps!")
                 self.key = None
@@ -388,9 +327,9 @@ class GRASP:
                 )
                 self.arm_ik.target = g_grasp
                 self.jp_grasp = self.arm_ik.get_goal_jp_jaw(dvrk_utils.get_jp(self.arm))
-                dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jaw_open_angle, 1)
+                dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jaw_open_angle, self.open_close_dur)
                 dvrk_utils.run_arm_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jp_grasp, 5)
-                dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jaw_close_angle, 1)
+                dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jaw_close_angle, self.open_close_dur)
                 self.jp_release = np.copy(self.jp_grasp)
                 self.ral.loginfo("Finished grasping the tissue!")
                 self.key = None
@@ -408,25 +347,31 @@ class GRASP:
                     bnd_3d = self.filt_bnd_pts(
                         np.copy(self.bnd_3d)
                     )
-                    _, pull_dist = self.get_pull_dir_mag(bnd_3d)
-                    # if pull_dist > self.max_pull_dist:
-                    #     continue
+                    # bnd_3d = np.copy(self.bnd_3d)
+                    g_fbfjaw = np.copy(self.g_fbfjaw)
+                    pull_dir, pull_dist = self.get_pull_dir_mag(bnd_3d)
+                    # pull_dist = self.get_pull_dir_mag(bnd_3d, -g_fbfjaw[:3,2])
+                    self.ral.loginfo(f"pull_dist: {pull_dist}")
+                    if pull_dist > self.max_pull_dist:
+                        continue
                     if pull_dist < self.min_pull_dist:
                         self.key = None
                         break
                     self.ral.loginfo("Pulling the tissue...")
-                    self.ral.loginfo(f"pull_dist: {pull_dist}")
-                    g_fbfjaw = np.copy(self.g_fbfjaw)
                     g_pull = self.tf_pull(
                         np.copy(self.custom_local_jaw_cp),
                         g_fbfjaw,
                         -g_fbfjaw[:3,2], pull_dist
                     )
+                    # g_pull = self.tf_pull(
+                    #     np.copy(self.custom_local_jaw_cp),
+                    #     g_fbfjaw,
+                    #     pull_dir, pull_dist
+                    # )
                     self.arm_ik.target = g_pull
                     self.jp_pull = self.arm_ik.get_goal_jp_jaw(dvrk_utils.get_jp(self.arm))
-                    dvrk_utils.run_arm_servo_jp(self.arm, self.sleep_rate, self.expected_interval,self.jp_pull, 1)
-                    for i in range(200):
-                        self.sleep_rate.sleep()
+                    dvrk_utils.run_arm_servo_jp(self.arm, self.sleep_rate, self.expected_interval,self.jp_pull, 0.1)
+                    time.sleep(2)
                 self.ral.loginfo("Finished pulling the tissue!")
 
             elif self.key == "r":
@@ -435,22 +380,22 @@ class GRASP:
                     continue
                 self.ral.loginfo("Start releasing the tissue...")
                 dvrk_utils.run_arm_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jp_release, 5)
-                dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jaw_open_angle, 1)
+                dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jaw_open_angle, self.open_close_dur)
                 dvrk_utils.run_arm_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jp_align, 5)
-                dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jaw_close_angle, 1)
+                dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jaw_close_angle, self.open_close_dur)
                 self.reset()
                 self.ral.loginfo("Finished releasing the tissue!")
                 self.key = None
 
             elif self.key == "o":
                 self.ral.loginfo("Opening the jaw...")
-                dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jaw_open_angle, 1)
+                dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jaw_open_angle, self.open_close_dur)
                 self.ral.loginfo("The jaws are opened!")
                 self.key = None
 
             elif self.key == "c":
                 self.ral.loginfo("Closing the jaw...")
-                dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jaw_close_angle, 1)
+                dvrk_utils.run_jaw_servo_jp(self.arm, self.sleep_rate, self.expected_interval, self.jaw_close_angle, self.open_close_dur)
                 self.ral.loginfo("The jaws are closed!")
                 self.key = None
 

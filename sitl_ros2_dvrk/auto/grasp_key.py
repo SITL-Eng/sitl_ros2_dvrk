@@ -1,6 +1,5 @@
 import rclpy
 from nodes.auto import grasp_key
-from rclpy.task import Future
 
 # "Press one of the following keys..."
 # "a: align forceps before grasping."
@@ -17,17 +16,14 @@ def main(args=None):
 
     params = {
         'node_name': 'grasp_key',
-        'hz': 1000,
-        'queue_size': 5,
+        'hz': 100,
+        'queue_size': 1,
         'key': 'o',
     }
 
     app = grasp_key.GRASP_KEY(params)
     try:
-        future = Future()
-        rclpy.spin_until_future_complete(app, future)
-        # rclpy.spin_once(app)
-        # rclpy.spin(app)
+        rclpy.spin(app)
     except KeyboardInterrupt:
         pass
     finally:
