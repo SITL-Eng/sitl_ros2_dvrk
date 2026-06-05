@@ -36,7 +36,7 @@ setup(
     maintainer='sitleng',
     maintainer_email='sitldvrk@gmail.com',
     description="This package provides an interface for connecting to the dVRK console over ROS2, specifically modified for UIC SITL's da Vinci Robot.",
-    license='Apache-2.0',
+    license='MIT',
     entry_points={
         'console_scripts': [
             # custom kinematics

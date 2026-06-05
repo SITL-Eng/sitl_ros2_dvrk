@@ -5,7 +5,7 @@
   <version>1.0.0</version>
   <description>This package provides an interface for connecting to the dVRK console over ROS2, specifically modified for UIC SITL's da Vinci Robot.</description>
   <maintainer email="sitldvrk@gmail.com">sitleng</maintainer>
-  <license>Apache-2.0</license>
+  <license>MIT</license>
 
   <!-- dependencies -->
   <depend>rclpy</depend>
